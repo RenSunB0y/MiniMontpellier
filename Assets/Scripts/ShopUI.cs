@@ -44,6 +44,7 @@ public class ShopUI : MonoBehaviour, IPointerEvents
     {
         actualdCardId = id;
         SelectedCardZoom.rectTransform.position = transform.GetChild(id).transform.position;
+        SelectedCardZoom.sprite = transform.GetChild(id).GetComponent<Image>().sprite;
         SelectedCardZoom.enabled = true;
         SelectedCardZoom.rectTransform.DOScale(_defaultScale * coefs, duration);
     }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "Champs de bl\xE9"
   m_EditorClassIdentifier: 
   prefab: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
-  sprite: {fileID: 21300000, guid: 245fd6e5505e63146821e823e103bc17, type: 3}
+  sprite: {fileID: 21300000, guid: 6732ad297f890d84aa8a5c3f554023c6, type: 3}
   name: "Champs de bl\xE9"
   effect: 
   color: Bleu
