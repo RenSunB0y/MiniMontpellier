@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 64ac7efca616186479c10f0bb4b59f28
+guid: 7489934801ccd704ca397dd0c193777d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1029451775111017224
-    second: "Capture d\u2019\xE9cran 2024-11-15 141854_0"
+      213: -8781516406684520038
+    second: CCo_0
+  - first:
+      213: 8167771412379351570
+    second: CCo_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Capture d\u2019\xE9cran 2024-11-15 141854_0"
+      name: CCo_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 963
-        height: 829
+        width: 32
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8fccc179017a6b1f0800000000000000
-      internalID: -1029451775111017224
+      spriteID: a91fd46ca59c12680800000000000000
+      internalID: -8781516406684520038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CCo_1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 24
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21a367923d0c95170800000000000000
+      internalID: 8167771412379351570
       vertices: []
       indices: 
       edges: []
@@ -125,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "Capture d\u2019\xE9cran 2024-11-15 141854_0": -1029451775111017224
+      CCo_0: -8781516406684520038
+      CCo_1: 8167771412379351570
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

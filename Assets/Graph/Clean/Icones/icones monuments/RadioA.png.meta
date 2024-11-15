@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 64ac7efca616186479c10f0bb4b59f28
+guid: e4da4ac59e84ea34887320e78bff241a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1029451775111017224
-    second: "Capture d\u2019\xE9cran 2024-11-15 141854_0"
+      213: 4322527826485959682
+    second: RadioA_0
+  - first:
+      213: 3518965156340495283
+    second: RadioA_1
+  - first:
+      213: -2838729131421321272
+    second: RadioA_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,7 +52,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Capture d\u2019\xE9cran 2024-11-15 141854_0"
+      name: RadioA_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 963
-        height: 829
+        x: 1
+        y: 13
+        width: 6
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8fccc179017a6b1f0800000000000000
-      internalID: -1029451775111017224
+      spriteID: 20cdf6d0824bcfb30800000000000000
+      internalID: 4322527826485959682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RadioA_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 0
+        width: 24
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b3f6a85a20e5d030800000000000000
+      internalID: 3518965156340495283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RadioA_2
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 13
+        width: 6
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c7341c25eeca98d0800000000000000
+      internalID: -2838729131421321272
       vertices: []
       indices: 
       edges: []
@@ -125,7 +175,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "Capture d\u2019\xE9cran 2024-11-15 141854_0": -1029451775111017224
+      RadioA_0: 4322527826485959682
+      RadioA_1: 3518965156340495283
+      RadioA_2: -2838729131421321272
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
