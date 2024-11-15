@@ -9,9 +9,8 @@ using System.Data.Common;
 using System.Security.Cryptography;
 using System;
 
-public class HorizontalLayoutBehaviour : MonoBehaviour
+public class MainHandUI : MonoBehaviour, IPointerEvents
 {
-    public GameObject Card;
     public Image SelectedCardZoom;
     [SerializeField]
     private List<CardSO> cards = new List<CardSO>();
@@ -23,7 +22,7 @@ public class HorizontalLayoutBehaviour : MonoBehaviour
     private const float HAND_TRANS_DURATION = 0.3f;
     private const float SELECTED_CARD_MOV_COEF = 300;
     private const float SELECTED_CARD_DURATION = 0.15f;
-    private const float SELECTED_CARD_SCALE_COEF = 1.5f;
+    private const float SELECTED_CARD_SCALE_COEF = 1.0f;
     
     int count = 0;
     IEnumerator FillMain()
@@ -53,9 +52,8 @@ public class HorizontalLayoutBehaviour : MonoBehaviour
         int id = 0;
         foreach (CardSO card in cards)
         {
-            var c = Instantiate(Card, Vector3.zero, Quaternion.identity, transform);
+            var c = Instantiate(card.prefab, transform);
             c.GetComponent<Image>().sprite = card.sprite;
-            c.GetComponent<OnPointerEnter>().MainHand = this;
             c.GetComponent<OnPointerEnter>().id = id;
             _cardPosY = c.GetComponent<RectTransform>().position.y;
             id++;
