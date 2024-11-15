@@ -544,11 +544,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e982663941269b4e8bbfb90d3c20469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players:
+  player:
   - {fileID: 846815620}
   - {fileID: 370608052}
   - {fileID: 709232270}
   - {fileID: 981312733}
+  currentPhase: 0
 --- !u!4 &1647894094
 Transform:
   m_ObjectHideFlags: 0

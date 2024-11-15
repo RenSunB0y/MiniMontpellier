@@ -1,60 +1,103 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TurnPhase
+{
+    Preparation,
+    DiceRoll,
+    End
+}
+
 public class PlayerTurn : MonoBehaviour
 {
-     // Liste des joueurs
-    public List<GameObject> players;
-    private int currentPlayerIndex = 0;  // Index du joueur actuel
+    public List<GameObject> player; // Liste des GameObjects des joueurs
+    private int currentPlayerIndex = 0; // Index du joueur courant
+    public TurnPhase currentPhase = TurnPhase.Preparation; // Phase du tour courant
 
-    // Initialisation
-    private void Start()
+    private GameObject currentPlayer; // GameObject du joueur actuel
+
+    void Start()
     {
-        if (players.Count == 0)
+        if (player.Count > 0)
         {
-            Debug.LogError("Aucun joueur n'a été ajouté à la liste des joueurs.");
-            return;
+            currentPlayer = player[currentPlayerIndex];
+            StartTurnForCurrentPlayer();
         }
+    }
 
-        // Début du tour pour le premier joueur
-        StartTurn(players[currentPlayerIndex]);
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) // Exemple pour avancer à la phase suivante
+        {
+            NextPhase();
+        }
+    }
+
+    // Démarrer un tour pour le joueur courant
+    void StartTurnForCurrentPlayer()
+    {
+        currentPhase = TurnPhase.Preparation;
+        Debug.Log($"{currentPlayer.name}'s Turn Started");
+        // Si tu veux par exemple changer la couleur du joueur actif :
+        ChangePlayerColor(Color.green);
+    }
+
+    // Passer à la phase suivante
+    void NextPhase()
+    {
+        switch (currentPhase)
+        {
+            case TurnPhase.Preparation:
+                currentPhase = TurnPhase.DiceRoll;
+                RollDice();
+                break;
+            case TurnPhase.DiceRoll:
+                currentPhase = TurnPhase.End;
+                EndTurn();
+                break;
+            case TurnPhase.End:
+                NextPlayer();
+                break;
+        }
+    }
+
+    // Gérer le lancement des dés
+    void RollDice()
+    {
+        int diceResult = Random.Range(2, 13); // Lancer de deux dés (valeur entre 2 et 12)
+        Debug.Log($"Dice rolled: {diceResult}");
+        HandleDiceOutcome(diceResult);
+    }
+
+    // Appliquer l'effet du lancer de dés
+    void HandleDiceOutcome(int rollResult)
+    {
+        // Appliquer des effets en fonction du lancer des dés (par exemple, gagner de l'argent ou des ressources)
+    }
+
+    // Fin du tour du joueur courant
+    void EndTurn()
+    {
+        Debug.Log($"{currentPlayer.name}'s Turn Ended");
+        // On peut réinitialiser la couleur ou effectuer d'autres actions.
+        ChangePlayerColor(Color.white); // Exemple pour remettre la couleur de base
     }
 
     // Passer au joueur suivant
-    public void NextTurn()
+    void NextPlayer()
     {
-        EndTurn(players[currentPlayerIndex]);
-
-        // Passer à l'index du joueur suivant, revenir au début si on atteint la fin de la liste
-        currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
-
-        // Début du tour pour le joueur suivant
-        StartTurn(players[currentPlayerIndex]);
+        currentPlayerIndex = (currentPlayerIndex + 1) % player.Count;
+        currentPlayer = player[currentPlayerIndex];
+        StartTurnForCurrentPlayer();
     }
 
-    // Début du tour d'un joueur
-    private void StartTurn(GameObject player)
+    // Changer la couleur du joueur courant pour indiquer qu'il est actif
+    void ChangePlayerColor(Color color)
     {
-        Debug.Log("C'est le tour de " + player.name);
-        // Activer les contrôles du joueur
-        player.GetComponent<PlayerController>().EnableControls();
-    }
-
-    // Fin du tour d'un joueur
-    private void EndTurn(GameObject player)
-    {
-        Debug.Log(player.name + " a terminé son tour.");
-        // Désactiver les contrôles du joueur
-        player.GetComponent<PlayerController>().DisableControls();
-    }
-    
-    private void Update()
-    {
-        // Passe au joueur suivant en appuyant sur la touche Espace
-        if (Input.GetKeyDown(KeyCode.Space))
+        Renderer playerRenderer = currentPlayer.GetComponent<Renderer>();
+        if (playerRenderer != null)
         {
-            NextTurn();
+            playerRenderer.material.color = color;
         }
     }
-
 }
