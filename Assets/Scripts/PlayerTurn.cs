@@ -64,15 +64,55 @@ public class PlayerTurn : MonoBehaviour
     // Gérer le lancement des dés
     void RollDice()
     {
-        int diceResult = Random.Range(2, 13); // Lancer de deux dés (valeur entre 2 et 12)
-        Debug.Log($"Dice rolled: {diceResult}");
+        int diceResult = Random.Range(1, 13); // Lancer de un ou deux dés (valeur entre 1 et 12)
         HandleDiceOutcome(diceResult);
     }
 
     // Appliquer l'effet du lancer de dés
     void HandleDiceOutcome(int rollResult)
     {
-        // Appliquer des effets en fonction du lancer des dés (par exemple, gagner de l'argent ou des ressources)
+        switch (rollResult)
+        {
+            case 1:
+                Debug.Log($"Dice rolled: {rollResult}");
+                break;
+            case 2:
+                Debug.Log($"Dice rolled: {rollResult}");
+                break;
+            case 3:
+                Debug.Log($"Dice rolled: {rollResult}");
+                break;
+            case 4:
+                Debug.Log($"Dice rolled: {rollResult}");
+                break;
+            case 5:
+                Debug.Log($"Dice rolled: {rollResult}");
+                break;
+            case 6:
+                Debug.Log($"Dice rolled: {rollResult}");
+                break;
+            case 7:
+                Debug.Log($"Dice rolled: {rollResult}");
+                break;
+            case 8:
+                Debug.Log($"Dice rolled: {rollResult}");
+                break;
+            case 9:
+                Debug.Log($"Dice rolled: {rollResult}");
+                break;
+            case 10:
+                Debug.Log($"Dice rolled: {rollResult}");
+                break;
+            case 11:
+                Debug.Log($"Dice rolled: {rollResult}");
+                break;
+            case 12:
+                Debug.Log($"Dice rolled: {rollResult}");
+                break;
+            default:
+                Debug.Log("Unknown dice result: No effect triggered.");
+                break;
+        }
     }
 
     // Fin du tour du joueur courant
