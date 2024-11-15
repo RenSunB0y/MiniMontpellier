@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8857916650068913498}
   - component: {fileID: 6146076524136603185}
   m_Layer: 5
-  m_Name: Card
+  m_Name: CardUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,5 +134,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57df82abab216384cac502684d0bb759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainHand: {fileID: 0}
   id: 0
+  coefs: 1.5
