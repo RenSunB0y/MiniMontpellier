@@ -70,7 +70,7 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
     {
         DOTween.To(()=> transform.GetComponent<HorizontalLayoutGroup>().padding, x=> transform.GetComponent<HorizontalLayoutGroup>().padding = x, new RectOffset(0,0,0,HIDE_HAND_Y), HAND_TRANS_DURATION);
     }
-    public void MouseOnCard(int id)
+    public void MouseOnCard(CardSO data, int id)
     {
         for(int i=0; i<transform.childCount; i++)
         {

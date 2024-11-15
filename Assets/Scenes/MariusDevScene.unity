@@ -119,6 +119,111 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &118747578
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1325001481}
+    m_Modifications:
+    - target: {fileID: 3036184158366936685, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_Name
+      value: CardUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 578.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 495
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6597d49af8aebd9419549839338e31de, type: 3}
 --- !u!1 &141451310
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6101f51d6dfdabf4ea592e5d9bcb8d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectedCardZoom: {fileID: 4041974834487068854}
+  SelectedCardZoom: {fileID: 0}
   cards:
   - {fileID: 11400000, guid: 260503c5ce0ddf9479ac786d33be8e15, type: 2}
 --- !u!114 &141451313
@@ -259,9 +364,9 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 141451312}
-          m_TargetAssemblyTypeName: HorizontalLayoutBehaviour, Assembly-CSharp
+          m_TargetAssemblyTypeName: MainHandUI, Assembly-CSharp
           m_MethodName: ShowHand
-          m_Mode: 3
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -275,9 +380,9 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 141451312}
-          m_TargetAssemblyTypeName: HorizontalLayoutBehaviour, Assembly-CSharp
+          m_TargetAssemblyTypeName: MainHandUI, Assembly-CSharp
           m_MethodName: HideHand
-          m_Mode: 3
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -569,6 +674,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &940251793 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+  m_PrefabInstance: {fileID: 118747578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &940251794 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8950077210579452709, guid: 6597d49af8aebd9419549839338e31de, type: 3}
+  m_PrefabInstance: {fileID: 118747578}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1012207400
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,7 +950,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -858,7 +973,7 @@ RectTransform:
   - {fileID: 1757580578}
   - {fileID: 1418934329}
   - {fileID: 141451311}
-  - {fileID: 7926410214853764606}
+  - {fileID: 940251794}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -955,6 +1070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88232aef7bd728d4780f4497dcfbdb5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectedCardZoom: {fileID: 940251793}
   cardsType:
   - {fileID: 11400000, guid: 260503c5ce0ddf9479ac786d33be8e15, type: 2}
   - {fileID: 11400000, guid: 688a77e1dd105ab4a9a390e51ed8e360, type: 2}
@@ -971,6 +1087,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 88f611f960eabc14cb901583b488e061, type: 2}
   - {fileID: 11400000, guid: 9d8f8aa3a362e3c4a9cf1e3b53dd1172, type: 2}
   - {fileID: 11400000, guid: 5571dddf1100bdc4a88b51da579ee042, type: 2}
+  coefs: 1.5
+  duration: 0.2
 --- !u!114 &1418934333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -991,7 +1109,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 150, y: 225}
+  m_CellSize: {x: 190, y: 270}
   m_Spacing: {x: 57.6, y: 29.4}
   m_Constraint: 1
   m_ConstraintCount: 5
@@ -1480,127 +1598,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6597d49af8aebd9419549839338e31de, type: 3}
---- !u!222 &1040203186712290497
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2681392728992496130}
-  m_CullTransparentMesh: 1
---- !u!1 &2681392728992496130
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7926410214853764606}
-  - component: {fileID: 1040203186712290497}
-  - component: {fileID: 4041974834487068854}
-  - component: {fileID: 7926410214853764607}
-  m_Layer: 5
-  m_Name: SelectedCard
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &4041974834487068854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2681392728992496130}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 245fd6e5505e63146821e823e103bc17, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!224 &7926410214853764606
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2681392728992496130}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1325001481}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1193.3918, y: -900}
-  m_SizeDelta: {x: 219.4447, y: 316.2275}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7926410214853764607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2681392728992496130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 141451312}
-          m_TargetAssemblyTypeName: HorizontalLayoutBehaviour, Assembly-CSharp
-          m_MethodName: ChangeSelectedCard
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 141451312}
-          m_TargetAssemblyTypeName: HorizontalLayoutBehaviour, Assembly-CSharp
-          m_MethodName: ChangeSelectedCard
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
