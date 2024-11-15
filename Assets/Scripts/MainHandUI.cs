@@ -23,6 +23,7 @@ public class HorizontalLayoutBehaviour : MonoBehaviour
     private const float HAND_TRANS_DURATION = 0.3f;
     private const float SELECTED_CARD_MOV_COEF = 300;
     private const float SELECTED_CARD_DURATION = 0.15f;
+    private const float SELECTED_CARD_SCALE_COEF = 1.5f;
     
     int count = 0;
     IEnumerator FillMain()
@@ -71,8 +72,6 @@ public class HorizontalLayoutBehaviour : MonoBehaviour
     {
         DOTween.To(()=> transform.GetComponent<HorizontalLayoutGroup>().padding, x=> transform.GetComponent<HorizontalLayoutGroup>().padding = x, new RectOffset(0,0,0,HIDE_HAND_Y), HAND_TRANS_DURATION);
     }
-
-    public float testtt;
     public void MouseOnCard(int id)
     {
         for(int i=0; i<transform.childCount; i++)
@@ -87,7 +86,7 @@ public class HorizontalLayoutBehaviour : MonoBehaviour
         SelectedCardZoom.GetComponent<RectTransform>().position = selectedCardImage.GetComponent<RectTransform>().position;
         SelectedCardZoom.rectTransform.localScale = selectedCardImage.rectTransform.localScale;
         SelectedCardZoom.transform.DOMove(new Vector3(SelectedCardZoom.GetComponent<RectTransform>().position.x, _cardPosY + SELECTED_CARD_MOV_COEF*SelectedCardZoom.GetComponent<RectTransform>().lossyScale.y),SELECTED_CARD_DURATION);
-        SelectedCardZoom.transform.DOScale(SelectedCardZoom.rectTransform.localScale * testtt, SELECTED_CARD_DURATION);
+        SelectedCardZoom.transform.DOScale(SelectedCardZoom.rectTransform.localScale * SELECTED_CARD_SCALE_COEF, SELECTED_CARD_DURATION);
         SelectedCardZoom.enabled = true;
     }
 
