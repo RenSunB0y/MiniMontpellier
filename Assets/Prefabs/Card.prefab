@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 8950077210579452709}
   - component: {fileID: 2043157161487204890}
   - component: {fileID: 3036184158366936685}
-  - component: {fileID: 6514901421942281813}
+  - component: {fileID: 8857916650068913498}
+  - component: {fileID: 6146076524136603185}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -76,7 +77,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6514901421942281813
+--- !u!114 &8857916650068913498
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,10 +94,10 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: HorizontalLayoutBehaviour, Assembly-CSharp
-          m_MethodName: MouseOnCard
-          m_Mode: 3
+        - m_Target: {fileID: 6146076524136603185}
+          m_TargetAssemblyTypeName: OnPointerEnter, Assembly-CSharp
+          m_MethodName: PointerEnter
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -109,10 +110,10 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: HorizontalLayoutBehaviour, Assembly-CSharp
-          m_MethodName: MouseLeavesCard
-          m_Mode: 3
+        - m_Target: {fileID: 6146076524136603185}
+          m_TargetAssemblyTypeName: OnPointerEnter, Assembly-CSharp
+          m_MethodName: PointerExit
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -121,3 +122,17 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &6146076524136603185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3964139294525955289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57df82abab216384cac502684d0bb759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainHand: {fileID: 0}
+  id: 0
