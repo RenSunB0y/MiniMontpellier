@@ -17,11 +17,12 @@ public class CardTemplateConfig : MonoBehaviour
     {
         
     }
-    public void Load(CardSO data)
+    public void Load(CardSO data, bool cost = true)
     {
         card = data;
         transform.GetChild(0).GetComponent<Image>().sprite = data.sprite;
         transform.GetChild(1).GetComponent<Image>().sprite = templates[chooseColor[data.color]];
+        transform.GetChild(2).gameObject.SetActive(cost);
         transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = data.cost.ToString();
         transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = data.name;
         transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"{data.dice[0]}" + (data.dice.Length > 1 ? $"\n{data.dice[1]}" : "");
