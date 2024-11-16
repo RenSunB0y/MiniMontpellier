@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/YvannDevScene.unity
     guid: b9e38f096e95a4f42bb3d2486e56d646
+  - enabled: 1
+    path: Assets/Scenes/PlayerSelection.unity
+    guid: 6d096858bf327f741b12b2962bbd2464
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -18,6 +18,8 @@ MonoBehaviour:
   effect: 
   color: Rouge
   type: Consommation
+  mainIcon: {fileID: 0}
+  additionalIcon: {fileID: 0}
   cost: 2
   gain: 1
   dice: 03000000

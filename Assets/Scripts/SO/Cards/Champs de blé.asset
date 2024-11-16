@@ -18,6 +18,8 @@ MonoBehaviour:
   effect: test
   color: Bleu
   type: Agriculture
+  mainIcon: {fileID: 21300000, guid: 34a1506972645ff44bdbdb97ee7b09a3, type: 3}
+  additionalIcon: {fileID: 0}
   cost: 1
   gain: 1
   dice: 01000000

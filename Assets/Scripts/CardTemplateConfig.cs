@@ -23,7 +23,6 @@ public class CardTemplateConfig : MonoBehaviour
     public List<Sprite> templates;
     public List<Sprite> icons;
     private List<string> templatesChoices = new List<string>{"Bleu","Vert","Rouge","Violette","Jaune","Grise"};
-    private List<string> iconsChoices = new List<string>{"Agriculture","Élevage","Commerce","Consommation","Ressource","Spécial","Usine","Marché"};
     public CardSO card;
     public bool isInShop;
 
@@ -40,9 +39,7 @@ public class CardTemplateConfig : MonoBehaviour
         card = data;
         art.sprite = data.sprite; // Illustration
         string iconName = data.type == "Monument" ? "Spécial" : data.type;
-        icon.sprite = icons[iconsChoices.IndexOf(iconName)];
-        // if(data.type=="Monument")
-        //     monumentIcon.sprite = data.additionalIcon;
+        icon.sprite = data.mainIcon;
         cardTemplate.sprite = templates[templatesChoices.IndexOf(data.color)]; // Template
         if(inShop)
         {
@@ -68,7 +65,7 @@ public class CardTemplateConfig : MonoBehaviour
         else
         {
             dice.text = "";
-            monumentIcon.sprite = card.additionalIcon;
+            monumentIcon.sprite = card.mainIcon;
             dice.transform.GetChild(0).gameObject.SetActive(true);
         }
 

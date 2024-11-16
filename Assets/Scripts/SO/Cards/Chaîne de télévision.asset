@@ -18,6 +18,8 @@ MonoBehaviour:
   effect: 
   color: Violette
   type: "Sp\xE9cial"
+  mainIcon: {fileID: 21300000, guid: 484243b0873d2894dbea81e8b53a27c1, type: 3}
+  additionalIcon: {fileID: 0}
   cost: 7
   gain: 5
   dice: 06000000

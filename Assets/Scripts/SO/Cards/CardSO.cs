@@ -9,6 +9,7 @@ public class CardSO : ScriptableObject
     public string effect;
     public string color;
     public string type;
+    public Sprite mainIcon;
     public Sprite additionalIcon;
     public int cost;
     public int gain;

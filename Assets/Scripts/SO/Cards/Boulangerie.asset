@@ -18,6 +18,7 @@ MonoBehaviour:
   effect: 'Recevez '
   color: Vert
   type: Commerce
+  mainIcon: {fileID: 21300000, guid: a1c199638bdd7d646907cb6fee455da9, type: 3}
   additionalIcon: {fileID: 0}
   cost: 1
   gain: 1
