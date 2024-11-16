@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ChangeScenes : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public void GoToYvannDevScene()
+    public void StartGame()
     {
         SceneManager.LoadScene("YvannDevScene");
     }

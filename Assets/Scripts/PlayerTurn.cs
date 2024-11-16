@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public enum TurnPhase
 {
@@ -10,6 +11,7 @@ public enum TurnPhase
 
 public class PlayerTurn : MonoBehaviour
 {
+    public TextMeshProUGUI playerInfoText;
     public List<GameObject> player; // Liste des GameObjects des joueurs
     private int currentPlayerIndex = 0; // Index du joueur courant
     public TurnPhase currentPhase = TurnPhase.Preparation; // Phase du tour courant
@@ -40,6 +42,7 @@ public class PlayerTurn : MonoBehaviour
         Debug.Log($"{currentPlayer.name}'s Turn Started");
         // Si tu veux par exemple changer la couleur du joueur actif :
         ChangePlayerColor(Color.green);
+        playerInfoText.text = $"Tour du joueur {currentPlayerIndex + 1}";
     }
 
     // Passer à la phase suivante
@@ -119,8 +122,10 @@ public class PlayerTurn : MonoBehaviour
     void EndTurn()
     {
         Debug.Log($"{currentPlayer.name}'s Turn Ended");
+
         // On peut réinitialiser la couleur ou effectuer d'autres actions.
         ChangePlayerColor(Color.white); // Exemple pour remettre la couleur de base
+        playerInfoText.text = $"Fin du tour du joueur {currentPlayerIndex + 1}";
     }
 
     // Passer au joueur suivant
