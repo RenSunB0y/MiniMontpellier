@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Mine
   m_EditorClassIdentifier: 
   prefab: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
-  sprite: {fileID: 21300000, guid: 05585b3b960ba8e4cba02ae650fcfde1, type: 3}
+  sprite: {fileID: 21300000, guid: 5a1310e49146366499a29ed54e688df0, type: 3}
   name: Mine
   effect: 
   color: Bleu
+  type: Ressource
+  additionalIcon: {fileID: 0}
   cost: 6
   gain: 5
   dice: 09000000

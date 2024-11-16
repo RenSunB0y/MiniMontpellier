@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: "Champs de bl\xE9"
   m_EditorClassIdentifier: 
   prefab: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
-  sprite: {fileID: 21300000, guid: 05585b3b960ba8e4cba02ae650fcfde1, type: 3}
+  sprite: {fileID: 21300000, guid: 25ea72702779eac448b37d67ec4a8b63, type: 3}
   name: "Champs de bl\xE9"
   effect: test
   color: Bleu
+  type: Agriculture
   cost: 1
   gain: 1
   dice: 01000000

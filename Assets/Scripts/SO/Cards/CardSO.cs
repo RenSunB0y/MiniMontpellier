@@ -8,6 +8,8 @@ public class CardSO : ScriptableObject
     public string name;
     public string effect;
     public string color;
+    public string type;
+    public Sprite additionalIcon;
     public int cost;
     public int gain;
     public int[] dice;
