@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using GameLogic;
 
 public enum TurnPhase
 {
@@ -12,6 +13,9 @@ public enum TurnPhase
 
 public class PlayerTurn : MonoBehaviour
 {
+    public List<Player> players; // Liste des joueurs
+    public CardSO ferme; // Référence au ScriptableObject pour Farm
+    public CardSO boulangerie; // Référence au ScriptableObject pour Bakery
     public TextMeshProUGUI playerInfoText;
     public List<GameObject> player; // Liste des GameObjects des joueurs
     private int currentPlayerIndex = 0; // Index du joueur courant
@@ -22,12 +26,47 @@ public class PlayerTurn : MonoBehaviour
 
     void Start()
     {
+        // Initialisation des joueurs
+        players = new List<Player>
+        {
+            new Player("Joueur 1", 3),
+            new Player("Joueur 2", 3),
+            new Player("Joueur 3", 3),
+            new Player("Joueur 4", 3)
+        };
+
+        // Ajouter des cartes initiales à chaque joueur
+        players[0].AddCardToDeck(ferme);
+        players[0].AddCardToDeck(boulangerie);
+
+        players[1].AddCardToDeck(ferme);
+        players[1].AddCardToDeck(boulangerie);
+
+        players[2].AddCardToDeck(ferme);
+        players[2].AddCardToDeck(boulangerie);
+
+        players[3].AddCardToDeck(ferme);
+        players[3].AddCardToDeck(boulangerie);
+
+        // Initialisation des GameObjects des joueurs
+        player = new List<GameObject>
+        {
+            GameObject.Find("Player1"),
+            GameObject.Find("Player2"),
+            GameObject.Find("Player3"),
+            GameObject.Find("Player4")
+        };
+
+        // Assurez-vous que currentPlayer est bien défini
         if (player.Count > 0)
         {
+            // Vérification du Deck du premier joueur
+            Debug.Log($"Deck du joueur 1 : {players[0].Deck.Count} cartes");
             currentPlayer = player[currentPlayerIndex];
             StartTurnForCurrentPlayer();
         }
     }
+
 
     void Update()
     {
@@ -44,11 +83,20 @@ public class PlayerTurn : MonoBehaviour
     // Démarrer un tour pour le joueur courant
     void StartTurnForCurrentPlayer()
     {
-        currentPhase = TurnPhase.Preparation;
-        Debug.Log($"{currentPlayer.name}'s Turn Started");
-        ChangePlayerColor(Color.green);
-        playerInfoText.text = $"Tour du joueur {currentPlayerIndex + 1}";
+        if (players.Count > 0)
+        {
+            currentPlayer = player[currentPlayerIndex];
+            Debug.Log($"{currentPlayer.name}'s Turn Started");
+            currentPhase = TurnPhase.Preparation;
+            ChangePlayerColor(Color.green);
+            playerInfoText.text = $"Tour du joueur {currentPlayerIndex + 1}";
+        }
+        else
+        {
+            Debug.LogError("La liste des joueurs est vide.");
+        }
     }
+
 
     // Passer à la phase suivante
     void NextPhase()
@@ -104,56 +152,42 @@ public class PlayerTurn : MonoBehaviour
             diceResult += Random.Range(1, 7);
         }
         Debug.Log($"Résultat des dés : {diceResult}");
-        HandleDiceOutcome(diceResult);
+        ResolveDiceEffects(diceResult);
         playerInfoText.text = $"Résultat des dés : {diceResult}";
     }
 
     // Appliquer l'effet du lancer de dés
-    void HandleDiceOutcome(int rollResult)
+    void ResolveDiceEffects(int diceResult)
     {
-        switch (rollResult)
+        // Récupérer le joueur courant à partir de la liste des joueurs
+        Player player = players[currentPlayerIndex];
+
+        if (player.Deck == null || player.Deck.Count == 0)
         {
-            case 1:
-                Debug.Log($"Dice rolled: {rollResult}");
-                break;
-            case 2:
-                Debug.Log($"Dice rolled: {rollResult}");
-                break;
-            case 3:
-                Debug.Log($"Dice rolled: {rollResult}");
-                break;
-            case 4:
-                Debug.Log($"Dice rolled: {rollResult}");
-                break;
-            case 5:
-                Debug.Log($"Dice rolled: {rollResult}");
-                break;
-            case 6:
-                Debug.Log($"Dice rolled: {rollResult}");
-                break;
-            case 7:
-                Debug.Log($"Dice rolled: {rollResult}");
-                break;
-            case 8:
-                Debug.Log($"Dice rolled: {rollResult}");
-                break;
-            case 9:
-                Debug.Log($"Dice rolled: {rollResult}");
-                break;
-            case 10:
-                Debug.Log($"Dice rolled: {rollResult}");
-                break;
-            case 11:
-                Debug.Log($"Dice rolled: {rollResult}");
-                break;
-            case 12:
-                Debug.Log($"Dice rolled: {rollResult}");
-                break;
-            default:
-                Debug.Log("Unknown dice result: No effect triggered.");
-                break;
+            Debug.LogWarning("Le deck du joueur est vide ou non initialisé.");
+            return;
+        }
+
+        // Parcourir les cartes dans le deck du joueur
+        foreach (var card in player.Deck)
+        {
+            foreach (int diceValue in card.dice)
+            {
+                if (diceValue == diceResult)
+                {
+                    Debug.Log($"Activation de la carte : {card.name}, Effet : {card.effect}");
+                    // Ici, ajoute la logique d'application de l'effet de la carte
+                    break; // Une fois activée, on peut sortir de la boucle interne
+                }
+            }
         }
     }
+
+
+
+
+
+
 
     // Fin du tour du joueur courant
     void EndTurn()

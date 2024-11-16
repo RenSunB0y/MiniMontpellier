@@ -208,6 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 370608054}
   - component: {fileID: 370608053}
+  - component: {fileID: 370608057}
   - component: {fileID: 370608056}
   - component: {fileID: 370608055}
   m_Layer: 0
@@ -297,6 +298,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 370608052}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &370608057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370608052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb08a14d97d33fa4d9f431764c5e61eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: 
+  coins: 0
+  Deck: []
 --- !u!1 &709232270
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,6 +323,7 @@ GameObject:
   m_Component:
   - component: {fileID: 709232272}
   - component: {fileID: 709232271}
+  - component: {fileID: 709232275}
   - component: {fileID: 709232274}
   - component: {fileID: 709232273}
   m_Layer: 0
@@ -396,6 +413,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 709232270}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &709232275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709232270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb08a14d97d33fa4d9f431764c5e61eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: 
+  coins: 0
+  Deck: []
 --- !u!1 &846815620
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,6 +438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 846815622}
   - component: {fileID: 846815621}
+  - component: {fileID: 846815625}
   - component: {fileID: 846815624}
   - component: {fileID: 846815623}
   m_Layer: 0
@@ -495,6 +528,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846815620}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &846815625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846815620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb08a14d97d33fa4d9f431764c5e61eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: Test
+  coins: 0
+  Deck: []
 --- !u!1 &981312733
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,6 +553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 981312735}
   - component: {fileID: 981312734}
+  - component: {fileID: 981312738}
   - component: {fileID: 981312737}
   - component: {fileID: 981312736}
   m_Layer: 0
@@ -594,6 +643,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 981312733}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &981312738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981312733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb08a14d97d33fa4d9f431764c5e61eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: 
+  coins: 0
+  Deck: []
 --- !u!1 &1251023498
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,12 +838,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e982663941269b4e8bbfb90d3c20469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  players:
+  - {fileID: 846815625}
+  - {fileID: 370608057}
+  - {fileID: 709232275}
+  - {fileID: 981312738}
+  ferme: {fileID: 11400000, guid: 688a77e1dd105ab4a9a390e51ed8e360, type: 2}
+  boulangerie: {fileID: 11400000, guid: 7ed4332f02ff2114f8e259f5929bedc6, type: 2}
   playerInfoText: {fileID: 1251023499}
   player:
-  - {fileID: 846815620}
-  - {fileID: 370608052}
-  - {fileID: 709232270}
-  - {fileID: 981312733}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   currentPhase: 0
 --- !u!1 &1710583898
 GameObject:

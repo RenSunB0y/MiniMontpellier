@@ -1,25 +1,27 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace GameLogic
 {
-    public class Player
+    public class Player : MonoBehaviour
     {
-        public List<Card> Deck { get; set; } = new List<Card>(); // Liste des cartes du joueur
-        public int CoinCount { get; set; } // Exemple d'attribut pour les pièces du joueur
-        public string Name { get; set; } // Exemple d'attribut pour le nom du joueur
+        public string playerName;
+        public int coins;
+        public List<CardSO> Deck;  // Liste des cartes du joueur
 
-        // Méthode pour obtenir le nombre de copies d'une carte spécifique
-        public int GetCardCount(Card card)
+        // Constructeur pour initialiser le joueur avec un nom et une quantité de pièces
+        public Player(string name, int initialCoins)
         {
-            int count = 0;
-            foreach (var c in Deck)
-            {
-                if (c.Equals(card)) // Vérifie si la carte dans le deck est égale à celle donnée
-                {
-                    count++;
-                }
-            }
-            return count;
+            playerName = name;
+            coins = initialCoins;
+            Deck = new List<CardSO>();  // Initialisation du Deck
+        }
+
+        // Méthode pour ajouter une carte au Deck
+        public void AddCardToDeck(CardSO card)
+        {
+            Debug.Log($"Ajout de la carte {card.name} au deck du joueur {playerName}");
+            Deck.Add(card);
         }
     }
 }

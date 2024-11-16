@@ -1,15 +1,24 @@
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using GameLogic;
+// using UnityEngine;
+// using GameLogic;
+// using TMPro;
 
-public class GameUI : MonoBehaviour
-{
-    public Player currentPlayer; // Référence au joueur courant
-    public TextMeshProUGUI playerInfoText;  // Référence au texte UI pour afficher les infos du joueur
+// public class GameUI : MonoBehaviour
+// {
+//     public Player currentPlayer; // Référence au joueur actuel
+//     public TextMeshProUGUI playerInfoText; // Pour afficher les infos des cartes
 
-    public void Start()
-    {
-        
-    }
-}
+//     void Start()
+//     {
+//         DisplayPlayerDeck();
+//     }
+
+//     public void DisplayPlayerDeck()
+//     {
+//         playerInfoText.text = $"Cartes du joueur {currentPlayer.Name}:\n";
+
+//         foreach (CardSO card in currentPlayer.Deck)
+//         {
+//             playerInfoText.text += $"- {card.name} (Coût: {card.cost}, Gain: {card.gain})\n";
+//         }
+//     }
+// }
