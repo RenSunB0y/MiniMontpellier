@@ -3,6 +3,6 @@ using UnityEngine;
 
 public interface IPointerEvents
 {
-    public void MouseOnCard(CardSO data, int id);
-    public void MouseLeavesCard();
+    public void MouseOnCard(GameObject sender);
+    public void MouseLeavesCard(GameObject sender);
 }

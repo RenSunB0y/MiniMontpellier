@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Centre d'affaires
   m_EditorClassIdentifier: 
   prefab: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
-  sprite: {fileID: 21300000, guid: 78010d193a99bfd479f5bca0131b5c71, type: 3}
-  name: Stade
+  sprite: {fileID: 21300000, guid: ca357c4c9dc3e5f4185bd572b21f8ba4, type: 3}
+  name: Centre d'affaires
   effect: 
   color: Violette
   type: "Sp\xE9cial"
+  additionalIcon: {fileID: 0}
   cost: 8
   gain: 0
   dice: 06000000

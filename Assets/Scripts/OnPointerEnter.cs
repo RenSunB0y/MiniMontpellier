@@ -1,3 +1,4 @@
+using System.Diagnostics.Tracing;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -5,8 +6,6 @@ using UnityEngine.InputSystem;
 
 public class OnPointerEnter : MonoBehaviour
 {
-    public bool PointerOn;
-    public int id;
     public float coefs;
     private Vector3 _defaultScale;
 
@@ -14,25 +13,27 @@ public class OnPointerEnter : MonoBehaviour
     {
         _defaultScale = transform.localScale;
     }
-    public void PointerEnter()
+    public void PointerEnter(BaseEventData eventData)
     {
-        PointerOn = true;
-        if(transform.parent.name == "MainHand")
-            transform.parent.GetComponent<MainHandUI>().MouseOnCard(GetComponent<CardTemplateConfig>().card,id);
-        else if(transform.parent.name == "Shop")
+        PointerEventData t = eventData as PointerEventData;
+        GameObject sender = t.pointerEnter;
+        if(GetComponent<CardTemplateConfig>().PrintInShop())
         {
-            transform.parent.GetComponent<ShopUI>().MouseOnCard(GetComponent<CardTemplateConfig>().card, id);
+            GameObject.FindGameObjectWithTag("Shop").GetComponent<ShopUI>().MouseOnCard(sender);
         }
+        else
+            GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().MouseOnCard(sender);
     }
 
-    public void PointerExit()
+    public void PointerExit(BaseEventData eventData)
     {
-        PointerOn = false;
-        if(transform.parent.name == "MainHand")
-            transform.parent.GetComponent<MainHandUI>().MouseLeavesCard();
-        else if(transform.parent.name == "Shop")
+        PointerEventData t = eventData as PointerEventData;
+        GameObject sender = t.pointerEnter;
+        if(GetComponent<CardTemplateConfig>().PrintInShop())
         {
-            transform.parent.GetComponent<ShopUI>().MouseLeavesCard();
+            GameObject.FindGameObjectWithTag("Shop").GetComponent<ShopUI>().MouseLeavesCard(sender);
         }
+        else
+            GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().MouseLeavesCard(sender);
     }
 }

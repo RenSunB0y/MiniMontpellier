@@ -18,6 +18,7 @@ MonoBehaviour:
   effect: 'Recevez '
   color: Vert
   type: Commerce
+  additionalIcon: {fileID: 0}
   cost: 1
   gain: 1
   dice: 0200000003000000
