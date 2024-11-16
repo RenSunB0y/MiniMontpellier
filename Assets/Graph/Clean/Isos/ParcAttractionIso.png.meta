@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ParcAttractionIso_0: 7132621101051962190
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
