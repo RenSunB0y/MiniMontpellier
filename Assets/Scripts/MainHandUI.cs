@@ -14,7 +14,6 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
     public GameObject SelectedCardZoom;
     [SerializeField]
     private List<CardSO> cards = new List<CardSO>();
-    private int actualdCardId;
     private float _cardPosY;
     private const float MIN_SPACE = 20;
     private const int SHOW_HAND_Y = 0;
@@ -22,7 +21,7 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
     private const float HAND_TRANS_DURATION = 0.3f;
     private const float SELECTED_CARD_MOV_COEF = 300;
     private const float SELECTED_CARD_DURATION = 0.15f;
-    private const float SELECTED_CARD_SCALE_COEF = 1.0f;
+    private const float SELECTED_CARD_SCALE_COEF = 1.3f;
     
     int count = 0;
     IEnumerator FillMain()
@@ -50,9 +49,9 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
         {
             Destroy(transform.GetChild(i).gameObject);
         }
-        int id = 0;
 
-        foreach (CardSO card in cards)
+        int id = 0;
+        foreach (CardSO card in cards) // Recup deck du joueur
         {
             var c = Instantiate(card.prefab, transform);
             c.GetComponent<CardTemplateConfig>().Load(card,false);
@@ -78,22 +77,23 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
         {
             transform.GetChild(i).GetComponent<Image>().color = new Color(0.8f,0.8f,0.8f);
         }
-        actualdCardId = id;
+
         Image selectedCardImage = transform.GetChild(id).GetComponent<Image>();
         selectedCardImage.color = new Color(1,1,1,0);
 
         SelectedCardZoom.GetComponent<CardTemplateConfig>().Load(data);
-        SelectedCardZoom.GetComponent<RectTransform>().position = selectedCardImage.GetComponent<RectTransform>().position;
+        SelectedCardZoom.transform.position = selectedCardImage.GetComponent<RectTransform>().position;
         SelectedCardZoom.transform.localScale = selectedCardImage.rectTransform.localScale;
+
         SelectedCardZoom.transform.DOMove(new Vector3(SelectedCardZoom.GetComponent<RectTransform>().position.x, _cardPosY + SELECTED_CARD_MOV_COEF*SelectedCardZoom.GetComponent<RectTransform>().lossyScale.y),SELECTED_CARD_DURATION);
         SelectedCardZoom.transform.DOScale(SelectedCardZoom.transform.localScale * SELECTED_CARD_SCALE_COEF, SELECTED_CARD_DURATION);
+
         for(int i=0; i<SelectedCardZoom.transform.childCount; i++)
             SelectedCardZoom.transform.GetChild(i).gameObject.SetActive(i!=2);
     }
 
     public void MouseLeavesCard()
     {
-        transform.GetChild(actualdCardId).GetComponent<Image>().color = new Color(0.8f,0.8f,0.8f);
         for(int i=0; i<SelectedCardZoom.transform.childCount; i++)
             SelectedCardZoom.transform.GetChild(i).gameObject.SetActive(false);
     }

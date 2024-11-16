@@ -17,6 +17,7 @@ MonoBehaviour:
   name: Restaurant
   effect: 
   color: Rouge
+  type: Consommation
   cost: 3
   gain: 2
   dice: 090000000a000000

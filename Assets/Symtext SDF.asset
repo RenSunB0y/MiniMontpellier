@@ -1,13 +1,13 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!21 &-6156697031979756059
+--- !u!21 &-4824765073399368101
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Pixeled Atlas Material
+  m_Name: Symtext Atlas Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -36,7 +36,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: -3550884088449228188}
+        m_Texture: {fileID: 6694344393051968703}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutlineTex:
@@ -70,7 +70,7 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.5
+    - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.9
@@ -109,52 +109,6 @@ Material:
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!28 &-3550884088449228188
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Pixeled Atlas
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 3
-  m_Width: 1
-  m_Height: 1
-  m_CompleteImageSize: 1
-  m_MipsStripped: 0
-  m_TextureFormat: 1
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_IsPreProcessed: 0
-  m_IgnoreMipmapLimit: 1
-  m_MipmapLimitGroupName: 
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_VTOnly: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  m_PlatformBlob: 
-  image data: 1
-  _typelessdata: 00
-  m_StreamData:
-    serializedVersion: 2
-    offset: 0
-    size: 0
-    path: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,36 +119,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: Pixeled SDF
+  m_Name: Symtext SDF
   m_EditorClassIdentifier: 
   m_Version: 1.1.0
   m_FaceInfo:
     m_FaceIndex: 0
-    m_FamilyName: Pixeled
+    m_FamilyName: Symtext
     m_StyleName: Regular
     m_PointSize: 90
     m_Scale: 1
-    m_UnitsPerEM: 4096
-    m_LineHeight: 251.98242
-    m_AscentLine: 197.9956
-    m_CapLine: 108
-    m_MeanLine: 90
+    m_UnitsPerEM: 2048
+    m_LineHeight: 131.83594
+    m_AscentLine: 105.46875
+    m_CapLine: 66
+    m_MeanLine: 66
     m_Baseline: 0
-    m_DescentLine: -53.986816
-    m_SuperscriptOffset: 197.9956
+    m_DescentLine: -26.367188
+    m_SuperscriptOffset: 105.46875
     m_SuperscriptSize: 0.5
-    m_SubscriptOffset: -53.986816
+    m_SubscriptOffset: -26.367188
     m_SubscriptSize: 0.5
-    m_UnderlineOffset: 6.7456055
-    m_UnderlineThickness: 4.482422
-    m_StrikethroughOffset: 36
-    m_StrikethroughThickness: 4.482422
-    m_TabWidth: 36
-  m_Material: {fileID: -6156697031979756059}
-  m_SourceFontFileGUID: 618f386582508c34abc91ef73cb93452
+    m_UnderlineOffset: -12.832031
+    m_UnderlineThickness: 6.591797
+    m_StrikethroughOffset: 26.4
+    m_StrikethroughThickness: 6.591797
+    m_TabWidth: 40
+  m_Material: {fileID: -4824765073399368101}
+  m_SourceFontFileGUID: 151dba949884fd043a35b91ccbc1fed2
   m_CreationSettings:
     sourceFontFileName: 
-    sourceFontFileGUID: 618f386582508c34abc91ef73cb93452
+    sourceFontFileGUID: 151dba949884fd043a35b91ccbc1fed2
     faceIndex: 0
     pointSizeSamplingMode: 0
     pointSize: 90
@@ -211,14 +165,14 @@ MonoBehaviour:
     fontStyleModifier: 0
     renderMode: 4165
     includeFontFeatures: 0
-  m_SourceFontFile: {fileID: 12800000, guid: 618f386582508c34abc91ef73cb93452, type: 3}
+  m_SourceFontFile: {fileID: 12800000, guid: 151dba949884fd043a35b91ccbc1fed2, type: 3}
   m_SourceFontFilePath: 
   m_AtlasPopulationMode: 1
   InternalDynamicOS: 0
   m_GlyphTable: []
   m_CharacterTable: []
   m_AtlasTextures:
-  - {fileID: -3550884088449228188}
+  - {fileID: 6694344393051968703}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 0
   m_GetFontFeatures: 1
@@ -296,3 +250,49 @@ MonoBehaviour:
     kerningPairs: []
   fallbackFontAssets: []
   atlas: {fileID: 0}
+--- !u!28 &6694344393051968703
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Symtext Atlas
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 3
+  m_Width: 1
+  m_Height: 1
+  m_CompleteImageSize: 1
+  m_MipsStripped: 0
+  m_TextureFormat: 1
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMipmapLimit: 1
+  m_MipmapLimitGroupName: 
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  m_PlatformBlob: 
+  image data: 1
+  _typelessdata: 00
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
