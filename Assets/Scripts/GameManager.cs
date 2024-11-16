@@ -14,9 +14,12 @@ public enum TurnPhase
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    private List<CardSO> cards;
+    public Piles DrawPile;
     public List<Player> players; // Liste des joueurs
-    public CardSO ferme; // Référence au ScriptableObject pour Farm
-    public CardSO boulangerie; // Référence au ScriptableObject pour Bakery
+    public Card ferme; // Référence au ScriptableObject pour Farm
+    public Card boulangerie; // Référence au ScriptableObject pour Bakery
     public TextMeshProUGUI playerInfoText;
     public TextMeshProUGUI[] playerNamesTexts;
     public List<GameObject> player; // Liste des GameObjects des joueurs
@@ -28,6 +31,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        DrawPile = new Piles(cards); // Initialisation du Draw
+
         // S'assurer que PlayerData.PlayerNames contient les noms des joueurs
         if (PlayerData.PlayerNames.Count > 0)
         {
@@ -54,8 +59,8 @@ public class GameManager : MonoBehaviour
             // Ajouter des cartes initiales aux joueurs sélectionnés
             for (int i = 0; i < PlayerData.PlayerNames.Count; i++)
             {
-                players[i].AddCardToDeck(ferme);
-                players[i].AddCardToDeck(boulangerie);
+                players[i].Deck.AddCard(ferme);
+                players[i].Deck.AddCard(boulangerie);
             }
         }
 
@@ -160,27 +165,28 @@ public class GameManager : MonoBehaviour
         // Récupérer le joueur courant à partir de la liste des joueurs
         Player player = players[currentPlayerIndex];
 
-        if (player.Deck == null || player.Deck.Count == 0)
-        {
-            Debug.LogWarning("Le deck du joueur est vide ou non initialisé.");
-            return;
-        }
 
+        foreach (Player _player in players)
         // Parcourir les cartes dans le deck du joueur
-        foreach (var card in player.Deck)
         {
-                if (card.dice.Contains(diceResult))
+
+            if (_player.Deck == null || _player.Deck.Pile.Count == 0)
+            {
+                Debug.LogWarning("Le deck du joueur est vide ou non initialisé.");
+                return;
+            }
+
+            foreach (var card in _player.Deck.Pile.Keys)
+            {
+                if (card.Dice.Contains(diceResult))
                 {
-                    Debug.Log($"Activation de la carte : {card.name}, Effet : {card.effect}");
-                    
-                    break; // Une fois activée, on peut sortir de la boucle interne
+                    for (int i = 0; i < _player.Deck.Pile[card]; i++)
+                    {
+                        _player.CheckEffects(player, diceResult, card);
+                    }
                 }
             }
-    }
-
-    private void Effect()
-    {
-
+        }
     }
 
     // Fin du tour du joueur courant

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using JetBrains.Annotations;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace GameLogic
@@ -7,21 +9,72 @@ namespace GameLogic
     {
         public string playerName;
         public int coins;
-        public List<CardSO> Deck;  // Liste des cartes du joueur
+        public Piles Deck; // Liste des cartes du joueur
 
-        // Constructeur pour initialiser le joueur avec un nom et une quantité de pièces
-        public Player(string name, int initialCoins)
+        private void Start()
         {
-            playerName = name;
-            coins = initialCoins;
-            Deck = new List<CardSO>();  // Initialisation du Deck
+            Deck = new Piles(); // Initialisation du Deck
         }
 
-        // Méthode pour ajouter une carte au Deck
-        public void AddCardToDeck(CardSO card)
+        public void CheckEffects(Player playerActuel, int diceResult, Card card)
         {
-            Debug.Log($"Ajout de la carte {card.name} au deck du joueur {playerName}");
-            Deck.Add(card);
+            { 
+                if (!playerActuel == this)
+                {
+                    switch (diceResult)
+                    {
+                        case 1: Gain(card.Gain); break;
+                        case 2: Gain(card.Gain); break;
+                        case 3:
+                            playerActuel.Pay(card.Cost);
+                            Gain(card.Gain); // ++++++ Limiter la perte jusque 0 et pas en dessous plus n'ajouter que ce qui a été débité
+                            break;
+                        case 5: Gain(card.Gain); break;
+                        case 9:
+                            if (card.Color == "Red")
+                            {
+                                playerActuel.Pay(card.Cost);
+                                Gain(card.Gain);
+                            }
+                            else
+                            { Gain(card.Gain); }
+                            break;
+                        case 10:
+                            if (card.Color == "Red")
+                            {
+                                playerActuel.Pay(card.Cost);
+                                Gain(card.Gain);
+                            }
+                            else
+                            { Gain(card.Gain); } 
+                            break;
+
+                    }
+                }
+
+                else if (playerActuel == this)
+                { 
+                    if (diceResult != 6)
+                    {
+                        Gain(card.Gain);
+                    }
+                    else
+                    {
+                        //Trucs avec cartes speciales
+                    }
+                }
+            }
         }
+
+        public void Gain(int gain)
+        {
+            coins += gain;
+        }
+
+        public void Pay(int payment)
+        { 
+            coins -= payment;
+        }
+
     }
 }

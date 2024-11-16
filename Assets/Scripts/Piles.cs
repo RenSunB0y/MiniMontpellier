@@ -2,14 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Piles : MonoBehaviour
+public class Piles
 {
 
-    [SerializeField]
-    private List<CardSO> cards;
+    public Dictionary<Card, int> Pile;
+    private Dictionary<Card, int> updatePile;
 
-    Dictionary<Card, int> Pile;
-    Dictionary<Card, int> UpdatePile;
+    public List<Card> playerDeck;
 
     public Piles()
     {
@@ -17,7 +16,7 @@ public class Piles : MonoBehaviour
         Pile = new Dictionary<Card, int>(); //vide
     }
 
-    private void Start()
+    public Piles(List<CardSO> cards)
     {
         foreach (CardSO card in cards)
         {
@@ -39,26 +38,33 @@ public class Piles : MonoBehaviour
     public void RemoveCard(Card wantedCard)
     {
         if (Pile.ContainsKey(wantedCard))
-            Pile[wantedCard]++;
-        else
-            Pile.Add(wantedCard, 1);
+        {
+            if (Pile[wantedCard] > 0)
+            {
+                Pile[wantedCard]--;
+            }
+            else
+            {
+                Pile.Remove(wantedCard);
+            }
 
-        UpgradePile();
+            UpgradePile();
+        }
     }
 
     private void UpgradePile()
     {
         //On reset l'UpgradePile en vidant puis en copiant la Pile (--->  viter de rajouter plusieurs fois les am liorations)
-        UpdatePile.Clear();
-        UpdatePile = new Dictionary<Card, int>();
+        updatePile.Clear();
+        updatePile = new Dictionary<Card, int>();
         foreach (KeyValuePair<Card, int> card in Pile)
-            UpdatePile.Add(card.Key, card.Value);
+            updatePile.Add(card.Key, card.Value);
 
         //Parcours chaque carte dans l'UpdatePile
-        foreach (Card card in UpdatePile.Keys)
+        foreach (Card card in updatePile.Keys)
         {
             //Recherche am lioration pour chaque carte
-            CheckCard(card, UpdatePile);
+            CheckCard(card, updatePile);
         }
     }
 

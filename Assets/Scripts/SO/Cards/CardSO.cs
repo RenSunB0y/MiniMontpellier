@@ -25,8 +25,4 @@ public class CardSO : ScriptableObject
         return card;
     }
 
-    public virtual void Effect()
-    {
-    }
-
 }
