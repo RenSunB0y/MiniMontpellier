@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start
+  m_text: Jouer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -659,7 +659,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1683010439}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: PlayerSelection
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -774,10 +774,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.00052083336
     y: 0
-    width: 1
-    height: 1
+    width: 0.76250005
+    height: 0.35185185
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60

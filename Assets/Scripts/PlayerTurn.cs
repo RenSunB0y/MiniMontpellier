@@ -26,14 +26,18 @@ public class PlayerTurn : MonoBehaviour
 
     void Start()
     {
-        // Initialisation des joueurs
-        players = new List<Player>
+        for (int i = 0; i < PlayerData.PlayerNames.Count; i++)
+    {
+        var name = PlayerData.PlayerNames[i];
+        players.Add(new Player(name, 3));
+
+        // Associer GameObject (si Player1, Player2, etc. sont bien nommés)
+        var playerGameObject = GameObject.Find($"Player{i + 1}");
+        if (playerGameObject != null)
         {
-            new Player("Joueur 1", 3),
-            new Player("Joueur 2", 3),
-            new Player("Joueur 3", 3),
-            new Player("Joueur 4", 3)
-        };
+            Debug.Log($"Player {name} associé à {playerGameObject.name}");
+        }
+    }
 
         // Ajouter des cartes initiales à chaque joueur
         players[0].AddCardToDeck(ferme);

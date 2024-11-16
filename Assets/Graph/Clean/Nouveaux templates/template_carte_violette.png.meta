@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      template_carte_violette_0: 4153407925282832319
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
