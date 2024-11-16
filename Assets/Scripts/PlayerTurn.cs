@@ -17,6 +17,7 @@ public class PlayerTurn : MonoBehaviour
     public CardSO ferme; // Référence au ScriptableObject pour Farm
     public CardSO boulangerie; // Référence au ScriptableObject pour Bakery
     public TextMeshProUGUI playerInfoText;
+    public TextMeshProUGUI[] playerNamesTexts;
     public List<GameObject> player; // Liste des GameObjects des joueurs
     private int currentPlayerIndex = 0; // Index du joueur courant
     public TurnPhase currentPhase = TurnPhase.Preparation; // Phase du tour courant
@@ -26,18 +27,22 @@ public class PlayerTurn : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < PlayerData.PlayerNames.Count; i++)
-    {
-        var name = PlayerData.PlayerNames[i];
-        players.Add(new Player(name, 3));
-
-        // Associer GameObject (si Player1, Player2, etc. sont bien nommés)
-        var playerGameObject = GameObject.Find($"Player{i + 1}");
-        if (playerGameObject != null)
+        // Assurez-vous que PlayerData.PlayerNames est bien rempli avec les noms des joueurs
+        if (PlayerData.PlayerNames.Count > 0)
         {
-            Debug.Log($"Player {name} associé à {playerGameObject.name}");
+            for (int i = 0; i < playerNamesTexts.Length; i++)
+            {
+                // Vérifiez si un nom existe pour chaque joueur
+                if (i < PlayerData.PlayerNames.Count)
+                {
+                    playerNamesTexts[i].text = PlayerData.PlayerNames[i]; // Assigner le nom du joueur à chaque TextMeshPro
+                }
+                else
+                {
+                    playerNamesTexts[i].text = "Joueur " + (i + 1); // Par défaut, afficher "Joueur X"
+                }
+            }
         }
-    }
 
         // Ajouter des cartes initiales à chaque joueur
         players[0].AddCardToDeck(ferme);
@@ -93,7 +98,7 @@ public class PlayerTurn : MonoBehaviour
             Debug.Log($"{currentPlayer.name}'s Turn Started");
             currentPhase = TurnPhase.Preparation;
             ChangePlayerColor(Color.green);
-            playerInfoText.text = $"Tour du joueur {currentPlayerIndex + 1}";
+            playerInfoText.text = $"Tour de {playerNamesTexts[currentPlayerIndex].text}";
         }
         else
         {
@@ -200,7 +205,7 @@ public class PlayerTurn : MonoBehaviour
 
         // On peut réinitialiser la couleur ou effectuer d'autres actions.
         ChangePlayerColor(Color.white); // Exemple pour remettre la couleur de base
-        playerInfoText.text = $"Fin du tour du joueur {currentPlayerIndex + 1}";
+        playerInfoText.text = $"Fin du tour de {playerNamesTexts[currentPlayerIndex].text}";
     }
 
     void NextPlayer()
