@@ -14,6 +14,7 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
     public GameObject SelectedCardZoom;
     [SerializeField]
     private List<CardSO> cards = new List<CardSO>();
+
     private int actualdCardId;
     private float _cardPosY;
     private const float MIN_SPACE = 20;
@@ -25,7 +26,7 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
     private const float SELECTED_CARD_SCALE_COEF = 1.0f;
     
     int count = 0;
-    IEnumerator FillMain()
+    IEnumerator FillMain() //Debug ??????
     {
         yield return new WaitForSeconds(0.05f);
         cards.Add(cards[0]);
@@ -46,13 +47,12 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
 
     private void UpdateMainHand()
     {
-        for(int i=0; i<transform.childCount; i++)
+        for(int i=0; i<transform.childCount; i++) //Clear cartes de la main
         {
             Destroy(transform.GetChild(i).gameObject);
         }
         int id = 0;
-
-        foreach (CardSO card in cards)
+        foreach (CardSO card in cards) //Instancie cartes de la main
         {
             var c = Instantiate(card.prefab, transform);
             c.GetComponent<CardTemplateConfig>().Load(card,false);
@@ -60,19 +60,19 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
             _cardPosY = c.GetComponent<RectTransform>().position.y;
             id++;
         }
-        transform.GetComponent<HorizontalLayoutGroup>().spacing = -(cards.Count * 6 + MIN_SPACE);
+        transform.GetComponent<HorizontalLayoutGroup>().spacing = -(cards.Count * 6 + MIN_SPACE); //Espace entre les carte (- important si + nombreuses / proportionnel)
     }
 
-    public void ShowHand()
+    public void ShowHand() //Animation d�placement vers le haut (mise en valeur de la carte)
     {
         DOTween.To(()=> transform.GetComponent<HorizontalLayoutGroup>().padding, x=> transform.GetComponent<HorizontalLayoutGroup>().padding = x, new RectOffset(0,0,0,SHOW_HAND_Y), HAND_TRANS_DURATION);
     }
 
-    public void HideHand()
+    public void HideHand() //Animation d�placement vers le bas (cache la carte)
     {
         DOTween.To(()=> transform.GetComponent<HorizontalLayoutGroup>().padding, x=> transform.GetComponent<HorizontalLayoutGroup>().padding = x, new RectOffset(0,0,0,HIDE_HAND_Y), HAND_TRANS_DURATION);
     }
-    public void MouseOnCard(CardSO data, int id)
+    public void MouseOnCard(int id) //M�thode event appel�e quand curseur EST sur carte pass�e en id
     {
         for(int i=0; i<transform.childCount; i++)
         {
@@ -91,7 +91,7 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
             SelectedCardZoom.transform.GetChild(i).gameObject.SetActive(i!=2);
     }
 
-    public void MouseLeavesCard()
+    public void MouseLeavesCard() //M�thode event appel�e quand curseur n'est PLUS sur carte pass�e en id
     {
         transform.GetChild(actualdCardId).GetComponent<Image>().color = new Color(0.8f,0.8f,0.8f);
         for(int i=0; i<SelectedCardZoom.transform.childCount; i++)
