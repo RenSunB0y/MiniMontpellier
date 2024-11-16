@@ -18,10 +18,10 @@ public class OnPointerEnter : MonoBehaviour
     {
         PointerOn = true;
         if(transform.parent.name == "MainHand")
-            transform.parent.GetComponent<MainHandUI>().MouseOnCard(id);
+            transform.parent.GetComponent<MainHandUI>().MouseOnCard(GetComponent<CardTemplateConfig>().card,id);
         else if(transform.parent.name == "Shop")
         {
-            transform.parent.GetComponent<ShopUI>().MouseOnCard(id);
+            transform.parent.GetComponent<ShopUI>().MouseOnCard(GetComponent<CardTemplateConfig>().card, id);
         }
     }
 
