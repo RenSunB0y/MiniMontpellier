@@ -4,26 +4,29 @@ using UnityEngine;
 
 public class Piles : MonoBehaviour
 {
-    Dictionary<Cards, int> Pile;
-    Dictionary<Cards, int> UpdatePile;
+
+    [SerializeField]
+    private List<CardSO> cards;
+
+    Dictionary<Card, int> Pile;
+    Dictionary<Card, int> UpdatePile;
 
     public Piles()
     {
         //Jeu(deck) du joueur
-        Pile = new Dictionary<Cards, int>(); //vide
+        Pile = new Dictionary<Card, int>(); //vide
     }
 
-    //Constructeur pour jeu de carte (toutes)
-    public Piles(List<CardSO> cards)
+    private void Start()
     {
         foreach (CardSO card in cards)
         {
-            Pile.Add(new Cards(card), card.amount);
+            Pile.Add(card.Build(), card.amount);
         }
     }
 
     // M thodes
-    public void AddCard(Cards wantedCard)
+    public void AddCard(Card wantedCard)
     {
         if (Pile.ContainsKey(wantedCard))
             Pile[wantedCard]++;
@@ -33,7 +36,7 @@ public class Piles : MonoBehaviour
         UpgradePile();
     }
 
-    public void RemoveCard(Cards wantedCard)
+    public void RemoveCard(Card wantedCard)
     {
         if (Pile.ContainsKey(wantedCard))
             Pile[wantedCard]++;
@@ -47,12 +50,12 @@ public class Piles : MonoBehaviour
     {
         //On reset l'UpgradePile en vidant puis en copiant la Pile (--->  viter de rajouter plusieurs fois les am liorations)
         UpdatePile.Clear();
-        UpdatePile = new Dictionary<Cards, int>();
-        foreach (KeyValuePair<Cards, int> card in Pile)
+        UpdatePile = new Dictionary<Card, int>();
+        foreach (KeyValuePair<Card, int> card in Pile)
             UpdatePile.Add(card.Key, card.Value);
 
         //Parcours chaque carte dans l'UpdatePile
-        foreach (Cards card in UpdatePile.Keys)
+        foreach (Card card in UpdatePile.Keys)
         {
             //Recherche am lioration pour chaque carte
             CheckCard(card, UpdatePile);
@@ -60,7 +63,7 @@ public class Piles : MonoBehaviour
     }
 
     //card = carte  tudi e, deck = jeu du joueur / itself = si la carte doit se "parcourir" elle m me
-    private void CheckCard(Cards card, Dictionary<Cards, int> deck, bool itself = false)
+    private void CheckCard(Card card, Dictionary<Card, int> deck, bool itself = false)
     {
         //S curti  : si on ne doit pas l' dudier et qu'elle est pr sente (on la supprime)
         if (!itself && deck.ContainsKey(card))

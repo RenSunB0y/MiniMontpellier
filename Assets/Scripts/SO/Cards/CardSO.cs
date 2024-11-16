@@ -15,4 +15,18 @@ public class CardSO : ScriptableObject
     public int gain;
     public int[] dice;
     public int amount;
+
+    public Card Build()
+    {
+      var c=  Instantiate(prefab);
+
+        var card = c.GetComponent<Card>();
+
+        return card;
+    }
+
+    public virtual void Effect()
+    {
+    }
+
 }

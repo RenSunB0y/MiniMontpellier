@@ -1243,7 +1243,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1647894092}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e982663941269b4e8bbfb90d3c20469, type: 3}
+  m_Script: {fileID: 11500000, guid: 191d09945d87a0c459fdbc5485a84df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   players:
@@ -1259,11 +1259,7 @@ MonoBehaviour:
   - {fileID: 809534725}
   - {fileID: 1851870605}
   - {fileID: 1557605384}
-  player:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  player: []
   currentPhase: 0
 --- !u!1 &1710583898
 GameObject:

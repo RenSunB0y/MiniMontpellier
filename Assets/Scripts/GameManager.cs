@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using GameLogic;
+using System.Linq;
 
 public enum TurnPhase
 {
@@ -168,17 +169,16 @@ public class GameManager : MonoBehaviour
         // Parcourir les cartes dans le deck du joueur
         foreach (var card in player.Deck)
         {
-            foreach (int diceValue in card.dice)
-            {
-                if (diceValue == diceResult)
+                if (card.dice.Contains(diceResult))
                 {
                     Debug.Log($"Activation de la carte : {card.name}, Effet : {card.effect}");
-                    // Ici, ajoute la logique d'application de l'effet de la carte
+                    
                     break; // Une fois activée, on peut sortir de la boucle interne
                 }
             }
-        }
     }
+
+    private void Effect()
 
     // Fin du tour du joueur courant
     void EndTurn()
