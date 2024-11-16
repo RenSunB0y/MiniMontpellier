@@ -179,6 +179,9 @@ public class GameManager : MonoBehaviour
     }
 
     private void Effect()
+    {
+
+    }
 
     // Fin du tour du joueur courant
     void EndTurn()
