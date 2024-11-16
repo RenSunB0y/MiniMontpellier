@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
   sprite: {fileID: 21300000, guid: 05585b3b960ba8e4cba02ae650fcfde1, type: 3}
   name: "Champs de bl\xE9"
-  effect: 
+  effect: test
   color: Bleu
   cost: 1
   gain: 1
