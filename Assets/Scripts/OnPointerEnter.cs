@@ -36,4 +36,9 @@ public class OnPointerEnter : MonoBehaviour
         else
             GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().MouseLeavesCard(sender);
     }
+
+    public void PointerClick(BaseEventData eventData)
+    {
+        Debug.Log("Clicked");
+    }
 }
