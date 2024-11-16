@@ -27,55 +27,44 @@ public class PlayerTurn : MonoBehaviour
 
     void Start()
     {
-        // Assurez-vous que PlayerData.PlayerNames est bien rempli avec les noms des joueurs
+        // S'assurer que PlayerData.PlayerNames contient les noms des joueurs
         if (PlayerData.PlayerNames.Count > 0)
         {
+            // Mise à jour des noms des joueurs dans l'UI (TextMeshPro)
             for (int i = 0; i < playerNamesTexts.Length; i++)
             {
-                // Vérifiez si un nom existe pour chaque joueur
                 if (i < PlayerData.PlayerNames.Count)
                 {
                     playerNamesTexts[i].text = PlayerData.PlayerNames[i]; // Assigner le nom du joueur à chaque TextMeshPro
                 }
                 else
                 {
-                    playerNamesTexts[i].text = "Joueur " + (i + 1); // Par défaut, afficher "Joueur X"
+                    playerNamesTexts[i].text = "Joueur " + (i + 1); // Par défaut, afficher "Joueur X" si non assigné
                 }
+            }
+
+            // Initialisation des GameObjects des joueurs
+            player = new List<GameObject>();
+            for (int i = 0; i < PlayerData.PlayerNames.Count; i++)
+            {
+                player.Add(GameObject.Find("Player" + (i + 1))); // Trouver les GameObjects des joueurs actifs
+            }
+
+            // Ajouter des cartes initiales aux joueurs sélectionnés
+            for (int i = 0; i < PlayerData.PlayerNames.Count; i++)
+            {
+                players[i].AddCardToDeck(ferme);
+                players[i].AddCardToDeck(boulangerie);
             }
         }
 
-        // Ajouter des cartes initiales à chaque joueur
-        players[0].AddCardToDeck(ferme);
-        players[0].AddCardToDeck(boulangerie);
-
-        players[1].AddCardToDeck(ferme);
-        players[1].AddCardToDeck(boulangerie);
-
-        players[2].AddCardToDeck(ferme);
-        players[2].AddCardToDeck(boulangerie);
-
-        players[3].AddCardToDeck(ferme);
-        players[3].AddCardToDeck(boulangerie);
-
-        // Initialisation des GameObjects des joueurs
-        player = new List<GameObject>
-        {
-            GameObject.Find("Player1"),
-            GameObject.Find("Player2"),
-            GameObject.Find("Player3"),
-            GameObject.Find("Player4")
-        };
-
-        // Assurez-vous que currentPlayer est bien défini
+        // Initialiser le premier joueur et commencer son tour
         if (player.Count > 0)
         {
-            // Vérification du Deck du premier joueur
-            Debug.Log($"Deck du joueur 1 : {players[0].Deck.Count} cartes");
             currentPlayer = player[currentPlayerIndex];
             StartTurnForCurrentPlayer();
         }
     }
-
 
     void Update()
     {
@@ -105,7 +94,6 @@ public class PlayerTurn : MonoBehaviour
             Debug.LogError("La liste des joueurs est vide.");
         }
     }
-
 
     // Passer à la phase suivante
     void NextPhase()
@@ -191,12 +179,6 @@ public class PlayerTurn : MonoBehaviour
             }
         }
     }
-
-
-
-
-
-
 
     // Fin du tour du joueur courant
     void EndTurn()
