@@ -5,6 +5,7 @@ using TMPro;
 public enum TurnPhase
 {
     Preparation,
+    DiceCount,
     DiceRoll,
     End
 }
@@ -17,6 +18,7 @@ public class PlayerTurn : MonoBehaviour
     public TurnPhase currentPhase = TurnPhase.Preparation; // Phase du tour courant
 
     private GameObject currentPlayer; // GameObject du joueur actuel
+    private bool waitingForDiceChoice = false; // Flag pour attendre l'entrée utilisateur
 
     void Start()
     {
@@ -29,7 +31,11 @@ public class PlayerTurn : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) // Exemple pour avancer à la phase suivante
+        if (waitingForDiceChoice && currentPhase == TurnPhase.DiceCount)
+        {
+            HandleDiceInput();
+        }
+        else if (Input.GetKeyDown(KeyCode.Space)) // Exemple pour avancer à la phase suivante
         {
             NextPhase();
         }
@@ -40,7 +46,6 @@ public class PlayerTurn : MonoBehaviour
     {
         currentPhase = TurnPhase.Preparation;
         Debug.Log($"{currentPlayer.name}'s Turn Started");
-        // Si tu veux par exemple changer la couleur du joueur actif :
         ChangePlayerColor(Color.green);
         playerInfoText.text = $"Tour du joueur {currentPlayerIndex + 1}";
     }
@@ -51,8 +56,11 @@ public class PlayerTurn : MonoBehaviour
         switch (currentPhase)
         {
             case TurnPhase.Preparation:
-                currentPhase = TurnPhase.DiceRoll;
-                RollDice();
+                currentPhase = TurnPhase.DiceCount;
+                ChooseDiceCount();
+                break;
+            case TurnPhase.DiceCount:
+                // Cette phase sera avancée après le choix des dés
                 break;
             case TurnPhase.DiceRoll:
                 currentPhase = TurnPhase.End;
@@ -64,11 +72,40 @@ public class PlayerTurn : MonoBehaviour
         }
     }
 
-    // Gérer le lancement des dés
-    void RollDice()
+    void ChooseDiceCount()
     {
-        int diceResult = Random.Range(1, 13); // Lancer de un ou deux dés (valeur entre 1 et 12)
+        waitingForDiceChoice = true;
+        playerInfoText.text = "Voulez-vous lancer 1 ou 2 dés ?\nAppuyez sur [1] ou [2]";
+    }
+
+    void HandleDiceInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            waitingForDiceChoice = false;
+            Debug.Log("1 dé choisi");
+            RollDice(1);
+            currentPhase = TurnPhase.DiceRoll; // Avance à la phase suivante
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            waitingForDiceChoice = false;
+            Debug.Log("2 dés choisis");
+            RollDice(2);
+            currentPhase = TurnPhase.DiceRoll; // Avance à la phase suivante
+        }
+    }
+
+    void RollDice(int dice)
+    {
+        int diceResult = 0;
+        for (int i = 0; i < dice; i++)
+        {
+            diceResult += Random.Range(1, 7);
+        }
+        Debug.Log($"Résultat des dés : {diceResult}");
         HandleDiceOutcome(diceResult);
+        playerInfoText.text = $"Résultat des dés : {diceResult}";
     }
 
     // Appliquer l'effet du lancer de dés
@@ -128,7 +165,6 @@ public class PlayerTurn : MonoBehaviour
         playerInfoText.text = $"Fin du tour du joueur {currentPlayerIndex + 1}";
     }
 
-    // Passer au joueur suivant
     void NextPlayer()
     {
         currentPlayerIndex = (currentPlayerIndex + 1) % player.Count;
@@ -136,7 +172,6 @@ public class PlayerTurn : MonoBehaviour
         StartTurnForCurrentPlayer();
     }
 
-    // Changer la couleur du joueur courant pour indiquer qu'il est actif
     void ChangePlayerColor(Color color)
     {
         Renderer playerRenderer = currentPlayer.GetComponent<Renderer>();
