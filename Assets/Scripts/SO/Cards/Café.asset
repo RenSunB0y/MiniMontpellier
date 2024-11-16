@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2be1f7785ad48fd45ad91648f2d7a016, type: 3}
-  m_Name: Parc
+  m_Name: "Caf\xE9"
   m_EditorClassIdentifier: 
   prefab: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
-  sprite: {fileID: 21300000, guid: ad661bda80602954a8a8daf98a5f32ed, type: 3}
-  name: Parc
+  sprite: {fileID: 21300000, guid: 061e32894fe67f84e874bad2640cdc99, type: 3}
+  name: "Caf\xE9"
   effect: 
-  color: Grise
-  type: "Sp\xE9cial"
-  mainIcon: {fileID: 21300000, guid: 276217f57ab599b498aa6504a8e5a0d3, type: 3}
-  additionalIcon: {fileID: 21300000, guid: 276217f57ab599b498aa6504a8e5a0d3, type: 3}
-  cost: 16
-  gain: 0
-  dice: 
-  amount: 4
+  color: Rouge
+  type: Consommation
+  mainIcon: {fileID: 0}
+  additionalIcon: {fileID: 0}
+  cost: 2
+  gain: 1
+  dice: 03000000
+  amount: 6
