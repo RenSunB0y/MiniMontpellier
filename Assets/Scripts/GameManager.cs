@@ -11,7 +11,8 @@ public enum TurnPhase
     Preparation,
     DiceCount,
     DiceRoll,
-    End
+    End,
+    EndGame
 }
 
 public class GameManager : MonoBehaviour
@@ -192,7 +193,7 @@ public class GameManager : MonoBehaviour
         int doubleCheck = 0;
 
         int diceResult = 0;
-
+        
         for (int i = 0; i < dice; i++)
         {
             int rnd = Random.Range(1, 7);
@@ -279,6 +280,36 @@ public class GameManager : MonoBehaviour
 
     void NextPlayer()
     {
+        int _winConCount = 0;
+        foreach(var card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
+        {
+            if (card.Name == "Centre Commercial")
+            {
+                _winConCount++;
+            }
+            if (card.Name == "Gare" )
+            {
+                _winConCount++;
+            }
+            if (card.Name == "Tour radio")
+            {
+                _winConCount++;
+            }
+            if (card.Name == "Parc")
+            {
+                _winConCount++;
+            }
+        }
+
+        if (_winConCount == 4)
+        {
+            Debug.Log("Le joueur a gagné !");
+            currentPhase = TurnPhase.EndGame;
+            EndGame();
+
+            return;
+        }
+
         if (isDouble)
         {
             Debug.Log("Double! C'est toujours au tour du même joueur.");
@@ -300,5 +331,10 @@ public class GameManager : MonoBehaviour
         {
             playerRenderer.material.color = color;
         }
+    }
+
+    private void EndGame()
+    {
+
     }
 }

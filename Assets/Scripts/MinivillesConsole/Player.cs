@@ -9,7 +9,8 @@ namespace GameLogic
     public class Player : MonoBehaviour
     {
         public string playerName;
-        public int coins;
+        public int coins =0;
+        public int coinsPerdus = 0;
         
         public Piles Deck; // Liste des cartes du joueur
 
@@ -28,15 +29,15 @@ namespace GameLogic
                         case 1: Gain(card.Gain); break;
                         case 2: Gain(card.Gain); break;
                         case 3:
-                            playerActuel.Pay(card.Gain);
-                            Gain(card.Gain); // ++++++ Limiter la perte jusque 0 et pas en dessous plus n'ajouter que ce qui a été débité
+                            playerActuel.Loss(card.Gain);
+                            Gain(playerActuel.coinsPerdus);
                             break;
                         case 5: Gain(card.Gain); break;
                         case 9:
                             if (card.Color == "Red")
                             {
-                                playerActuel.Pay(card.Gain);
-                                Gain(card.Gain);
+                                playerActuel.Loss(card.Gain);
+                                Gain(playerActuel.coinsPerdus);
                             }
                             else
                             { Gain(card.Gain); }
@@ -44,8 +45,8 @@ namespace GameLogic
                         case 10:
                             if (card.Color == "Red")
                             {
-                                playerActuel.Pay(card.Gain);
-                                Gain(card.Gain);
+                                playerActuel.Loss(card.Gain);
+                                Gain(playerActuel.coinsPerdus);
                             }
                             else
                             { Gain(card.Gain); } 
@@ -69,15 +70,15 @@ namespace GameLogic
 
                                 if (_player != this)
                                 {
-                                    _player.Pay(card.Gain);
-                                    Gain(card.Gain); ////faire pareil qu'avec le restau
+                                    _player.Loss(card.Gain);
+                                    Gain(_player.coinsPerdus); 
                                 }
                             }
                         }
                         else if (card.Name == "Chaîne de télévision")
                         {
                             Player _pickedPlayer = null;
-                            _pickedPlayer.Pay(card.Gain);
+                            _pickedPlayer.Loss(card.Gain);
                             Gain(card.Gain);
                         }
                         else if (card.Name == "Centre d'affaires")
@@ -95,9 +96,19 @@ namespace GameLogic
             coins += gain;
         }
 
-        public void Pay(int payment)
-        { 
-            coins -= payment;
+        public void Loss(int loss)
+        {
+            coinsPerdus = 0;
+            if (coins < loss)
+            {
+                coinsPerdus = coins;
+                coins = 0;
+            }
+            else
+            {
+                coins -= loss;
+                coinsPerdus = loss;
+            }
         }
 
     }
