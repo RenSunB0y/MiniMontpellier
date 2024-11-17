@@ -23,4 +23,4 @@ MonoBehaviour:
   cost: 1
   gain: 1
   dice: 01000000
-  amount: 10
+  amount: 6
