@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MainHand
   - Shop
+  - SecondaryHand
   layers:
   - Default
   - TransparentFX

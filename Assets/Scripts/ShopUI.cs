@@ -25,7 +25,7 @@ public class ShopUI : MonoBehaviour, IPointerEvents
         foreach(CardSO card in cardsType)
         {
             var c = Instantiate(card.prefab, transform);
-            c.GetComponent<CardTemplateConfig>().Load(card,true);
+            c.GetComponent<CardTemplateConfig>().Load(card,true,transform.tag);
             _defaultScale = c.transform.localScale;
             id++;
         }
@@ -38,7 +38,7 @@ public class ShopUI : MonoBehaviour, IPointerEvents
         SelectedCardZoom.transform.DOScale(_defaultScale * SELECTED_CARD_SCALE_COEF, SELECTED_CARD_DURATION);
         for(int i=0; i<SelectedCardZoom.transform.childCount; i++)
             SelectedCardZoom.transform.GetChild(i).gameObject.SetActive(true);
-        SelectedCardZoom.GetComponent<CardTemplateConfig>().Load(sender.GetComponent<CardTemplateConfig>().card,true);
+        SelectedCardZoom.GetComponent<CardTemplateConfig>().Load(sender.GetComponent<CardTemplateConfig>().card,true,transform.tag);
     }
 
     public void MouseLeavesCard(GameObject sender)
