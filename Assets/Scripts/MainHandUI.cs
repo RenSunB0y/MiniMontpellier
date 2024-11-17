@@ -30,7 +30,7 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
 
         int id = 0;
         var dec = deck.OrderByDescending(card => card.Key.SO.dice.Length>0 ? card.Key.SO.dice[0] : int.MaxValue).ThenByDescending(card => card.Key.SO.dice.Length);
-        foreach (KeyValuePair<Card,int> card in GameManager.Instance.currentPlayer.GetComponent<Player>().Deck.Pile)
+        foreach (KeyValuePair<Card,int> card in dec)
         {
             var c = Instantiate(card.Key.SO.prefab, transform);
             c.GetComponent<CardTemplateConfig>().Load(card.Key.SO,card.Value,false,transform.tag);

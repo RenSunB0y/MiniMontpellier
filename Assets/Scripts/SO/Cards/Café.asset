@@ -18,7 +18,7 @@ MonoBehaviour:
   effect: 
   color: Rouge
   type: Consommation
-  mainIcon: {fileID: 0}
+  mainIcon: {fileID: 21300000, guid: a3d250ceda7c6e749a32ca325056084d, type: 3}
   additionalIcon: {fileID: 0}
   cost: 2
   gain: 1

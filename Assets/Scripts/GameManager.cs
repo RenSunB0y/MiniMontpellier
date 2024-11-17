@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
     public Piles DrawPile;
     public List<Player> players; // Liste des joueurs
     [SerializeField]
+    private Transform enemiesUIManager;
+    [SerializeField]
     private CardSO farm;
     [SerializeField]
     private CardSO wheatField;
@@ -94,6 +96,9 @@ public class GameManager : MonoBehaviour
                 playersGameObject.Add(GameObject.Find("Player" + (i + 1))); // Trouver les GameObjects des joueurs actifs
                 players[i].Deck.AddCard(new Card(farm));
                 players[i].Deck.AddCard(new Card(wheatField));
+
+                enemiesUIManager.GetChild(i>0 ? i-1 : i).gameObject.SetActive(true);
+                enemiesUIManager.GetChild(i>0 ? i-1 : i).gameObject.name = $"EnemyPanel-{i}";
             }
         }
 
