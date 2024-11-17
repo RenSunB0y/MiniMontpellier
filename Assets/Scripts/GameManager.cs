@@ -72,6 +72,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private GameObject shopPanel;
+    [SerializeField]
+    private Transform diceGroup;
+    [SerializeField]
+    private Sprite[] diceFacesSprite;
 
     IEnumerator PauseGame()
     {
@@ -132,7 +136,7 @@ public class GameManager : MonoBehaviour
         }
 
         // UI Update
-       // GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().UpdateMainHand(currentPlayer.GetComponent<Player>().Deck.Pile); ///????????????????
+       GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().UpdateMainHand(currentPlayer.GetComponent<Player>().Deck.Pile); ///????????????????
     }
 
     void Update()
@@ -208,7 +212,7 @@ public class GameManager : MonoBehaviour
         //CREER DES BOUTONS ET LES ASSIGNER COMME CA : 1 EN ARGUMENT DE ROLLDICE POUR UN DE ET 2 POUR DEUX
     }
 
-    void RollDice(int diceCount)
+    public void RollDice(int diceCount)
     {
         diceResult = 0;
         doubleCheck = 0;
@@ -216,6 +220,9 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < diceCount; i++)
         {
             int rnd = Random.Range(1, 7);
+            diceGroup.GetChild(i).GetComponent<DiceRollAnim>().actualFace = diceFacesSprite[rnd-1];
+            diceGroup.GetChild(i).GetComponent<Animator>().enabled = true;
+            diceGroup.GetChild(i).GetComponent<Animator>().SetTrigger("RollDice");
             diceResult += rnd;
             if (doubleCheck == 0)
                 doubleCheck = diceResult;
@@ -280,7 +287,7 @@ public class GameManager : MonoBehaviour
 
     private void DisplayShop()
     {
-        shopPanel.SetActive(true);
+        // shopPanel.SetActive(true);
     }
 
     public void EndShopping()
