@@ -289,8 +289,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 23, y: 98}
-  m_SizeDelta: {x: 1087.3333, y: 627.8838}
+  m_AnchoredPosition: {x: 23, y: 100.59894}
+  m_SizeDelta: {x: 1087.3333, y: 622.6859}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &205650582
 MonoBehaviour:
@@ -946,8 +946,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1818878740}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: set_mute
-        m_Mode: 6
+        m_MethodName: Stop
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -961,8 +961,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1818878742}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: set_mute
-        m_Mode: 6
+        m_MethodName: Play
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -974,10 +974,10 @@ MonoBehaviour:
   onGameMusicExit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1818878740}
+      - m_Target: {fileID: 1818878742}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: set_mute
-        m_Mode: 6
+        m_MethodName: Stop
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -991,8 +991,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1818878741}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: set_mute
-        m_Mode: 6
+        m_MethodName: Play
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1006,8 +1006,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1818878741}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: set_mute
-        m_Mode: 6
+        m_MethodName: Stop
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1036,7 +1036,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1818878750}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Stop
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1248,11 +1248,11 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0658f503aa988e9448c9c52dec18de6e, type: 3}
   m_Resource: {fileID: 8300000, guid: 0658f503aa988e9448c9c52dec18de6e, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -1345,11 +1345,11 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2ea6045006b2a0544b7f0c91b9597bcf, type: 3}
   m_Resource: {fileID: 8300000, guid: 2ea6045006b2a0544b7f0c91b9597bcf, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128

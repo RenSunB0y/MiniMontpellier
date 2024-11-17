@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+
+
+        Debug.Log("SONNNN");
+        SoundManager.instance.onGameMusicPlay.Invoke();
+        SoundManager.instance.onMainMenuExit.Invoke();
     }
 
     [SerializeField]
@@ -114,6 +119,7 @@ public class GameManager : MonoBehaviour
                 playersGameObject.Add(GameObject.Find("Player" + (i + 1))); // Trouver les GameObjects des joueurs actifs
                 foreach(CardSO data in startPlayerDeck)
                 {
+                    Debug.Log("YOYOYOYOYOYOY");
                     players[i].Deck.AddCard(new Card(data));
                 }
                 players[i].playerName = PlayerData.PlayerNames[i];
