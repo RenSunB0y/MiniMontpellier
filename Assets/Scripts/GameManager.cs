@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateUI()
     {
+        Debug.Log("Update UI");
        currentPlayer = playersGameObject[currentPlayerIndex];
         for(int i=0; i<players.Count;i++)
         {
@@ -302,9 +303,6 @@ public class GameManager : MonoBehaviour
     {
         enemiesUIManager.gameObject.SetActive(false);
         shopPanel.SetActive(true);
-
-
-        EndShopping();
     }
 
     public void EndShopping()

@@ -24,6 +24,7 @@ public class ShopUI : MonoBehaviour, IPointerEvents
         List<CardSO> cardsSorted = GameManager.Instance.cards;
         for(int i=0; i<4; i++)
             cardsSorted.RemoveAt(cardsSorted.Count-1);
+
         cardsSorted = cardsSorted.OrderBy(card => card.dice[0]).ThenBy(card=>card.dice.Length).ToList();
         foreach(CardSO card in cardsSorted)
         {
