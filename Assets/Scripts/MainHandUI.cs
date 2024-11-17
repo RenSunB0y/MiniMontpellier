@@ -22,7 +22,7 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
     private const float SELECTED_CARD_DURATION = 0.15f;
     private const float SELECTED_CARD_SCALE_COEF = 1.3f;
     
-    int count = 0;
+    int count = 0;  
     // IEnumerator FillMain()
     // {
     //     yield return new WaitForSeconds(0.5f);

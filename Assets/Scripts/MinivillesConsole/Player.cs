@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GameLogic
 {
     public class Player : MonoBehaviour
     {
+        [SerializeField]
         public string playerName;
         public int coins =0;
         public int coinsPerdus = 0;
+
+        public Sprite PlayerBackground;
+        
+        public Sprite PlayerIcon;
         
         public Piles Deck; // Liste des cartes du joueur
 

@@ -6,6 +6,8 @@ using System.Linq;
 using Unity.VisualScripting;
 using Mono.Cecil;
 using System.Collections;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public enum TurnPhase
 {
@@ -30,6 +32,11 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
     }
+
+    [SerializeField]
+    private GameObject background;
+    [SerializeField]
+    private Image imageBG;
 
     [SerializeField]
     private List<CardSO> cards = new();
@@ -69,7 +76,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         DrawPile = new Piles(cards); // Initialisation du Draw
-
 
         // S'assurer que PlayerData.PlayerNames contient les noms des joueurs
         if (PlayerData.PlayerNames.Count > 0)
@@ -141,6 +147,8 @@ public class GameManager : MonoBehaviour
         if (players.Count > 0)
         {
             currentPlayer = playersGameObject[currentPlayerIndex];
+
+            imageBG.sprite = currentPlayer.GetComponent<Player>().PlayerBackground;
             Debug.Log($"{currentPlayer.name}'s Turn Started");
             currentPhase = TurnPhase.Preparation;
             ChangePlayerColor(Color.green);
