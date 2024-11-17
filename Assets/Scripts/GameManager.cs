@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
         {
             currentPlayer = playersGameObject[currentPlayerIndex];
 
-            // imageBG.sprite = currentPlayer.GetComponent<Player>().PlayerBackground;
+            imageBG.sprite = currentPlayer.GetComponent<Player>().PlayerBackground;
             Debug.Log($"{currentPlayer.name}'s Turn Started");
             currentPhase = TurnPhase.Preparation;
             ChangePlayerColor(Color.green);
@@ -214,6 +214,8 @@ public class GameManager : MonoBehaviour
 
     public void RollDice(int diceCount)
     {
+
+        NextPhase();
         diceResult = 0;
         doubleCheck = 0;
 
@@ -246,6 +248,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Si pas de relance possible ou déjà utilisée, applique les effets des dés
+        Debug.Log(diceResult);
         ResolveDiceEffects(diceResult);
 
      }
@@ -287,7 +290,7 @@ public class GameManager : MonoBehaviour
 
     private void DisplayShop()
     {
-        // shopPanel.SetActive(true);
+        shopPanel.SetActive(true);
     }
 
     public void EndShopping()
