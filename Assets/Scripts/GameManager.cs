@@ -120,8 +120,7 @@ public class GameManager : MonoBehaviour
                 players[i].playerName = PlayerData.PlayerNames[i];
 
                 enemiesUIManager.GetChild(i>0 ? i-1 : i).gameObject.SetActive(true);
-                enemiesUIManager.GetChild(i>0 ? i-1 : i).gameObject.name = $"EnemyPanel-{i}";
-                enemiesUIManager.GetChild(i>0 ? i-1 : i).GetComponent<EnemyPanelUI>().Init();
+                enemiesUIManager.GetChild(i>0 ? i-1 : i).GetComponent<EnemyPanelUI>().Init(players[i]);
             }
         }
 
@@ -129,7 +128,7 @@ public class GameManager : MonoBehaviour
         if (playersGameObject.Count > 0)
         {
             currentPlayer = playersGameObject[currentPlayerIndex];
-            playerDataUI.GetComponent<EnemyPanelUI>().Init();
+            playerDataUI.GetComponent<EnemyPanelUI>().Init(currentPlayer.GetComponent<Player>());
             playerDataUI.gameObject.SetActive(true);
             foreach(Card c in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
                 Debug.Log(c.Name);
@@ -138,12 +137,26 @@ public class GameManager : MonoBehaviour
         }
 
         // UI Update
-       GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().UpdateMainHand(currentPlayer.GetComponent<Player>().Deck.Pile); ///????????????????
+        UpdateUI();
     }
 
-    void Update()
+    void UpdateUI()
     {
-        
+       currentPlayer = playersGameObject[currentPlayerIndex];
+        for(int i=0; i<players.Count;i++)
+        {
+            if(i==currentPlayerIndex)
+                playerDataUI.GetComponent<EnemyPanelUI>().Init(players[i]);
+            else
+            {
+                enemiesUIManager.GetChild(i>=3 ? 2 : i).GetComponent<EnemyPanelUI>().Init(players[i]);
+            }
+        }
+       GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().UpdateMainHand(currentPlayer.GetComponent<Player>().Deck.Pile);
+        imageBG.sprite = currentPlayer.GetComponent<Player>().PlayerBackground;
+        Debug.Log($"{currentPlayer.name}'s Turn Started");
+        playerInfoText.text = $"Tour de {playerNamesTexts[currentPlayerIndex]}";
+        currentPhase = TurnPhase.Preparation;
     }
 
     // Démarrer un tour pour le joueur courant
@@ -151,14 +164,7 @@ public class GameManager : MonoBehaviour
     {
         if (players.Count > 0)
         {
-            currentPlayer = playersGameObject[currentPlayerIndex];
-
-            // imageBG.sprite = currentPlayer.GetComponent<Player>().PlayerBackground;
-            Debug.Log($"{currentPlayer.name}'s Turn Started");
-            currentPhase = TurnPhase.Preparation;
-            ChangePlayerColor(Color.green);
-            //playerInfoText.text = $"Tour de {playerNamesTexts[currentPlayerIndex]}";
-
+            UpdateUI();
             NextPhase();
         }
         else
@@ -295,12 +301,17 @@ public class GameManager : MonoBehaviour
 
     private void DisplayShop()
     {
-        // shopPanel.SetActive(true);
+        enemiesUIManager.gameObject.SetActive(false);
+        shopPanel.SetActive(true);
+
+
+        EndShopping();
     }
 
     public void EndShopping()
     {
         shopPanel.SetActive(false);
+        enemiesUIManager.gameObject.SetActive(true);
         isInShop = false;
         NextPhase();
         EndTurn();
@@ -356,15 +367,6 @@ public class GameManager : MonoBehaviour
             currentPlayerIndex = (currentPlayerIndex + 1) % playersGameObject.Count;
             currentPlayer = playersGameObject[currentPlayerIndex];
             StartTurnForCurrentPlayer();
-        }
-    }
-
-    void ChangePlayerColor(Color color)
-    {
-        Renderer playerRenderer = currentPlayer.GetComponent<Renderer>();
-        if (playerRenderer != null)
-        {
-            playerRenderer.material.color = color;
         }
     }
 
