@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private CardSO wheatField;
     public TextMeshProUGUI playerInfoText;
-    public TextMeshProUGUI[] playerNamesTexts;
+    public string[] playerNamesTexts;
     public List<GameObject> playersGameObject; // Liste des GameObjects des joueurs
     private int currentPlayerIndex = 0; // Index du joueur courant
     public TurnPhase currentPhase = TurnPhase.Preparation; // Phase du tour courant
@@ -79,11 +79,11 @@ public class GameManager : MonoBehaviour
             {
                 if (i < PlayerData.PlayerNames.Count)
                 {
-                    playerNamesTexts[i].text = PlayerData.PlayerNames[i]; // Assigner le nom du joueur à chaque TextMeshPro
+                    playerNamesTexts[i] = PlayerData.PlayerNames[i]; // Assigner le nom du joueur à chaque TextMeshPro
                 }
                 else
                 {
-                    playerNamesTexts[i].text = "Joueur " + (i + 1); // Par défaut, afficher "Joueur X" si non assigné
+                    playerNamesTexts[i] = "Joueur " + (i + 1); // Par défaut, afficher "Joueur X" si non assigné
                 }
             }
 
@@ -96,9 +96,11 @@ public class GameManager : MonoBehaviour
                 playersGameObject.Add(GameObject.Find("Player" + (i + 1))); // Trouver les GameObjects des joueurs actifs
                 players[i].Deck.AddCard(new Card(farm));
                 players[i].Deck.AddCard(new Card(wheatField));
+                players[i].playerName = PlayerData.PlayerNames[i];
 
                 enemiesUIManager.GetChild(i>0 ? i-1 : i).gameObject.SetActive(true);
                 enemiesUIManager.GetChild(i>0 ? i-1 : i).gameObject.name = $"EnemyPanel-{i}";
+                enemiesUIManager.GetChild(i>0 ? i-1 : i).GetComponent<EnemyPanelUI>().Init();
             }
         }
 
@@ -152,7 +154,7 @@ public class GameManager : MonoBehaviour
             Debug.Log($"{currentPlayer.name}'s Turn Started");
             currentPhase = TurnPhase.Preparation;
             ChangePlayerColor(Color.green);
-            playerInfoText.text = $"Tour de {playerNamesTexts[currentPlayerIndex].text}";
+            playerInfoText.text = $"Tour de {playerNamesTexts[currentPlayerIndex]}";
         }
         else
         {
@@ -308,7 +310,7 @@ public class GameManager : MonoBehaviour
         hasUsedReroll = false; // Réinitialise la relance
         // On peut réinitialiser la couleur ou effectuer d'autres actions.
         ChangePlayerColor(Color.white); // Exemple pour remettre la couleur de base
-        playerInfoText.text = $"Fin du tour de {playerNamesTexts[currentPlayerIndex].text}";
+        playerInfoText.text = $"Fin du tour de {playerNamesTexts[currentPlayerIndex]}";
     }
 
     void NextPlayer()

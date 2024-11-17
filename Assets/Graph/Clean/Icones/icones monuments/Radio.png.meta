@@ -57,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -106,35 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Radio_0
+      name: card_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 13
-        width: 6
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5202b54e1192fff80800000000000000
-      internalID: -8070686850402279387
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Radio_1
-      rect:
-        serializedVersion: 2
-        x: 4
+        x: 0
         y: 0
-        width: 24
-        height: 27
+        width: 512
+        height: 715
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,30 +121,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: af8a2bc65241a5330800000000000000
-      internalID: 3700292194808277242
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Radio_2
-      rect:
-        serializedVersion: 2
-        x: 25
-        y: 13
-        width: 6
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0be2524bf045469b0800000000000000
-      internalID: -5087849252598239568
+      spriteID: 929d5e1449c750840800000000000000
+      internalID: 5189691121816951081
       vertices: []
       indices: 
       edges: []
@@ -185,9 +141,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Radio_0: -8070686850402279387
-      Radio_1: 3700292194808277242
-      Radio_2: -5087849252598239568
+      card_0: 5189691121816951081
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
