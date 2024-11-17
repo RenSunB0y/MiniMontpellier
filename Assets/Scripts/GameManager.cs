@@ -49,7 +49,11 @@ public class GameManager : MonoBehaviour
     public TurnPhase currentPhase = TurnPhase.Preparation; // Phase du tour courant
 
     private GameObject currentPlayer; // GameObject du joueur actuel
+    private int lastDiceResult;
+
     private bool waitingForDiceChoice = false; // Flag pour attendre l'entrée utilisateur
+    private bool hasUsedReroll = false;
+
 
     void Start()
     {
@@ -100,7 +104,19 @@ public class GameManager : MonoBehaviour
         }
         else if (waitingForDiceChoice && currentPhase == TurnPhase.DiceRoll)
         {
-
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                Debug.Log("Relance des dés !");
+                hasUsedReroll = true; // Marque la relance comme utilisée
+                waitingForDiceChoice = false;
+                RollDice(1); // Relance avec le même nombre de dés (ou adapte en fonction de ton jeu)
+            }
+            else if (Input.GetKeyDown(KeyCode.N))
+            {
+                Debug.Log("Aucune relance, on garde le résultat.");
+                waitingForDiceChoice = false;
+                ResolveDiceEffects(lastDiceResult); // Résout les effets avec le dernier résultat
+            }
         }
         else if (Input.GetKeyDown(KeyCode.Space)) // Exemple pour avancer à la phase suivante
         {
@@ -151,21 +167,21 @@ public class GameManager : MonoBehaviour
     {
         foreach (var card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
         {
+            Debug.Log($"Carte : {card.Name}");
             if (card.Name == "Gare")
             {
                 playerInfoText.text = "Choisissez le nombre de dés à lancer (1 ou 2)";
                 waitingForDiceChoice = true;
                 return;
             }
-            else
-            {
-                playerInfoText.text = "Vous n'avez pas de carte Gare, vous lancerez 1 dé.";
-                waitingForDiceChoice = false;
-                RollDice(1);
-                currentPhase = TurnPhase.DiceRoll;
-                return;
-            }
+            
         }
+        Debug.Log("Pas de carte Gare, lancer 1 dé.");
+        playerInfoText.text = "Vous n'avez pas de carte Gare, vous lancerez 1 dé.";
+        waitingForDiceChoice = false;
+        RollDice(1);
+        currentPhase = TurnPhase.DiceRoll;
+        return;
     }
 
     void HandleDiceInput()
@@ -188,53 +204,47 @@ public class GameManager : MonoBehaviour
 
     void RollDice(int dice)
     {
-
         int doubleCheck = 0;
-
         int diceResult = 0;
 
         for (int i = 0; i < dice; i++)
         {
             int rnd = Random.Range(1, 7);
             diceResult += rnd;
+
             if (doubleCheck != 0)
             {
                 foreach (Card card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
                 {
-                    if (card.Name == "Parc")
+                    if (card.Name == "Parc" && rnd == doubleCheck)
                     {
-                        if (rnd == doubleCheck)
-                        {
-                            isDouble = true;
-                        }
+                        isDouble = true;
                     }
                 }
             }
+
             doubleCheck = rnd;
         }
 
         Debug.Log($"Résultat des dés : {diceResult}");
         playerInfoText.text = $"Résultat des dés : {diceResult}";
 
+        // Vérifie si le joueur possède une carte "Tour Radio"
         foreach (Card card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
         {
-            if (card.Name == "Tour Radio")
+            if (card.Name == "Tour Radio" && !hasUsedReroll)
             {
-                playerInfoText.text = "Voulez vous relancer les dés ?";
+                playerInfoText.text = "Voulez-vous relancer les dés ?";
                 waitingForDiceChoice = true;
-                Debug.Log("WAAAAAHAAAAAAHAAAAAAAAAH");
-                if (Input.GetKeyDown(KeyCode.Y))
-                {
-                    Debug.Log("its ameee");
-                    waitingForDiceChoice = false;
-                    RollDice(dice);
-                }
-
-                else { return; }
+                lastDiceResult = diceResult; // Sauvegarde le résultat en cas de relance
+                return; // Attend l'entrée utilisateur dans Update
             }
         }
+
+        // Si pas de relance possible ou déjà utilisée, applique les effets des dés
         ResolveDiceEffects(diceResult);
     }
+
     // Appliquer l'effet du lancer de dés
     void ResolveDiceEffects(int diceResult)
     {
@@ -271,7 +281,7 @@ public class GameManager : MonoBehaviour
     void EndTurn()
     {
         Debug.Log($"{currentPlayer.name}'s Turn Ended");
-
+        hasUsedReroll = false; // Réinitialise la relance
         // On peut réinitialiser la couleur ou effectuer d'autres actions.
         ChangePlayerColor(Color.white); // Exemple pour remettre la couleur de base
         playerInfoText.text = $"Fin du tour de {playerNamesTexts[currentPlayerIndex].text}";
