@@ -7,7 +7,7 @@ using System.Linq;
 
 public class ShopUI : MonoBehaviour, IPointerEvents
 {
-    public GameObject SelectedCardZoom;
+    private GameObject SelectedCardZoom;
     private Vector3 _defaultScale;
 
     private const float SELECTED_CARD_SCALE_COEF = 1.3f;
@@ -36,18 +36,15 @@ public class ShopUI : MonoBehaviour, IPointerEvents
 
     public void MouseOnCard(GameObject sender)
     {
+        SelectedCardZoom = Instantiate(sender, GameObject.FindGameObjectWithTag("Canvas").transform);
         SelectedCardZoom.transform.position = sender.transform.position;
         SelectedCardZoom.transform.localScale = _defaultScale;
         SelectedCardZoom.transform.DOScale(_defaultScale * SELECTED_CARD_SCALE_COEF, SELECTED_CARD_DURATION);
-        for(int i=0; i<SelectedCardZoom.transform.childCount; i++)
-            SelectedCardZoom.transform.GetChild(i).gameObject.SetActive(true);
-        SelectedCardZoom.GetComponent<CardTemplateConfig>().Load(sender.GetComponent<CardTemplateConfig>().cardSO,1,true,transform.tag);
     }
 
     public void MouseLeavesCard(GameObject sender)
     {
-        for(int i=0; i<SelectedCardZoom.transform.childCount; i++)
-            SelectedCardZoom.transform.GetChild(i).gameObject.SetActive(false);
+        Destroy(SelectedCardZoom);
     }
 
     public void MouseClickCard(GameObject sender)

@@ -633,7 +633,7 @@ GameObject:
   - component: {fileID: 861696060456798758}
   - component: {fileID: 3067258319272339721}
   m_Layer: 5
-  m_Name: CantPurchase
+  m_Name: SubTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -866,7 +866,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 9.9
+  m_fontSize: 6.8
   m_fontSizeBase: 10.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1540,7 +1540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.81761, g: 0.81761, b: 0.81761, a: 1}
+  m_Color: {r: 0.81761, g: 0.81761, b: 0.81761, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1630,7 +1630,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57df82abab216384cac502684d0bb759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coefs: 1.5
 --- !u!114 &8049103446984413328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1654,7 +1653,7 @@ MonoBehaviour:
   - {r: 0.54901963, g: 0.5411765, b: 0.5176471, a: 1}
   icon: {fileID: 146330353140818283}
   monumentIcon: {fileID: 8491617909343154992}
-  cantPurchase: {fileID: 3067258319272339721}
+  subTemplate: {fileID: 3067258319272339721}
   gain: {fileID: 0}
   cost: {fileID: 1762916154044801026}
   amount: {fileID: 3007496075016558142}
@@ -1678,7 +1677,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 484243b0873d2894dbea81e8b53a27c1, type: 3}
   - {fileID: 21300000, guid: 9d2151c279247a94283275e7e150c4ce, type: 3}
   - {fileID: 21300000, guid: da0533eb5f7760f4a99b89bb6dfbfdbf, type: 3}
-  card: {fileID: 0}
+  cantPurchaseSprite: {fileID: 21300000, guid: d2684a36a1eb1e94ba504a636ad05eae, type: 3}
+  selectedSprite: {fileID: 21300000, guid: d46d87757649c324482badbcaefed5e8, type: 3}
+  cardSO: {fileID: 0}
+  exemplaries: 0
+  parentScriptTag: 
   isInShop: 0
   interactable: 0
 --- !u!1 &4356603103887502326
@@ -2060,7 +2063,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.5
+  m_fontSize: 14.65
   m_fontSizeBase: 13.43
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3149,7 +3152,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 47.4
+  m_fontSize: 37.8
   m_fontSizeBase: 8.54
   m_fontWeight: 400
   m_enableAutoSizing: 1
