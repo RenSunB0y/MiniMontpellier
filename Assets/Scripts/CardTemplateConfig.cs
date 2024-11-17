@@ -60,11 +60,12 @@ public class CardTemplateConfig : MonoBehaviour
         exemplaries = exemp;
         parentScriptTag = tag;
         isInShop = inShop;
+        // isInShop = inShop;
         art.sprite = cardSO.sprite; 
         icon.sprite = cardSO.mainIcon;
         cardTemplate.sprite = templates[exemp==-1 ? 5 : templatesChoices.IndexOf(cardSO.color)];
 
-        if(inShop)
+        if(isInShop)
         {
             if(cardSO.amount==0) // ou joueur ne peut pas acheter;
             {
@@ -85,7 +86,7 @@ public class CardTemplateConfig : MonoBehaviour
             amountVisual.GetComponent<Image>().enabled = exemp>=2;
         }
 
-        amount.gameObject.SetActive(inShop);
+        amount.gameObject.SetActive(isInShop);
         cost.transform.parent.gameObject.SetActive(inShop);
         nameText.text = cardSO.name;
         effect.text = cardSO.effect;

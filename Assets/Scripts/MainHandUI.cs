@@ -20,7 +20,6 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
     private const float SELECTED_CARD_MOV_COEF = 300;
     private const float SELECTED_CARD_DURATION = 0.15f;
     private const float SELECTED_CARD_SCALE_COEF = 1.3f;
-    int count = 0;
     public void UpdateMainHand(Dictionary<Card,int> deck)
     {
         for(int i=0; i<transform.childCount; i++)
@@ -42,15 +41,8 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
 
     public void MouseOnCard(GameObject sender)
     {
-        for(int i=0; i<transform.childCount; i++)
-        {
-            transform.GetChild(i).GetComponent<Image>().color = new Color(0.8f,0.8f,0.8f);
-        }
-
         SelectedCardZoom = Instantiate(sender, GameObject.FindGameObjectWithTag("Canvas").transform);
         SelectedCardZoom.GetComponent<Image>().enabled = false;
-
-        sender.GetComponent<Image>().color = new Color(0,0,0,0);
         for(int i=0; i<sender.transform.childCount; i++)
             sender.transform.GetChild(i).gameObject.SetActive(false);
 

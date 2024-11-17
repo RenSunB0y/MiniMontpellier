@@ -38,9 +38,10 @@ public class ShopUI : MonoBehaviour, IPointerEvents
     public void MouseOnCard(GameObject sender)
     {
         SelectedCardZoom = Instantiate(sender, GameObject.FindGameObjectWithTag("Canvas").transform);
+        SelectedCardZoom.GetComponent<Image>().enabled = false;
         SelectedCardZoom.transform.position = sender.transform.position;
-        SelectedCardZoom.transform.localScale = _defaultScale;
-        SelectedCardZoom.transform.DOScale(_defaultScale * SELECTED_CARD_SCALE_COEF, SELECTED_CARD_DURATION);
+        SelectedCardZoom.transform.localScale = sender.transform.localScale;
+        SelectedCardZoom.transform.DOScale(SelectedCardZoom.transform.localScale * SELECTED_CARD_SCALE_COEF, SELECTED_CARD_DURATION);
     }
 
     public void MouseLeavesCard(GameObject sender)
