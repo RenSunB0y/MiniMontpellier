@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     private CardSO wheatField;
     public TextMeshProUGUI playerInfoText;
     public TextMeshProUGUI[] playerNamesTexts;
-    public List<GameObject> player; // Liste des GameObjects des joueurs
+    public List<GameObject> playersGameObject; // Liste des GameObjects des joueurs
     private int currentPlayerIndex = 0; // Index du joueur courant
     public TurnPhase currentPhase = TurnPhase.Preparation; // Phase du tour courant
 
@@ -71,24 +71,21 @@ public class GameManager : MonoBehaviour
             }
 
             // Initialisation des GameObjects des joueurs
-            player = new List<GameObject>();
+            playersGameObject = new List<GameObject>();
             for (int i = 0; i < PlayerData.PlayerNames.Count; i++)
             {
-                player.Add(GameObject.Find("Player" + (i + 1))); // Trouver les GameObjects des joueurs actifs
-            }
-
-            // Ajouter des cartes initiales aux joueurs sélectionnés
-            for (int i = 0; i < PlayerData.PlayerNames.Count; i++)
-            {
+                players[i].Deck = new Piles(); // Initialisation du Deck
+                Debug.Log($"{PlayerData.PlayerNames[i]} a été initialisé.");
+                playersGameObject.Add(GameObject.Find("Player" + (i + 1))); // Trouver les GameObjects des joueurs actifs
                 players[i].Deck.AddCard(new Card(farm));
-                players[i].Deck.AddCard(new Card (wheatField));
+                players[i].Deck.AddCard(new Card(wheatField));
             }
         }
 
         // Initialiser le premier joueur et commencer son tour
-        if (player.Count > 0)
+        if (playersGameObject.Count > 0)
         {
-            currentPlayer = player[currentPlayerIndex];
+            currentPlayer = playersGameObject[currentPlayerIndex];
             StartTurnForCurrentPlayer();
         }
     }
@@ -110,7 +107,7 @@ public class GameManager : MonoBehaviour
     {
         if (players.Count > 0)
         {
-            currentPlayer = player[currentPlayerIndex];
+            currentPlayer = playersGameObject[currentPlayerIndex];
             Debug.Log($"{currentPlayer.name}'s Turn Started");
             currentPhase = TurnPhase.Preparation;
             ChangePlayerColor(Color.green);
@@ -187,23 +184,25 @@ public class GameManager : MonoBehaviour
         Player player = players[currentPlayerIndex];
 
 
-        foreach (Player _player in players)
+        foreach (GameObject _player in playersGameObject)
         // Parcourir les cartes dans le deck du joueur
         {
+            // montre les cartes du deck du joueur
+            Debug.Log($"Deck du joueur{currentPlayerIndex + 1} {_player.GetComponent<Player>().Deck.Pile.Count}");
 
-            if (_player.Deck == null || _player.Deck.Pile.Count == 0)
+            if (_player.GetComponent<Player>().Deck == null || _player.GetComponent<Player>().Deck.Pile.Count == 0)
             {
                 Debug.LogWarning("Le deck du joueur est vide ou non initialisé.");
                 return;
             }
 
-            foreach (var card in _player.Deck.Pile.Keys)
+            foreach (var card in _player.GetComponent<Player>().Deck.Pile.Keys)
             {
                 if (card.Dice.Contains(diceResult))
                 {
-                    for (int i = 0; i < _player.Deck.Pile[card]; i++)
+                    for (int i = 0; i < _player.GetComponent<Player>().Deck.Pile[card]; i++)
                     {
-                        _player.CheckEffects(player, diceResult, card);
+                        _player.GetComponent<Player>().CheckEffects(player, diceResult, card);
                     }
                 }
             }
@@ -222,8 +221,8 @@ public class GameManager : MonoBehaviour
 
     void NextPlayer()
     {
-        currentPlayerIndex = (currentPlayerIndex + 1) % player.Count;
-        currentPlayer = player[currentPlayerIndex];
+        currentPlayerIndex = (currentPlayerIndex + 1) % playersGameObject.Count;
+        currentPlayer = playersGameObject[currentPlayerIndex];
         StartTurnForCurrentPlayer();
     }
 

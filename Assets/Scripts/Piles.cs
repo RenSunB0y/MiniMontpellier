@@ -26,12 +26,19 @@ public class Piles
     public void AddCard(Card wantedCard)
     {
         if (Pile.ContainsKey(wantedCard))
+        {
             Pile[wantedCard]++;
+            Debug.Log($"Carte existante augmentée : {wantedCard.Name}, quantité : {Pile[wantedCard]}");
+        }
         else
+        {
             Pile.Add(wantedCard, 1);
+            Debug.Log($"Nouvelle carte ajoutée : {wantedCard.Name}, quantité : {Pile[wantedCard]}");
+        }
 
         UpgradePile();
     }
+
 
     public void RemoveCard(Card wantedCard)
     {
@@ -67,8 +74,9 @@ public class Piles
     }
 
     //card = carte  tudi e, deck = jeu du joueur / itself = si la carte doit se "parcourir" elle m me
-    private void CheckCard(Card card, Dictionary<Card, int> deck, bool itself = false)
+    private void CheckCard(Card card, Dictionary<Card, int> deckRef, bool itself = false)
     {
+        Dictionary<Card, int> deck = new Dictionary<Card, int>(deckRef);
         //S curti  : si on ne doit pas l' dudier et qu'elle est pr sente (on la supprime)
         if (!itself && deck.ContainsKey(card))
         {
