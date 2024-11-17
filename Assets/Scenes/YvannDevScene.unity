@@ -1269,7 +1269,7 @@ MonoBehaviour:
   - {fileID: 709232275}
   - {fileID: 981312738}
   farm: {fileID: 11400000, guid: 181a78d6c47da8b41abb2833d293fdd3, type: 2}
-  wheatField: {fileID: 11400000, guid: 260503c5ce0ddf9479ac786d33be8e15, type: 2}
+  wheatField: {fileID: 11400000, guid: 87c4ec32c59d9164dba9e7150fd9145e, type: 2}
   playerInfoText: {fileID: 1251023499}
   playerNamesTexts:
   - {fileID: 30912619}
@@ -1333,10 +1333,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.00052083336
     y: 0
-    width: 1
-    height: 1
+    width: 0.76250005
+    height: 0.35185185
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
