@@ -287,26 +287,26 @@ public class GameManager : MonoBehaviour
 
 
 
-    // private void AfterPause()
-    // {
-    //     Debug.Log($"Résultat des dés : {diceResult}");
-    //     playerInfoText.text = $"Résultat des dés : {diceResult}";
+    private void AfterPause()
+     {
+      Debug.Log($"Résultat des dés : {diceResult}");
+        playerInfoText.text = $"Résultat des dés : {diceResult}";
 
-    //     // Vérifie si le joueur possède une carte "Tour Radio"
-    //     foreach (Card card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
-    //     {
-    //         if (card.Name == "Tour Radio" && !hasUsedReroll)
-    //         {
-    //             playerInfoText.text = "Voulez-vous relancer les dés ?";
-    //             waitingForDiceChoice = true;
-    //             lastDiceResult = diceResult; // Sauvegarde le résultat en cas de relance
-    //             return; // Attend l'entrée utilisateur dans Update
-    //         }
-    //     }
+        // Vérifie si le joueur possède une carte "Tour Radio"
+      foreach (Card card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
+     {
+             if (card.Name == "Tour Radio" && !hasUsedReroll)
+            {
+                 playerInfoText.text = "Voulez-vous relancer les dés ?";
+                 waitingForDiceChoice = true;
+                 lastDiceResult = diceResult; // Sauvegarde le résultat en cas de relance
+                return; // Attend l'entrée utilisateur dans Update
+             }
+         }
 
     //     // Si pas de relance possible ou déjà utilisée, applique les effets des dés
     //     ResolveDiceEffects(diceResult);
-    // }
+     }
 
     // Appliquer l'effet du lancer de dés
     void ResolveDiceEffects(int diceResult)

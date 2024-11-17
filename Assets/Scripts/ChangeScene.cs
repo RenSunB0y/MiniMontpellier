@@ -6,7 +6,7 @@ public class ChangeScene : MonoBehaviour
 {
     public void PlayerSelection()
     {
-        //SceneManager.LoadScene("PlayerSelection");
+        SceneManager.LoadScene("PlayerSelection");
 
         //SoundManager.instance.onMainMenuExit.Invoke(); 
     }
