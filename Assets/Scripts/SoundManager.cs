@@ -54,4 +54,5 @@ public class SoundManager : MonoBehaviour
 
     //Button
     public UnityEvent onButtonSound = new UnityEvent();
+    public UnityEvent onWhoosh = new UnityEvent();
 }

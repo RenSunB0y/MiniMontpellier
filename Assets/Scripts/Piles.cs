@@ -1,3 +1,4 @@
+using GameLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,8 @@ public class Piles
 { 
     public Dictionary<Card, int> Pile= new();
     private Dictionary<Card, int> updatePile = new();
+
+    public Player thisPlayer;
 
     public Piles()
     {
@@ -23,8 +26,31 @@ public class Piles
     }
 
     // M thodes
-    public void AddCard(Card wantedCard)
+    public void AddCard(Card wantedCard, bool isShop)
     {
+        thisPlayer = GameManager.Instance.currentPlayer.GetComponent<Player>();
+        if (isShop)
+        {
+            if (wantedCard.Cost > thisPlayer.coins)
+            {
+                Debug.Log("Pas assez de pièces pour acheter cette carte");
+                return;
+            }
+
+            foreach (Card card in GameManager.Instance.DrawPile.Pile.Keys)
+            {
+                if (card.Name == wantedCard.Name)
+                {
+                    if (GameManager.Instance.DrawPile.Pile[card] == 0)
+                    {
+                        return;
+                    }
+                }
+            }
+
+            thisPlayer.coins -= wantedCard.Cost;
+        }
+
         foreach(Card card in Pile.Keys)
             if(card.SO==wantedCard.SO)
             {
@@ -32,8 +58,15 @@ public class Piles
                 Debug.Log($"Carte existante augmentée : {wantedCard.Name}, quantité : {Pile[card]}");
                 return;
             }
+
         Pile.Add(wantedCard, 1);
         Debug.Log($"Nouvelle carte ajoutée : {wantedCard.Name}, quantité : {Pile[wantedCard]}");
+        if (isShop)
+        {
+            GameManager.Instance.DrawPile.RemoveCard(wantedCard);
+            GameManager.Instance.EndShopping()  ;
+
+        }
     }
 
 

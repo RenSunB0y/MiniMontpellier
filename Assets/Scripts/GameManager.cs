@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
                 foreach(CardSO data in startPlayerDeck)
                 {
                     Debug.Log("YOYOYOYOYOYOY");
-                    players[i].Deck.AddCard(new Card(data));
+                    players[i].Deck.AddCard(new Card(data), false);
                 }
                 players[i].playerName = PlayerData.PlayerNames[i];
 
@@ -140,9 +140,6 @@ public class GameManager : MonoBehaviour
             StartTurnForCurrentPlayer();
 
         }
-
-        // UI Update
-        UpdateUI();
     }
 
     void UpdateUI()
@@ -313,6 +310,7 @@ public class GameManager : MonoBehaviour
 
     public void EndShopping()
     {
+        SoundManager.instance.onWhoosh.Invoke();
         shopPanel.SetActive(false);
         enemiesUIManager.gameObject.SetActive(true);
         isInShop = false;
