@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<CardSO> cards = new();
 
+    [SerializeField]
+    private bool isDouble = false;
     public Piles DrawPile;
     public List<Player> players; // Liste des joueurs
     [SerializeField]
@@ -96,6 +98,10 @@ public class GameManager : MonoBehaviour
         {
             HandleDiceInput();
         }
+        else if (waitingForDiceChoice && currentPhase == TurnPhase.DiceRoll)
+        {
+
+        }
         else if (Input.GetKeyDown(KeyCode.Space)) // Exemple pour avancer à la phase suivante
         {
             NextPhase();
@@ -156,6 +162,7 @@ public class GameManager : MonoBehaviour
                 playerInfoText.text = "Vous n'avez pas de carte Gare, vous lancerez 1 dé.";
                 waitingForDiceChoice = false;
                 RollDice(1);
+                currentPhase = TurnPhase.DiceRoll;
                 return;
             }
         }
@@ -181,16 +188,53 @@ public class GameManager : MonoBehaviour
 
     void RollDice(int dice)
     {
+
+        int doubleCheck = 0;
+
         int diceResult = 0;
+
         for (int i = 0; i < dice; i++)
         {
-            diceResult += Random.Range(1, 7);
+            int rnd = Random.Range(1, 7);
+            diceResult += rnd;
+            if (doubleCheck != 0)
+            {
+                foreach (Card card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
+                {
+                    if (card.Name == "Parc")
+                    {
+                        if (rnd == doubleCheck)
+                        {
+                            isDouble = true;
+                        }
+                    }
+                }
+            }
+            doubleCheck = rnd;
         }
-        Debug.Log($"Résultat des dés : {diceResult}");
-        ResolveDiceEffects(diceResult);
-        playerInfoText.text = $"Résultat des dés : {diceResult}";
-    }
 
+        Debug.Log($"Résultat des dés : {diceResult}");
+        playerInfoText.text = $"Résultat des dés : {diceResult}";
+
+        foreach (Card card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
+        {
+            if (card.Name == "Tour Radio")
+            {
+                playerInfoText.text = "Voulez vous relancer les dés ?";
+                waitingForDiceChoice = true;
+                Debug.Log("WAAAAAHAAAAAAHAAAAAAAAAH");
+                if (Input.GetKeyDown(KeyCode.Y))
+                {
+                    Debug.Log("its ameee");
+                    waitingForDiceChoice = false;
+                    RollDice(dice);
+                }
+
+                else { return; }
+            }
+        }
+        ResolveDiceEffects(diceResult);
+    }
     // Appliquer l'effet du lancer de dés
     void ResolveDiceEffects(int diceResult)
     {
@@ -235,9 +279,18 @@ public class GameManager : MonoBehaviour
 
     void NextPlayer()
     {
-        currentPlayerIndex = (currentPlayerIndex + 1) % playersGameObject.Count;
-        currentPlayer = playersGameObject[currentPlayerIndex];
-        StartTurnForCurrentPlayer();
+        if (isDouble)
+        {
+            Debug.Log("Double! C'est toujours au tour du même joueur.");
+            StartTurnForCurrentPlayer();
+            isDouble = false;
+        }
+        else
+        {
+            currentPlayerIndex = (currentPlayerIndex + 1) % playersGameObject.Count;
+            currentPlayer = playersGameObject[currentPlayerIndex];
+            StartTurnForCurrentPlayer();
+        }
     }
 
     void ChangePlayerColor(Color color)
