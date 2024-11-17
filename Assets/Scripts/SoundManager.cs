@@ -4,7 +4,8 @@ using UnityEngine.Events;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
-    
+    public 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -25,30 +26,33 @@ public class SoundManager : MonoBehaviour
     }
 
     //------- MUSIC
-    public UnityEvent onMainMenuPlay = new UnityEvent();
-    public UnityEvent onMainMenuExit = new UnityEvent();
+    public static UnityEvent onMainMenuPlay = new UnityEvent();
+    public static UnityEvent onMainMenuExit = new UnityEvent();
 
-    public UnityEvent onGameMusicPlay = new UnityEvent();
-    public UnityEvent onGameMusicExit = new UnityEvent();
+    public static UnityEvent onGameMusicPlay = new UnityEvent();
+    public static UnityEvent onGameMusicExit = new UnityEvent();
+
+    public static UnityEvent onShopEnter = new UnityEvent();
+    public static UnityEvent onShopExit = new UnityEvent();
 
     //------- SOUND EFFECT
 
     //Coin
-    public UnityEvent onCoinSound_1 = new UnityEvent();
-    public UnityEvent onCoinSound_2 = new UnityEvent();
+    public static UnityEvent onCoinSound_1 = new UnityEvent();
+    public static UnityEvent onCoinSound_2 = new UnityEvent();
 
     //Dice
-    public UnityEvent onDicePick_1 = new UnityEvent();
-    public UnityEvent onDiceRoll_1 = new UnityEvent();
-    public UnityEvent onDiceRoll_2 = new UnityEvent();
-    public UnityEvent onDiceShake = new UnityEvent();
+    public static UnityEvent onDicePick_1 = new UnityEvent();
+    public static UnityEvent onDiceRoll_1 = new UnityEvent();
+    public static UnityEvent onDiceRoll_2 = new UnityEvent();
+    public static UnityEvent onDiceShake = new UnityEvent();
 
     //Gain/Lose
-    public UnityEvent onGain = new UnityEvent();
-    public UnityEvent onLose = new UnityEvent();
+    public  static UnityEvent onGain = new UnityEvent();
+    public  static UnityEvent onLose = new UnityEvent();
 
     //Cards
 
     //Button
-    public UnityEvent onButtonSound = new UnityEvent();
+    public  static UnityEvent onButtonSound = new UnityEvent();
 }
