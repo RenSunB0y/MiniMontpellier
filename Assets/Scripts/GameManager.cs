@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI playerInfoText;
     public TextMeshProUGUI[] playerNamesTexts;
     public List<GameObject> playersGameObject; // Liste des GameObjects des joueurs
+    [SerializeField]
+    private List<Dice> diceObjects;
     private int currentPlayerIndex = 0; // Index du joueur courant
     public TurnPhase currentPhase = TurnPhase.Preparation; // Phase du tour courant
 
@@ -203,48 +205,74 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void RollDice(int dice)
+    void RollDice(int diceCount)
     {
-        int doubleCheck = 0;
-        int diceResult = 0;
-        
-        for (int i = 0; i < dice; i++)
+        if (diceCount > diceObjects.Count)
         {
-            int rnd = Random.Range(1, 7);
-            diceResult += rnd;
+            Debug.LogError("Pas assez de dés assignés !");
+            return;
+        }
 
-            if (doubleCheck != 0)
+        int diceResult = 0;
+        int doubleCheck = 0;
+
+        int diceRolledCount = 0; // Pour compter combien de dés ont terminé leur lancer
+
+        // Itère sur les dés à lancer
+        for (int i = 0; i < diceCount; i++)
+        {
+            Dice dice = diceObjects[i];
+
+            // Écouter l'événement pour récupérer le résultat
+            dice.OnDiceRolled += (result) =>
             {
-                foreach (Card card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
+                diceResult += result;
+
+                // Vérifie les doubles
+                if (doubleCheck != 0 && result == doubleCheck)
                 {
-                    if (card.Name == "Parc" && rnd == doubleCheck)
+                    foreach (Card card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
                     {
-                        isDouble = true;
+                        if (card.Name == "Parc")
+                        {
+                            isDouble = true;
+                        }
                     }
                 }
-            }
 
-            doubleCheck = rnd;
+                doubleCheck = result;
+
+                diceRolledCount++;
+
+                // Quand tous les dés ont terminé leur lancer
+                if (diceRolledCount == diceCount)
+                {
+                    Debug.Log($"Résultat des dés : {diceResult}");
+                    playerInfoText.text = $"Résultat des dés : {diceResult}";
+
+                    // Vérifie si le joueur peut relancer
+                    foreach (Card card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
+                    {
+                        if (card.Name == "Tour Radio" && !hasUsedReroll)
+                        {
+                            playerInfoText.text = "Voulez-vous relancer les dés ?";
+                            waitingForDiceChoice = true;
+                            lastDiceResult = diceResult; // Sauvegarde le résultat
+                            return;
+                        }
+                    }
+
+                    // Résout les effets si pas de relance
+                    ResolveDiceEffects(diceResult);
+                }
+            };
+
+            // Lancer le dé
+            dice.Roll();
         }
-
-        Debug.Log($"Résultat des dés : {diceResult}");
-        playerInfoText.text = $"Résultat des dés : {diceResult}";
-
-        // Vérifie si le joueur possède une carte "Tour Radio"
-        foreach (Card card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
-        {
-            if (card.Name == "Tour Radio" && !hasUsedReroll)
-            {
-                playerInfoText.text = "Voulez-vous relancer les dés ?";
-                waitingForDiceChoice = true;
-                lastDiceResult = diceResult; // Sauvegarde le résultat en cas de relance
-                return; // Attend l'entrée utilisateur dans Update
-            }
-        }
-
-        // Si pas de relance possible ou déjà utilisée, applique les effets des dés
-        ResolveDiceEffects(diceResult);
     }
+
+
 
     // Appliquer l'effet du lancer de dés
     void ResolveDiceEffects(int diceResult)
