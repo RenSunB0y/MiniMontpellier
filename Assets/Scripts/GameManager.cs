@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using GameLogic;
 using System.Linq;
+using Unity.VisualScripting;
 
 public enum TurnPhase
 {
@@ -14,6 +15,21 @@ public enum TurnPhase
 
 public class GameManager : MonoBehaviour
 {
+
+    public static GameManager Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     [SerializeField]
     private List<CardSO> cards = new();
 

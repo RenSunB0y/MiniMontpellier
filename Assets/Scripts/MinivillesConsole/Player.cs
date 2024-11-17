@@ -1,5 +1,6 @@
 ﻿using JetBrains.Annotations;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using UnityEngine;
 
@@ -61,7 +62,24 @@ namespace GameLogic
                     }
                     else
                     {
-                        //Trucs avec cartes speciales
+                        if (card.Name == "Stade")
+                        {
+                            foreach (var _player in GameManager.Instance.players)
+                            {
+
+                                if (_player != this)
+                                {
+                                    _player.Pay(card.Gain);
+                                    Gain(card.Gain); ////faire pareil qu'avec le restau
+                                }
+                            }
+                        }
+                        else if (card.Name == "Chaîne de télévision")
+                        {
+                            Player _pickedPlayer = null;
+                            _pickedPlayer.Pay(card.Gain);
+                        }
+                        
                     }
                 }
             }
