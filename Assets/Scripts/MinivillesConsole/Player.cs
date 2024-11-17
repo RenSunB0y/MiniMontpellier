@@ -16,7 +16,7 @@ namespace GameLogic
 
         private void Start()
         {
-            Deck = new Piles(); // Initialisation du Deck
+
         }
 
         public void CheckEffects(Player playerActuel, int diceResult, Card card)

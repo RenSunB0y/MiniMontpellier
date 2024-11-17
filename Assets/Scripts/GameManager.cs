@@ -5,6 +5,7 @@ using GameLogic;
 using System.Linq;
 using Unity.VisualScripting;
 using Mono.Cecil;
+using System.Collections;
 
 public enum TurnPhase
 {
@@ -50,9 +51,19 @@ public class GameManager : MonoBehaviour
     private GameObject currentPlayer; // GameObject du joueur actuel
     private int lastDiceResult;
 
+    private int doubleCheck = 0;
+    private int diceResult = 0;
+
+    private bool isPaused = false;
     private bool waitingForDiceChoice = false; // Flag pour attendre l'entrée utilisateur
     private bool hasUsedReroll = false;
 
+    IEnumerator PauseGame()
+    {
+        yield return new WaitForSeconds(1);
+        isPaused = false;
+        AfterPause();
+    }
 
     void Start()
     {
@@ -117,7 +128,7 @@ public class GameManager : MonoBehaviour
                 ResolveDiceEffects(lastDiceResult); // Résout les effets avec le dernier résultat
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Space)) // Exemple pour avancer à la phase suivante
+        else if (Input.GetKeyDown(KeyCode.Space) && !isPaused) // Exemple pour avancer à la phase suivante
         {
             NextPhase();
         }
@@ -173,7 +184,7 @@ public class GameManager : MonoBehaviour
                 waitingForDiceChoice = true;
                 return;
             }
-            
+
         }
         Debug.Log("Pas de carte Gare, lancer 1 dé.");
         playerInfoText.text = "Vous n'avez pas de carte Gare, vous lancerez 1 dé.";
@@ -203,9 +214,8 @@ public class GameManager : MonoBehaviour
 
     void RollDice(int dice)
     {
-        int doubleCheck = 0;
-        int diceResult = 0;
-        
+        diceResult = 0;
+        doubleCheck = 0;
         for (int i = 0; i < dice; i++)
         {
             int rnd = Random.Range(1, 7);
@@ -224,7 +234,12 @@ public class GameManager : MonoBehaviour
 
             doubleCheck = rnd;
         }
+        isPaused = true;
+        StartCoroutine(PauseGame());
+    }
 
+    private void AfterPause()
+    {
         Debug.Log($"Résultat des dés : {diceResult}");
         playerInfoText.text = $"Résultat des dés : {diceResult}";
 
@@ -244,8 +259,8 @@ public class GameManager : MonoBehaviour
         ResolveDiceEffects(diceResult);
     }
 
-    // Appliquer l'effet du lancer de dés
-    void ResolveDiceEffects(int diceResult)
+// Appliquer l'effet du lancer de dés
+void ResolveDiceEffects(int diceResult)
     {
         // Récupérer le joueur courant à partir de la liste des joueurs
         Player player = players[currentPlayerIndex];
