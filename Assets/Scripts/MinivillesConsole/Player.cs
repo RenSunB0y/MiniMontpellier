@@ -83,7 +83,14 @@ namespace GameLogic
                         }
                         else if (card.Name == "Centre d'affaires")
                         {
+                            Player _pickedPlayer= null;
+                            Card _pickedCard = null;
+                            Card _GivenCard = null;
 
+                            _pickedPlayer.Deck.AddCard(_GivenCard);
+                            Deck.RemoveCard(_GivenCard);
+                            Deck.AddCard(_pickedCard);
+                            _pickedPlayer.Deck.RemoveCard(_pickedCard);
                         }
                         
                     }
