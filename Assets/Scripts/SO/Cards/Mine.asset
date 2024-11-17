@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
   sprite: {fileID: 21300000, guid: 5a1310e49146366499a29ed54e688df0, type: 3}
   name: Mine
-  effect: 
+  effect: Recevez
   color: Bleu
   type: Ressource
   mainIcon: {fileID: 21300000, guid: 66ea2c90490cef74e8e091853c537f10, type: 3}

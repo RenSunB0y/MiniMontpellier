@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
   sprite: {fileID: 21300000, guid: 061e32894fe67f84e874bad2640cdc99, type: 3}
   name: "Caf\xE9"
-  effect: 
+  effect: Recevez du joueur actif
   color: Rouge
   type: Consommation
   mainIcon: {fileID: 21300000, guid: a3d250ceda7c6e749a32ca325056084d, type: 3}

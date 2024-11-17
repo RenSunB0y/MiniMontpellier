@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
   sprite: {fileID: 21300000, guid: 628ba6d8eb4f4644da0a2d895c7c9fe6, type: 3}
   name: "March\xE9"
-  effect: 
+  effect: Recevez
   color: Vert
   type: "March\xE9"
   mainIcon: {fileID: 21300000, guid: da0533eb5f7760f4a99b89bb6dfbfdbf, type: 3}

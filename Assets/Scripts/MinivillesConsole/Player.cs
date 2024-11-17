@@ -11,7 +11,7 @@ namespace GameLogic
     {
         [SerializeField]
         public string playerName;
-        public int coins =0;
+        public int coins = 3;
         public int coinsPerdus = 0;
 
         public Player PickedPlayer = null;
