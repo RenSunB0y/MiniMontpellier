@@ -21,9 +21,9 @@ public class EnemyPanelUI : MonoBehaviour
     private Player player;
     private Dictionary<Card,int> deck;
 
-    public void Init()
+    public void Init(Player player)
     {
-        player = GameManager.Instance.players[int.Parse(transform.name.Split('-')[1])];
+        this.player = player;
         deck = player.GetComponent<Player>().Deck.Pile;
         UpdatePanel();
     }
