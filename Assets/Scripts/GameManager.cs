@@ -15,11 +15,12 @@ public enum TurnPhase
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private List<CardSO> cards;
+    private List<CardSO> cards = new();
+
     public Piles DrawPile;
     public List<Player> players; // Liste des joueurs
-    public Card ferme; // Référence au ScriptableObject pour Farm
-    public Card boulangerie; // Référence au ScriptableObject pour Bakery
+    public CardSO Farm; // Référence au ScriptableObject pour Farm
+    public CardSO WheatField; // Référence au ScriptableObject pour Bakery
     public TextMeshProUGUI playerInfoText;
     public TextMeshProUGUI[] playerNamesTexts;
     public List<GameObject> player; // Liste des GameObjects des joueurs
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         DrawPile = new Piles(cards); // Initialisation du Draw
+
 
         // S'assurer que PlayerData.PlayerNames contient les noms des joueurs
         if (PlayerData.PlayerNames.Count > 0)
@@ -59,8 +61,8 @@ public class GameManager : MonoBehaviour
             // Ajouter des cartes initiales aux joueurs sélectionnés
             for (int i = 0; i < PlayerData.PlayerNames.Count; i++)
             {
-                players[i].Deck.AddCard(ferme);
-                players[i].Deck.AddCard(boulangerie);
+                players[i].Deck.AddCard(Farm.Build());
+                players[i].Deck.AddCard(WheatField.Build());
             }
         }
 

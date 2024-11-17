@@ -18,7 +18,7 @@ public class CardSO : ScriptableObject
 
     public Card Build()
     {
-      var c=  Instantiate(prefab);
+      var c =  Instantiate(prefab);
 
         var card = c.GetComponent<Card>();
 

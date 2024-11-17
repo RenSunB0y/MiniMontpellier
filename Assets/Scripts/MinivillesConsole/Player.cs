@@ -9,6 +9,7 @@ namespace GameLogic
     {
         public string playerName;
         public int coins;
+        [HideInInspector]
         public Piles Deck; // Liste des cartes du joueur
 
         private void Start()

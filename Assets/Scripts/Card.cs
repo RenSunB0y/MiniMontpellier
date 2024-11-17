@@ -1,5 +1,5 @@
 using UnityEngine;
-public class Card : MonoBehaviour
+public class Card
 {
     //Attributs
     public CardSO SO;
@@ -11,9 +11,16 @@ public class Card : MonoBehaviour
     public int Gain; //peut changer
     public int[] Dice;
 
-    private void Start()
+    public Card(CardSO card)
     {
-        Initialisation();
+        this.SO = card;
+        this.Name = SO.name;
+        this.Effect = SO.effect;
+        this.Color = SO.color;
+        this.Type = SO.type;
+        this.Cost = SO.cost;
+        this.Gain = SO.gain;
+        this.Dice = SO.dice;
     }
 
     //M thode pour augmenter gain
@@ -24,13 +31,6 @@ public class Card : MonoBehaviour
 
     public void Initialisation()
     {
-        this.Name = SO.name;
-        this.Effect = SO.effect;
-        this.Color = SO.color;
-        this.Type = SO.type;
-        this.Cost = SO.cost;
-        this.Gain = SO.gain;
-        this.Dice = SO.dice;
     }
 
 }

@@ -1,26 +1,24 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class Piles
-{
 
-    public Dictionary<Card, int> Pile;
-    private Dictionary<Card, int> updatePile;
-
-    public List<Card> playerDeck;
+{ 
+    public Dictionary<Card, int> Pile= new();
+    private Dictionary<Card, int> updatePile = new();
 
     public Piles()
     {
         //Jeu(deck) du joueur
-        Pile = new Dictionary<Card, int>(); //vide
     }
 
     public Piles(List<CardSO> cards)
     {
         foreach (CardSO card in cards)
         {
-            Pile.Add(card.Build(), card.amount);
+            Pile.Add(new Card(card), card.amount);
         }
     }
 
