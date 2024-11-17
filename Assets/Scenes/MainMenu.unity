@@ -871,6 +871,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b5b23bac4c44a24bba1c33194c3e175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1818878737
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1818878738}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1818878738
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818878737}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 711.48596, y: 522.30615, z: -1.2011786}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1972966265
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,3 +1071,4 @@ SceneRoots:
   - {fileID: 1972966268}
   - {fileID: 248290941}
   - {fileID: 585765296}
+  - {fileID: 1818878738}
