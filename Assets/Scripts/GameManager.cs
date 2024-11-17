@@ -52,7 +52,6 @@ public class GameManager : MonoBehaviour
     private Transform playerDataUI;
     [SerializeField]
     private CardSO[] startPlayerDeck;
-    //public TextMeshProUGUI playerInfoText;
     public string[] playerNamesTexts;
     public List<GameObject> playersGameObject; // Liste des GameObjects des joueurs
     public List<Dice> diceObjects; // Liste des dés à lancer
@@ -142,6 +141,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateUI()
     {
+        Debug.Log("Update UI");
        currentPlayer = playersGameObject[currentPlayerIndex];
         for(int i=0; i<players.Count;i++)
         {
@@ -155,7 +155,6 @@ public class GameManager : MonoBehaviour
        GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().UpdateMainHand(currentPlayer.GetComponent<Player>().Deck.Pile);
         imageBG.sprite = currentPlayer.GetComponent<Player>().PlayerBackground;
         Debug.Log($"{currentPlayer.name}'s Turn Started");
-        //playerInfoText.text = $"Tour de {playerNamesTexts[currentPlayerIndex]}";
         currentPhase = TurnPhase.Preparation;
     }
 
@@ -304,9 +303,6 @@ public class GameManager : MonoBehaviour
     {
         enemiesUIManager.gameObject.SetActive(false);
         shopPanel.SetActive(true);
-
-
-        EndShopping();
     }
 
     public void EndShopping()
