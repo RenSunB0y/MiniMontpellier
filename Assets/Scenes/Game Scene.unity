@@ -1575,9 +1575,6 @@ MonoBehaviour:
   - {fileID: 1851870605}
   - {fileID: 1557605384}
   playersGameObject: []
-  diceObjects:
-  - {fileID: 1206790523}
-  - {fileID: 134087721}
   currentPhase: 0
 --- !u!1 &1710583898
 GameObject:
@@ -1634,10 +1631,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00052083336
+    x: 0
     y: 0
-    width: 0.76250005
-    height: 0.35185185
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
