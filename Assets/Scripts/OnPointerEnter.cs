@@ -17,28 +17,43 @@ public class OnPointerEnter : MonoBehaviour
     {
         PointerEventData t = eventData as PointerEventData;
         GameObject sender = t.pointerEnter;
-        if(GetComponent<CardTemplateConfig>().PrintInShop())
+        // if(GetComponent<CardTemplateConfig>().interactable)
         {
-            GameObject.FindGameObjectWithTag("Shop").GetComponent<ShopUI>().MouseOnCard(sender);
+            if(GetComponent<CardTemplateConfig>().isInShop)
+            {
+                GameObject.FindGameObjectWithTag("Shop").GetComponent<ShopUI>().MouseOnCard(sender);
+            }
+            else
+                GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().MouseOnCard(sender);
         }
-        else
-            GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().MouseOnCard(sender);
     }
 
     public void PointerExit(BaseEventData eventData)
     {
         PointerEventData t = eventData as PointerEventData;
         GameObject sender = t.pointerEnter;
-        if(GetComponent<CardTemplateConfig>().PrintInShop())
+        // if(GetComponent<CardTemplateConfig>().interactable)
         {
-            GameObject.FindGameObjectWithTag("Shop").GetComponent<ShopUI>().MouseLeavesCard(sender);
+            if(GetComponent<CardTemplateConfig>().isInShop)
+            {
+                GameObject.FindGameObjectWithTag("Shop").GetComponent<ShopUI>().MouseLeavesCard(sender);
+            }
+            else
+                GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().MouseLeavesCard(sender);
         }
-        else
-            GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().MouseLeavesCard(sender);
     }
 
     public void PointerClick(BaseEventData eventData)
     {
-        Debug.Log("Clicked");
+        PointerEventData t = eventData as PointerEventData;
+        GameObject sender = t.pointerEnter;
+        if(GetComponent<CardTemplateConfig>().interactable)
+        {
+            if(GetComponent<CardTemplateConfig>().isInShop)
+            {
+                Debug.Log(sender.GetComponent<CardTemplateConfig>().card.name);
+            }
+
+        }
     }
 }
