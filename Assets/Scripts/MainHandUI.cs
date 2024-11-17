@@ -16,17 +16,29 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
     [SerializeField]
     private List<CardSO> cards = new List<CardSO>();
     [SerializeField]
-    private float _cardPosY;
+    private Vector2 _cardPos;
     private const float MIN_SPACE = 20;
     private const float SELECTED_CARD_MOV_COEF = 300;
     private const float SELECTED_CARD_DURATION = 0.15f;
     private const float SELECTED_CARD_SCALE_COEF = 1.3f;
     
     int count = 0;
+    // IEnumerator FillMain()
+    // {
+    //     yield return new WaitForSeconds(0.5f);
+    //     cards.Add(cards[0]);
+    //     UpdateMainHand();
+    //     if(count<17)
+    //     {
+    //         count++;
+    //         StartCoroutine("FillMain");
+    //     }
+    // }
 
     void Start()
     {
         UpdateMainHand();
+        // StartCoroutine("FillMain");
     }
 
     private void UpdateMainHand()
@@ -42,7 +54,7 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
         {
             var c = Instantiate(card.prefab, transform);
             c.GetComponent<CardTemplateConfig>().Load(card,false,transform.tag);
-            _cardPosY = c.transform.position.y;
+            _cardPos = c.transform.position;
             id++;
         }
         transform.GetComponent<HorizontalLayoutGroup>().spacing = -(cards.Count * 6.5f + MIN_SPACE);
@@ -61,8 +73,8 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
 
         SelectedCardZoom.transform.position = sender.transform.position;
         SelectedCardZoom.transform.localScale = sender.transform.localScale;
-        Debug.Log(_cardPosY);
-        SelectedCardZoom.transform.DOMove(new Vector3(SelectedCardZoom.transform.position.x, _cardPosY + SELECTED_CARD_MOV_COEF*SelectedCardZoom.transform.lossyScale.y),SELECTED_CARD_DURATION);
+        Debug.Log(_cardPos);
+        SelectedCardZoom.transform.DOMove(new Vector3(SelectedCardZoom.transform.position.x, _cardPos.y + SELECTED_CARD_MOV_COEF*SelectedCardZoom.transform.lossyScale.y),SELECTED_CARD_DURATION);
         SelectedCardZoom.transform.DOScale(SelectedCardZoom.transform.localScale * SELECTED_CARD_SCALE_COEF, SELECTED_CARD_DURATION);
 
         for(int i=0; i<SelectedCardZoom.transform.childCount; i++)

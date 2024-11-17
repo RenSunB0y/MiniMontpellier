@@ -5,28 +5,34 @@ using UnityEngine.UI;
 public class ShowHideHand : MonoBehaviour
 {
     [SerializeField]
-    private RectOffset start;
+    private RectOffset hideTarget;
     [SerializeField]
-    private RectOffset target;
+    private RectOffset hideStart;
+    [SerializeField]
+    private RectOffset showTarget;
+    [SerializeField]
+    private RectOffset showStart;
     [SerializeField]
     private float duration;
     [SerializeField]
-    private bool startHided;
+    private bool interactable = false;
 
     private void Start()
     {
-        if(startHided)
-        HideHand();
-        else
-        ShowHand();
+        transform.GetComponent<HorizontalLayoutGroup>().padding = showStart;
     }
     public void ShowHand()
     {
-        DOTween.To(()=> transform.GetComponent<HorizontalLayoutGroup>().padding, x=> transform.GetComponent<HorizontalLayoutGroup>().padding = x, target, duration);
+        DOTween.To(()=> showStart, x=> transform.GetComponent<HorizontalLayoutGroup>().padding = x, showTarget, duration);
+        interactable = true;
     }
 
     public void HideHand()
     {
-        DOTween.To(()=> transform.GetComponent<HorizontalLayoutGroup>().padding, x=> transform.GetComponent<HorizontalLayoutGroup>().padding = x, start, duration);
+        if(interactable)
+        {
+            interactable = false;
+            DOTween.To(()=> hideStart, x=> transform.GetComponent<HorizontalLayoutGroup>().padding = x, hideTarget, duration);
+        }
     }
 }
