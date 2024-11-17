@@ -40,13 +40,11 @@ public class OnPointerEnter : MonoBehaviour
     {
         PointerEventData t = eventData as PointerEventData;
         GameObject sender = t.pointerEnter;
-        if(GetComponent<CardTemplateConfig>().interactable)
-        {
-            if(GetComponent<CardTemplateConfig>().isInShop)
+        if(GetComponent<CardTemplateConfig>().isInShop)
             {
-                Debug.Log(sender.GetComponent<CardTemplateConfig>().card.name);
+                GameObject.FindGameObjectWithTag(GetComponent<CardTemplateConfig>().parentScriptTag).GetComponent<ShopUI>().MouseClickCard(sender);
             }
-
-        }
+            else
+                GameObject.FindGameObjectWithTag(GetComponent<CardTemplateConfig>().parentScriptTag).GetComponent<MainHandUI>().MouseClickCard(sender);
     }
 }

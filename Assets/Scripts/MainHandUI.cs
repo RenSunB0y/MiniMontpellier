@@ -73,7 +73,6 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
 
         SelectedCardZoom.transform.position = sender.transform.position;
         SelectedCardZoom.transform.localScale = sender.transform.localScale;
-        Debug.Log(_cardPos);
         SelectedCardZoom.transform.DOMove(new Vector3(SelectedCardZoom.transform.position.x, _cardPos.y + SELECTED_CARD_MOV_COEF*SelectedCardZoom.transform.lossyScale.y),SELECTED_CARD_DURATION);
         SelectedCardZoom.transform.DOScale(SelectedCardZoom.transform.localScale * SELECTED_CARD_SCALE_COEF, SELECTED_CARD_DURATION);
 
@@ -90,6 +89,14 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
         sender.GetComponent<Image>().color = new Color(1,1,1,1);
         for(int i=0; i<SelectedCardZoom.transform.childCount; i++)
             SelectedCardZoom.transform.GetChild(i).gameObject.SetActive(false);
+    }
+
+    public void MouseClickCard(GameObject sender)
+    {
+        if(transform.tag == "MainHand")
+            Debug.Log($"Carte du joueur sélectionnée : {sender.GetComponent<CardTemplateConfig>().card.name}");
+        else if(transform.tag == "SecondaryHand")
+            Debug.Log($"Carte de l'ennemi sélectionnée : {sender.GetComponent<CardTemplateConfig>().card.name}");
     }
 
 }

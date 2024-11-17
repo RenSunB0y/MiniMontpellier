@@ -5,4 +5,5 @@ public interface IPointerEvents
 {
     public void MouseOnCard(GameObject sender);
     public void MouseLeavesCard(GameObject sender);
+    public void MouseClickCard(GameObject sender);
 }

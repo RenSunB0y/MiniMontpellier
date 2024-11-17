@@ -46,4 +46,9 @@ public class ShopUI : MonoBehaviour, IPointerEvents
         for(int i=0; i<SelectedCardZoom.transform.childCount; i++)
             SelectedCardZoom.transform.GetChild(i).gameObject.SetActive(false);
     }
+
+    public void MouseClickCard(GameObject sender)
+    {
+        Debug.Log($"Carte achetée : {sender.GetComponent<CardTemplateConfig>().card.name}");
+    }
 }
