@@ -28,14 +28,14 @@ namespace GameLogic
                         case 1: Gain(card.Gain); break;
                         case 2: Gain(card.Gain); break;
                         case 3:
-                            playerActuel.Pay(card.Cost);
+                            playerActuel.Pay(card.Gain);
                             Gain(card.Gain); // ++++++ Limiter la perte jusque 0 et pas en dessous plus n'ajouter que ce qui a été débité
                             break;
                         case 5: Gain(card.Gain); break;
                         case 9:
                             if (card.Color == "Red")
                             {
-                                playerActuel.Pay(card.Cost);
+                                playerActuel.Pay(card.Gain);
                                 Gain(card.Gain);
                             }
                             else
@@ -44,7 +44,7 @@ namespace GameLogic
                         case 10:
                             if (card.Color == "Red")
                             {
-                                playerActuel.Pay(card.Cost);
+                                playerActuel.Pay(card.Gain);
                                 Gain(card.Gain);
                             }
                             else
