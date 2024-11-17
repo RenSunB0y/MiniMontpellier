@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         isPaused = false;
-        // AfterPause();
+        AfterPause();
     }
 
     void Start()
@@ -132,30 +132,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (waitingForDiceChoice && currentPhase == TurnPhase.DiceCount)
-        {
-            HandleDiceInput();
-        }
-        else if (waitingForDiceChoice && currentPhase == TurnPhase.DiceRoll)
-        {
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                Debug.Log("Relance des dés !");
-                hasUsedReroll = true; // Marque la relance comme utilisée
-                waitingForDiceChoice = false;
-                RollDice(1); // Relance avec le même nombre de dés (ou adapte en fonction de ton jeu)
-            }
-            else if (Input.GetKeyDown(KeyCode.N))
-            {
-                Debug.Log("Aucune relance, on garde le résultat.");
-                waitingForDiceChoice = false;
-                ResolveDiceEffects(lastDiceResult); // Résout les effets avec le dernier résultat
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.Space) && !isPaused && !isInShop) // Exemple pour avancer à la phase suivante
-        {
-            NextPhase();
-        }
+        
     }
 
     // Démarrer un tour pour le joueur courant
@@ -170,6 +147,8 @@ public class GameManager : MonoBehaviour
             currentPhase = TurnPhase.Preparation;
             ChangePlayerColor(Color.green);
             //playerInfoText.text = $"Tour de {playerNamesTexts[currentPlayerIndex]}";
+
+            NextPhase();
         }
         else
         {
@@ -192,7 +171,6 @@ public class GameManager : MonoBehaviour
                 break;
             case TurnPhase.DiceRoll:
                 currentPhase = TurnPhase.Shop;
-                EndTurn();
                 break;
              case TurnPhase.Shop:
                 currentPhase = TurnPhase.End;
@@ -210,129 +188,54 @@ public class GameManager : MonoBehaviour
             Debug.Log($"Carte : {card.Name}");
             if (card.Name == "Gare")
             {
-                //playerInfoText.text = "Choisissez le nombre de dés à lancer (1 ou 2)";
-                waitingForDiceChoice = true;
-                return;
+                HandleDiceButtons();
             }
         }
-        Debug.Log("Pas de carte Gare, lancer 1 dé.");
-        //playerInfoText.text = "Vous n'avez pas de carte Gare, vous lancerez 1 dé.";
         waitingForDiceChoice = false;
-        RollDice(1);
+
+        //Creer un bouton pour lancer Un dé de la meme facon (en event passer le parametre 1 au rolldice())
         currentPhase = TurnPhase.DiceRoll;
         return;
     }
 
-    void HandleDiceInput()
+    void HandleDiceButtons()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            waitingForDiceChoice = false;
-            Debug.Log("1 dé choisi");
-            RollDice(1);
-            currentPhase = TurnPhase.DiceRoll; // Avance à la phase suivante
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            waitingForDiceChoice = false;
-            Debug.Log("2 dés choisis");
-            RollDice(2);
-            currentPhase = TurnPhase.DiceRoll; // Avance à la phase suivante
-        }
+        //CREER DES BOUTONS ET LES ASSIGNER COMME CA : 1 EN ARGUMENT DE ROLLDICE POUR UN DE ET 2 POUR DEUX
     }
 
     void RollDice(int diceCount)
     {
-        if (diceCount > diceObjects.Count)
-        {
-            Debug.LogError("Pas assez de dés assignés !");
-            return;
-        }
+        diceResult = 0;
+        doubleCheck = 0;
 
-        int diceResult = 0;
-        int doubleCheck = 0;
-
-        int diceRolledCount = 0; // Pour compter combien de dés ont terminé leur lancer
-
-        // Itère sur les dés à lancer
         for (int i = 0; i < diceCount; i++)
         {
-            Dice dice = diceObjects[i];
-
-            // Écouter l'événement pour récupérer le résultat
-            dice.OnDiceRolled += (result) =>
-            {
-                diceResult += result;
-
-                // Vérifie les doubles
-                if (doubleCheck != 0 && result == doubleCheck)
-                {
-                    foreach (Card card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
-                    {
-                        if (card.Name == "Parc")
-                        {
-                            isDouble = true;
-                        }
-                    }
-                }
-
-                doubleCheck = result;
-
-                diceRolledCount++;
-
-                // Quand tous les dés ont terminé leur lancer
-                if (diceRolledCount == diceCount)
-                {
-                    Debug.Log($"Résultat des dés : {diceResult}");
-                    //playerInfoText.text = $"Résultat des dés : {diceResult}";
-
-                    // Vérifie si le joueur peut relancer
-                    foreach (Card card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
-                    {
-                        if (card.Name == "Tour Radio" && !hasUsedReroll)
-                        {
-                            //playerInfoText.text = "Voulez-vous relancer les dés ?";
-                            waitingForDiceChoice = true;
-                            lastDiceResult = diceResult; // Sauvegarde le résultat
-                            return;
-                        }
-                    }
-
-                    // Résout les effets si pas de relance
-                    ResolveDiceEffects(diceResult);
-                }
-            };
-
-            // Lancer le dé
-            dice.Roll();
-
-            // Pause pour simuler le lancer du dé
-            isPaused = true;
-            StartCoroutine(PauseGame());
+            int rnd = Random.Range(1, 7);
+            diceResult += rnd;
+            if (doubleCheck == 0)
+                doubleCheck = diceResult;
+            else if (doubleCheck == rnd)
+                isDouble = true;
         }
+        isPaused = true;
+        StartCoroutine(PauseGame());
     }
-
-
 
     private void AfterPause()
     {
-      Debug.Log($"Résultat des dés : {diceResult}");
-        //playerInfoText.text = $"Résultat des dés : {diceResult}";
-
-        // Vérifie si le joueur possède une carte "Tour Radio"
+      
         foreach (Card card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
         {
-                if (card.Name == "Tour Radio" && !hasUsedReroll)
+            if (card.Name == "Tour Radio" && !hasUsedReroll)
             {
-                    //playerInfoText.text = "Voulez-vous relancer les dés ?";
-                    waitingForDiceChoice = true;
-                    lastDiceResult = diceResult; // Sauvegarde le résultat en cas de relance
-                return; // Attend l'entrée utilisateur dans Update
-                }
+                hasUsedReroll = true;
+                ChooseDiceCount();
+            }
         }
 
         // Si pas de relance possible ou déjà utilisée, applique les effets des dés
         ResolveDiceEffects(diceResult);
+
      }
 
     // Appliquer l'effet du lancer de dés
@@ -366,6 +269,7 @@ public class GameManager : MonoBehaviour
             }
         }
         isInShop = true;
+        NextPhase();
         DisplayShop();
     }
 
@@ -379,16 +283,14 @@ public class GameManager : MonoBehaviour
         shopPanel.SetActive(false);
         isInShop = false;
         NextPhase();
+        EndTurn();
     }
 
     // Fin du tour du joueur courant
     void EndTurn()
     {
         Debug.Log($"{currentPlayer.name}'s Turn Ended");
-        hasUsedReroll = false; // Réinitialise la relance
-        // On peut réinitialiser la couleur ou effectuer d'autres actions.
-        ChangePlayerColor(Color.white); // Exemple pour remettre la couleur de base
-        //playerInfoText.text = $"Fin du tour de {playerNamesTexts[currentPlayerIndex]}";
+        hasUsedReroll = false; 
     }
 
     void NextPlayer()
