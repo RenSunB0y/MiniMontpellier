@@ -31,8 +31,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    private List<CardSO> cards = new();
+    public List<CardSO> cards = new();
 
     [SerializeField]
     private bool isDouble = false;
@@ -48,7 +47,7 @@ public class GameManager : MonoBehaviour
     private int currentPlayerIndex = 0; // Index du joueur courant
     public TurnPhase currentPhase = TurnPhase.Preparation; // Phase du tour courant
 
-    private GameObject currentPlayer; // GameObject du joueur actuel
+    public GameObject currentPlayer; // GameObject du joueur actuel
     private int lastDiceResult;
 
     private int doubleCheck = 0;
@@ -102,8 +101,13 @@ public class GameManager : MonoBehaviour
         if (playersGameObject.Count > 0)
         {
             currentPlayer = playersGameObject[currentPlayerIndex];
+            foreach(Card c in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
+                Debug.Log(c.Name);
             StartTurnForCurrentPlayer();
         }
+
+        // UI Update
+        GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().UpdateMainHand(currentPlayer.GetComponent<Player>().Deck.Pile);
     }
 
     void Update()

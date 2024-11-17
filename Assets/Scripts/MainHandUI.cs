@@ -9,39 +9,19 @@ using System.Data.Common;
 using System.Security.Cryptography;
 using System;
 using System.Linq;
+using GameLogic;
 
 public class MainHandUI : MonoBehaviour, IPointerEvents
 {
     public GameObject SelectedCardZoom;
-    [SerializeField]
-    private List<CardSO> cards = new List<CardSO>();
     [SerializeField]
     private Vector2 _cardPos;
     private const float MIN_SPACE = 20;
     private const float SELECTED_CARD_MOV_COEF = 300;
     private const float SELECTED_CARD_DURATION = 0.15f;
     private const float SELECTED_CARD_SCALE_COEF = 1.3f;
-    
     int count = 0;
-    // IEnumerator FillMain()
-    // {
-    //     yield return new WaitForSeconds(0.5f);
-    //     cards.Add(cards[0]);
-    //     UpdateMainHand();
-    //     if(count<17)
-    //     {
-    //         count++;
-    //         StartCoroutine("FillMain");
-    //     }
-    // }
-
-    void Start()
-    {
-        UpdateMainHand();
-        // StartCoroutine("FillMain");
-    }
-
-    private void UpdateMainHand()
+    public void UpdateMainHand(Dictionary<Card,int> deck)
     {
         for(int i=0; i<transform.childCount; i++)
         {
@@ -49,15 +29,15 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
         }
 
         int id = 0;
-        var deck = cards.OrderByDescending(card => card.dice.Length>0 ? card.dice[0] : int.MaxValue).ThenByDescending(card => card.dice.Length);
-        foreach (CardSO card in deck) // Recup deck du joueur
+        var dec = deck.OrderByDescending(card => card.Key.SO.dice.Length>0 ? card.Key.SO.dice[0] : int.MaxValue).ThenByDescending(card => card.Key.SO.dice.Length);
+        foreach (KeyValuePair<Card,int> card in GameManager.Instance.currentPlayer.GetComponent<Player>().Deck.Pile)
         {
-            var c = Instantiate(card.prefab, transform);
-            c.GetComponent<CardTemplateConfig>().Load(card,false,transform.tag);
+            var c = Instantiate(card.Key.SO.prefab, transform);
+            c.GetComponent<CardTemplateConfig>().Load(card.Key.SO,card.Value,false,transform.tag);
             _cardPos = c.transform.position;
             id++;
         }
-        transform.GetComponent<HorizontalLayoutGroup>().spacing = -(cards.Count * 6.5f + MIN_SPACE);
+        transform.GetComponent<HorizontalLayoutGroup>().spacing = -(deck.Count * 6.5f + MIN_SPACE);
     }
 
     public void MouseOnCard(GameObject sender)
@@ -78,14 +58,14 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
 
         for(int i=0; i<SelectedCardZoom.transform.childCount; i++)
             SelectedCardZoom.transform.GetChild(i).gameObject.SetActive(true);
-        SelectedCardZoom.GetComponent<CardTemplateConfig>().Load(sender.GetComponent<CardTemplateConfig>().card,false,transform.tag);
+        SelectedCardZoom.GetComponent<CardTemplateConfig>().Load(sender.GetComponent<CardTemplateConfig>().cardSO,sender.GetComponent<CardTemplateConfig>().exemplaries,false,transform.tag);
     }
 
     public void MouseLeavesCard(GameObject sender)
     {
         for(int i=0; i<sender.transform.childCount; i++)
             sender.transform.GetChild(i).gameObject.SetActive(true);
-        sender.GetComponent<CardTemplateConfig>().Load(sender.GetComponent<CardTemplateConfig>().card,false,transform.tag);
+        sender.GetComponent<CardTemplateConfig>().Load(sender.GetComponent<CardTemplateConfig>().cardSO,sender.GetComponent<CardTemplateConfig>().exemplaries,false,transform.tag);
         sender.GetComponent<Image>().color = new Color(1,1,1,1);
         for(int i=0; i<SelectedCardZoom.transform.childCount; i++)
             SelectedCardZoom.transform.GetChild(i).gameObject.SetActive(false);
@@ -94,9 +74,9 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
     public void MouseClickCard(GameObject sender)
     {
         if(transform.tag == "MainHand")
-            Debug.Log($"Carte du joueur sélectionnée : {sender.GetComponent<CardTemplateConfig>().card.name}");
+            Debug.Log($"Carte du joueur sélectionnée : {sender.GetComponent<CardTemplateConfig>().cardSO.name}");
         else if(transform.tag == "SecondaryHand")
-            Debug.Log($"Carte de l'ennemi sélectionnée : {sender.GetComponent<CardTemplateConfig>().card.name}");
+            Debug.Log($"Carte de l'ennemi sélectionnée : {sender.GetComponent<CardTemplateConfig>().cardSO.name}");
     }
 
 }

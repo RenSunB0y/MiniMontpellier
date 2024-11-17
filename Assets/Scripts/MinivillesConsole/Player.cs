@@ -87,9 +87,9 @@ namespace GameLogic
                             Card _pickedCard = null;
                             Card _GivenCard = null;
 
-                            _pickedPlayer.Deck.AddCard(_GivenCard);
+                            // _pickedPlayer.Deck.AddCard(_GivenCard);
                             Deck.RemoveCard(_GivenCard);
-                            Deck.AddCard(_pickedCard);
+                            // Deck.AddCard(_pickedCard);
                             _pickedPlayer.Deck.RemoveCard(_pickedCard);
                         }
                         
