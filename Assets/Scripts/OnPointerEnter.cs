@@ -6,13 +6,6 @@ using UnityEngine.InputSystem;
 
 public class OnPointerEnter : MonoBehaviour
 {
-    public float coefs;
-    private Vector3 _defaultScale;
-
-    void Start()
-    {
-        _defaultScale = transform.localScale;
-    }
     public void PointerEnter(BaseEventData eventData)
     {
         PointerEventData t = eventData as PointerEventData;
@@ -21,10 +14,10 @@ public class OnPointerEnter : MonoBehaviour
         {
             if(GetComponent<CardTemplateConfig>().isInShop)
             {
-                GameObject.FindGameObjectWithTag("Shop").GetComponent<ShopUI>().MouseOnCard(sender);
+                GameObject.FindGameObjectWithTag(GetComponent<CardTemplateConfig>().parentScriptTag).GetComponent<ShopUI>().MouseOnCard(sender);
             }
             else
-                GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().MouseOnCard(sender);
+                GameObject.FindGameObjectWithTag(GetComponent<CardTemplateConfig>().parentScriptTag).GetComponent<MainHandUI>().MouseOnCard(sender);
         }
     }
 
@@ -36,10 +29,10 @@ public class OnPointerEnter : MonoBehaviour
         {
             if(GetComponent<CardTemplateConfig>().isInShop)
             {
-                GameObject.FindGameObjectWithTag("Shop").GetComponent<ShopUI>().MouseLeavesCard(sender);
+                GameObject.FindGameObjectWithTag(GetComponent<CardTemplateConfig>().parentScriptTag).GetComponent<ShopUI>().MouseLeavesCard(sender);
             }
             else
-                GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().MouseLeavesCard(sender);
+                GameObject.FindGameObjectWithTag(GetComponent<CardTemplateConfig>().parentScriptTag).GetComponent<MainHandUI>().MouseLeavesCard(sender);
         }
     }
 
@@ -47,13 +40,11 @@ public class OnPointerEnter : MonoBehaviour
     {
         PointerEventData t = eventData as PointerEventData;
         GameObject sender = t.pointerEnter;
-        if(GetComponent<CardTemplateConfig>().interactable)
-        {
-            if(GetComponent<CardTemplateConfig>().isInShop)
+        if(GetComponent<CardTemplateConfig>().isInShop)
             {
-                Debug.Log(sender.GetComponent<CardTemplateConfig>().card.name);
+                GameObject.FindGameObjectWithTag(GetComponent<CardTemplateConfig>().parentScriptTag).GetComponent<ShopUI>().MouseClickCard(sender);
             }
-
-        }
+            else
+                GameObject.FindGameObjectWithTag(GetComponent<CardTemplateConfig>().parentScriptTag).GetComponent<MainHandUI>().MouseClickCard(sender);
     }
 }
