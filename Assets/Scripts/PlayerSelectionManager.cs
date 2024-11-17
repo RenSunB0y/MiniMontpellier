@@ -39,7 +39,7 @@ public class PlayerSelectionManager : MonoBehaviour
         if (PlayerData.PlayerNames.Count >= minPlayers && PlayerData.PlayerNames.Count <= maxPlayers)
         {
             // Charger la scène de jeu si le nombre de joueurs est valide
-            UnityEngine.SceneManagement.SceneManager.LoadScene("YvannDevScene");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Game Scene");
         }
         else
         {

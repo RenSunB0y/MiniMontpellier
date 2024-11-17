@@ -30,6 +30,7 @@ public class CardTemplateConfig : MonoBehaviour
     private List<string> templatesChoices = new List<string>{"Bleu","Vert","Rouge","Violette","Jaune","Grise"};
     private Dictionary<string,Color> colorChoice = new Dictionary<string, Color>();
     public CardSO card;
+    public string parentScriptTag;
     public bool isInShop;
     public bool interactable;
 
@@ -46,10 +47,11 @@ public class CardTemplateConfig : MonoBehaviour
             {"Grise",templatesColors[5]},
         };
         if(card!=null)
-            Load(card,true);
+            Load(card,true,"ShopUI");
     }
-    public void Load(CardSO data, bool inShop)
+    public void Load(CardSO data, bool inShop, string tag)
     {
+        parentScriptTag = tag;
         isInShop = inShop;
         card = data;
         art.sprite = data.sprite; 
