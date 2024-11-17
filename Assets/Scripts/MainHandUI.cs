@@ -13,7 +13,7 @@ using GameLogic;
 
 public class MainHandUI : MonoBehaviour, IPointerEvents
 {
-    public GameObject SelectedCardZoom;
+    private GameObject SelectedCardZoom;
     [SerializeField]
     private Vector2 _cardPos;
     private const float MIN_SPACE = 20;
@@ -47,18 +47,17 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
             transform.GetChild(i).GetComponent<Image>().color = new Color(0.8f,0.8f,0.8f);
         }
 
+        SelectedCardZoom = Instantiate(sender, GameObject.FindGameObjectWithTag("Canvas").transform);
+        SelectedCardZoom.GetComponent<Image>().enabled = false;
+
+        sender.GetComponent<Image>().color = new Color(0,0,0,0);
         for(int i=0; i<sender.transform.childCount; i++)
             sender.transform.GetChild(i).gameObject.SetActive(false);
-        sender.GetComponent<Image>().color = new Color(0,0,0,0);
 
         SelectedCardZoom.transform.position = sender.transform.position;
         SelectedCardZoom.transform.localScale = sender.transform.localScale;
         SelectedCardZoom.transform.DOMove(new Vector3(SelectedCardZoom.transform.position.x, _cardPos.y + SELECTED_CARD_MOV_COEF*SelectedCardZoom.transform.lossyScale.y),SELECTED_CARD_DURATION);
         SelectedCardZoom.transform.DOScale(SelectedCardZoom.transform.localScale * SELECTED_CARD_SCALE_COEF, SELECTED_CARD_DURATION);
-
-        for(int i=0; i<SelectedCardZoom.transform.childCount; i++)
-            SelectedCardZoom.transform.GetChild(i).gameObject.SetActive(true);
-        SelectedCardZoom.GetComponent<CardTemplateConfig>().Load(sender.GetComponent<CardTemplateConfig>().cardSO,sender.GetComponent<CardTemplateConfig>().exemplaries,false,transform.tag);
     }
 
     public void MouseLeavesCard(GameObject sender)
@@ -67,16 +66,15 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
             sender.transform.GetChild(i).gameObject.SetActive(true);
         sender.GetComponent<CardTemplateConfig>().Load(sender.GetComponent<CardTemplateConfig>().cardSO,sender.GetComponent<CardTemplateConfig>().exemplaries,false,transform.tag);
         sender.GetComponent<Image>().color = new Color(1,1,1,1);
-        for(int i=0; i<SelectedCardZoom.transform.childCount; i++)
-            SelectedCardZoom.transform.GetChild(i).gameObject.SetActive(false);
+
+
+        Destroy(SelectedCardZoom);
     }
 
     public void MouseClickCard(GameObject sender)
     {
-        if(transform.tag == "MainHand")
-            Debug.Log($"Carte du joueur sélectionnée : {sender.GetComponent<CardTemplateConfig>().cardSO.name}");
-        else if(transform.tag == "SecondaryHand")
-            Debug.Log($"Carte de l'ennemi sélectionnée : {sender.GetComponent<CardTemplateConfig>().cardSO.name}");
+        sender.GetComponent<CardTemplateConfig>().SelectCard(!sender.GetComponent<CardTemplateConfig>().subTemplate.enabled);
+        SelectedCardZoom.GetComponent<CardTemplateConfig>().SelectCard(sender.GetComponent<CardTemplateConfig>().subTemplate.enabled);
     }
 
 }

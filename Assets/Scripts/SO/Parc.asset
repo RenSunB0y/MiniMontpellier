@@ -16,7 +16,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: ad661bda80602954a8a8daf98a5f32ed, type: 3}
   name: Parc
   effect: 
-  color: Grise
+  color: Jaune
   type: "Sp\xE9cial"
   mainIcon: {fileID: 21300000, guid: 276217f57ab599b498aa6504a8e5a0d3, type: 3}
   additionalIcon: {fileID: 21300000, guid: 276217f57ab599b498aa6504a8e5a0d3, type: 3}

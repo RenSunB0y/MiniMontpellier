@@ -9,13 +9,15 @@ using UnityEngine.UI;
 
 public class CardTemplateConfig : MonoBehaviour
 {
+    [SerializeField]
+    private bool loadOnStart = false;
     #region Prefab's children
     public Image art;
     public Image cardTemplate;
     public List<Color> templatesColors;
     public Image icon;
     public Image monumentIcon;
-    public Image cantPurchase;
+    public Image subTemplate;
     public TextMeshProUGUI gain;
     public TextMeshProUGUI cost;
     public TextMeshProUGUI amount;
@@ -27,6 +29,8 @@ public class CardTemplateConfig : MonoBehaviour
 
     public List<Sprite> templates;
     public List<Sprite> icons;
+    public Sprite cantPurchaseSprite;
+    public Sprite selectedSprite;
     private List<string> templatesChoices = new List<string>{"Bleu","Vert","Rouge","Violette","Jaune","Grise"};
     private Dictionary<string,Color> colorChoice = new Dictionary<string, Color>();
     public CardSO cardSO;
@@ -47,14 +51,9 @@ public class CardTemplateConfig : MonoBehaviour
             {"Jaune",templatesColors[4]},
             {"Grise",templatesColors[5]},
         };
-
-        if(cardSO!=null)
-        {
-            parentScriptTag = "Shop";
-            Load(cardSO,-1,true,parentScriptTag);
-        }
+        if(loadOnStart)
+            Load(cardSO,-1,true,"Shop");
     }
-
     public void Load(CardSO dataSO, int exemp, bool inShop, string tag)
     {
         cardSO = dataSO;
@@ -63,7 +62,7 @@ public class CardTemplateConfig : MonoBehaviour
         isInShop = inShop;
         art.sprite = cardSO.sprite; 
         icon.sprite = cardSO.mainIcon;
-        cardTemplate.sprite = templates[templatesChoices.IndexOf(cardSO.color)];
+        cardTemplate.sprite = templates[exemp==-1 ? 5 : templatesChoices.IndexOf(cardSO.color)];
 
         if(inShop)
         {
@@ -107,7 +106,11 @@ public class CardTemplateConfig : MonoBehaviour
         // if(data.gain==0) 
         //     gain.text = data.gain.ToString(); // 
         interactable = isInteractable();
-        cantPurchase.enabled = !interactable;
+        if(!interactable)
+        {
+            subTemplate.sprite = cantPurchaseSprite;
+            subTemplate.enabled = true;
+        }
     }
 
     private bool isInteractable()
@@ -115,5 +118,11 @@ public class CardTemplateConfig : MonoBehaviour
         if(cardSO.amount<=0) // ou joueur n'a plus assez de pièces
             return false;
         return true;
+    }
+
+    public void SelectCard(bool state)
+    {
+        subTemplate.sprite = selectedSprite;
+        subTemplate.enabled = state;
     }
 }

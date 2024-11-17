@@ -16,7 +16,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 2b957f9080efee64593fef615b9b2710, type: 3}
   name: Tour Radio
   effect: 
-  color: Grise
+  color: Jaune
   type: "Sp\xE9cial"
   mainIcon: {fileID: 21300000, guid: e4da4ac59e84ea34887320e78bff241a, type: 3}
   additionalIcon: {fileID: 21300000, guid: e4da4ac59e84ea34887320e78bff241a, type: 3}
