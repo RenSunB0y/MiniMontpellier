@@ -78,6 +78,11 @@ namespace GameLogic
                         {
                             Player _pickedPlayer = null;
                             _pickedPlayer.Pay(card.Gain);
+                            Gain(card.Gain);
+                        }
+                        else if (card.Name == "Centre d'affaires")
+                        {
+
                         }
                         
                     }
