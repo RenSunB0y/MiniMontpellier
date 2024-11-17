@@ -14,6 +14,9 @@ namespace GameLogic
         public int coins =0;
         public int coinsPerdus = 0;
 
+        public Player PickedPlayer = null;
+        public Card PickedCard = null;
+        public Card GivenCard = null;
         public Sprite PlayerBackground;
         
         public Sprite PlayerIcon;
@@ -89,14 +92,11 @@ namespace GameLogic
                         }
                         else if (card.Name == "Centre d'affaires")
                         {
-                            Player _pickedPlayer= null;
-                            Card _pickedCard = null;
-                            Card _GivenCard = null;
 
                             // _pickedPlayer.Deck.AddCard(_GivenCard);
-                            Deck.RemoveCard(_GivenCard);
+                            Deck.RemoveCard(GivenCard);
                             // Deck.AddCard(_pickedCard);
-                            _pickedPlayer.Deck.RemoveCard(_pickedCard);
+                            PickedPlayer.Deck.RemoveCard(PickedCard);
                         }
                         
                     }

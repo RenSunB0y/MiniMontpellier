@@ -14,6 +14,7 @@ public enum TurnPhase
     Preparation,
     DiceCount,
     DiceRoll,
+    Shop,
     End,
     EndGame
 }
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
     private CardSO farm;
     [SerializeField]
     private CardSO wheatField;
-    public TextMeshProUGUI playerInfoText;
+    // TextMeshProUGUI playerInfoText;
     public string[] playerNamesTexts;
     public List<GameObject> playersGameObject; // Liste des GameObjects des joueurs
     public List<Dice> diceObjects; // Liste des dés à lancer
@@ -67,6 +68,10 @@ public class GameManager : MonoBehaviour
     private bool isPaused = false;
     private bool waitingForDiceChoice = false; // Flag pour attendre l'entrée utilisateur
     private bool hasUsedReroll = false;
+    private bool isInShop = false;
+
+    [SerializeField]
+    private GameObject shopPanel;
 
     IEnumerator PauseGame()
     {
@@ -122,7 +127,7 @@ public class GameManager : MonoBehaviour
         }
 
         // UI Update
-        GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().UpdateMainHand(currentPlayer.GetComponent<Player>().Deck.Pile);
+       // GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().UpdateMainHand(currentPlayer.GetComponent<Player>().Deck.Pile); ///????????????????
     }
 
     void Update()
@@ -147,7 +152,7 @@ public class GameManager : MonoBehaviour
                 ResolveDiceEffects(lastDiceResult); // Résout les effets avec le dernier résultat
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && !isPaused) // Exemple pour avancer à la phase suivante
+        else if (Input.GetKeyDown(KeyCode.Space) && !isPaused && !isInShop) // Exemple pour avancer à la phase suivante
         {
             NextPhase();
         }
@@ -164,7 +169,7 @@ public class GameManager : MonoBehaviour
             Debug.Log($"{currentPlayer.name}'s Turn Started");
             currentPhase = TurnPhase.Preparation;
             ChangePlayerColor(Color.green);
-            playerInfoText.text = $"Tour de {playerNamesTexts[currentPlayerIndex]}";
+            //playerInfoText.text = $"Tour de {playerNamesTexts[currentPlayerIndex]}";
         }
         else
         {
@@ -175,6 +180,7 @@ public class GameManager : MonoBehaviour
     // Passer à la phase suivante
     void NextPhase()
     {
+        Debug.Log($"Phase actuelle : {currentPhase}");
         switch (currentPhase)
         {
             case TurnPhase.Preparation:
@@ -185,8 +191,11 @@ public class GameManager : MonoBehaviour
                 // Cette phase sera avancée après le choix des dés
                 break;
             case TurnPhase.DiceRoll:
-                currentPhase = TurnPhase.End;
+                currentPhase = TurnPhase.Shop;
                 EndTurn();
+                break;
+             case TurnPhase.Shop:
+                currentPhase = TurnPhase.End;
                 break;
             case TurnPhase.End:
                 NextPlayer();
@@ -201,15 +210,13 @@ public class GameManager : MonoBehaviour
             Debug.Log($"Carte : {card.Name}");
             if (card.Name == "Gare")
             {
-                playerInfoText.text = "Choisissez le nombre de dés à lancer (1 ou 2)";
+                //playerInfoText.text = "Choisissez le nombre de dés à lancer (1 ou 2)";
                 waitingForDiceChoice = true;
                 return;
             }
-            
-
         }
         Debug.Log("Pas de carte Gare, lancer 1 dé.");
-        playerInfoText.text = "Vous n'avez pas de carte Gare, vous lancerez 1 dé.";
+        //playerInfoText.text = "Vous n'avez pas de carte Gare, vous lancerez 1 dé.";
         waitingForDiceChoice = false;
         RollDice(1);
         currentPhase = TurnPhase.DiceRoll;
@@ -277,14 +284,14 @@ public class GameManager : MonoBehaviour
                 if (diceRolledCount == diceCount)
                 {
                     Debug.Log($"Résultat des dés : {diceResult}");
-                    playerInfoText.text = $"Résultat des dés : {diceResult}";
+                    //playerInfoText.text = $"Résultat des dés : {diceResult}";
 
                     // Vérifie si le joueur peut relancer
                     foreach (Card card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
                     {
                         if (card.Name == "Tour Radio" && !hasUsedReroll)
                         {
-                            playerInfoText.text = "Voulez-vous relancer les dés ?";
+                            //playerInfoText.text = "Voulez-vous relancer les dés ?";
                             waitingForDiceChoice = true;
                             lastDiceResult = diceResult; // Sauvegarde le résultat
                             return;
@@ -308,24 +315,24 @@ public class GameManager : MonoBehaviour
 
 
     private void AfterPause()
-     {
+    {
       Debug.Log($"Résultat des dés : {diceResult}");
-        playerInfoText.text = $"Résultat des dés : {diceResult}";
+        //playerInfoText.text = $"Résultat des dés : {diceResult}";
 
         // Vérifie si le joueur possède une carte "Tour Radio"
-      foreach (Card card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
-     {
-             if (card.Name == "Tour Radio" && !hasUsedReroll)
+        foreach (Card card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
+        {
+                if (card.Name == "Tour Radio" && !hasUsedReroll)
             {
-                 playerInfoText.text = "Voulez-vous relancer les dés ?";
-                 waitingForDiceChoice = true;
-                 lastDiceResult = diceResult; // Sauvegarde le résultat en cas de relance
+                    //playerInfoText.text = "Voulez-vous relancer les dés ?";
+                    waitingForDiceChoice = true;
+                    lastDiceResult = diceResult; // Sauvegarde le résultat en cas de relance
                 return; // Attend l'entrée utilisateur dans Update
-             }
-         }
+                }
+        }
 
-    //     // Si pas de relance possible ou déjà utilisée, applique les effets des dés
-    //     ResolveDiceEffects(diceResult);
+        // Si pas de relance possible ou déjà utilisée, applique les effets des dés
+        ResolveDiceEffects(diceResult);
      }
 
     // Appliquer l'effet du lancer de dés
@@ -358,6 +365,20 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        isInShop = true;
+        DisplayShop();
+    }
+
+    private void DisplayShop()
+    {
+        shopPanel.SetActive(true);
+    }
+
+    public void EndShopping()
+    {
+        shopPanel.SetActive(false);
+        isInShop = false;
+        NextPhase();
     }
 
     // Fin du tour du joueur courant
@@ -367,7 +388,7 @@ public class GameManager : MonoBehaviour
         hasUsedReroll = false; // Réinitialise la relance
         // On peut réinitialiser la couleur ou effectuer d'autres actions.
         ChangePlayerColor(Color.white); // Exemple pour remettre la couleur de base
-        playerInfoText.text = $"Fin du tour de {playerNamesTexts[currentPlayerIndex]}";
+        //playerInfoText.text = $"Fin du tour de {playerNamesTexts[currentPlayerIndex]}";
     }
 
     void NextPlayer()
