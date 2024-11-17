@@ -25,7 +25,7 @@ Au début de chaque partie, le jeu commence avec un certain nombre de joueurs. C
 Au début de chaque tour, un joueur choisit combien de dés il souhaite lancer (1 ou 2). Après le lancement, le jeu affiche le résultat des dés, et certaines cartes dans le deck du joueur peuvent influencer ce résultat. Certaines cartes permettent même de relancer les dés pour tenter d'obtenir un meilleur résultat.
 
 ### 3. Relancer les dés
-Si le joueur possède une carte lui permettant (exemple : "Tour Radio"), il a la possibilité de relancer ses dés. La relance peut être effectuée en appuyant sur la touche **Y**. Si le joueur choisit de ne pas relancer, il appuie sur **N** et les effets des dés seront appliqués.
+Si le joueur possède une carte lui permettant (exemple : "Tour Radio"), il a la possibilité de relancer ses dés. Si le joueur choisit de ne pas relancer, les effets des dés seront appliqués.
 
 ### 4. Effets des dés
 Le résultat des dés peut affecter les ressources du joueur ou déclencher des actions spéciales en fonction des cartes qu'il possède dans son deck. Par exemple, une carte peut multiplier un certain résultat de dé ou offrir des ressources supplémentaires.
@@ -35,13 +35,6 @@ Une fois que le joueur a effectué toutes les actions possibles en fonction des 
 
 ### 6. Gagner la partie
 La partie se termine lorsqu'un joueur remplit les conditions de victoire. Ces conditions sont définies par les cartes qu'il possède dans son deck. Le premier joueur à avoir acheté toutes les cartes monuments ("Gare", "Parc d'attraction", "Tour Radio" et "Centre commercial") remporte la partie.
-
-## Commandes
-
-* **Espace** : Passe à la phase suivante du tour.
-* **1 / 2** : Choisir le nombre de dés à lancer.
-* **Y** : Relancer les dés (si une carte "Tour Radio" est possédée).
-* **N** : Ne pas relancer les dés et appliquer les effets.
 
 ## Technologies utilisées
 
