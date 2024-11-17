@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
   sprite: {fileID: 21300000, guid: 2b957f9080efee64593fef615b9b2710, type: 3}
   name: Tour Radio
-  effect: 
+  effect: "Vous pouvez relancer vos d\xE9s une fois par tour"
   color: Jaune
   type: "Sp\xE9cial"
   mainIcon: {fileID: 21300000, guid: e4da4ac59e84ea34887320e78bff241a, type: 3}

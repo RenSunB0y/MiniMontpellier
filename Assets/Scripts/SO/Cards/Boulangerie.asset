@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
   sprite: {fileID: 21300000, guid: 9f6bddd8274cceb49a54cd0efd4ba6cc, type: 3}
   name: Boulangerie
-  effect: 'Recevez '
+  effect: Recevez
   color: Vert
   type: Commerce
   mainIcon: {fileID: 21300000, guid: a1c199638bdd7d646907cb6fee455da9, type: 3}

@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
   sprite: {fileID: 21300000, guid: 2c354023f1bc1d7439a1777a09bb9f04, type: 3}
   name: Verger
-  effect: 
+  effect: Recevez
   color: Bleu
   type: Agriculture
   mainIcon: {fileID: 21300000, guid: 34a1506972645ff44bdbdb97ee7b09a3, type: 3}

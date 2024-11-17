@@ -260,6 +260,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Si pas de relance possible ou déjà utilisée, applique les effets des dés
+        Debug.Log(diceResult);
         ResolveDiceEffects(diceResult);
 
      }

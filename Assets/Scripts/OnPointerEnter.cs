@@ -10,7 +10,7 @@ public class OnPointerEnter : MonoBehaviour
     {
         PointerEventData t = eventData as PointerEventData;
         GameObject sender = t.pointerEnter;
-        // if(GetComponent<CardTemplateConfig>().interactable)
+        if(GetComponent<CardTemplateConfig>().interactable)
         {
             if(GetComponent<CardTemplateConfig>().isInShop)
             {
@@ -25,7 +25,7 @@ public class OnPointerEnter : MonoBehaviour
     {
         PointerEventData t = eventData as PointerEventData;
         GameObject sender = t.pointerEnter;
-        // if(GetComponent<CardTemplateConfig>().interactable)
+        if(GetComponent<CardTemplateConfig>().interactable)
         {
             if(GetComponent<CardTemplateConfig>().isInShop)
             {

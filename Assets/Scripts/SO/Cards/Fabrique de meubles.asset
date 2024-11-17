@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
   sprite: {fileID: 21300000, guid: 29cd1f501c4590b41a7b8f92447f59e7, type: 3}
   name: Fabrique de meubles
-  effect: 
+  effect: Recevez
   color: Vert
   type: Usine
   mainIcon: {fileID: 21300000, guid: 9d2151c279247a94283275e7e150c4ce, type: 3}

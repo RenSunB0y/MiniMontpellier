@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
   sprite: {fileID: 21300000, guid: 05585b3b960ba8e4cba02ae650fcfde1, type: 3}
   name: Restaurant
-  effect: 
+  effect: Recevez du joueur actif
   color: Rouge
   type: Consommation
   mainIcon: {fileID: 21300000, guid: a3d250ceda7c6e749a32ca325056084d, type: 3}

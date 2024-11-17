@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 3964139294525955289, guid: 6597d49af8aebd9419549839338e31de, type: 3}
   sprite: {fileID: 21300000, guid: f673575ccdc49fa40a26ba39bcacbeb1, type: 3}
   name: Ferme
-  effect: 
+  effect: Recevez
   color: Bleu
   type: "\xC9levage"
   mainIcon: {fileID: 21300000, guid: b60db140a2798d9489187c9e424daa6b, type: 3}
