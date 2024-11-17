@@ -16,7 +16,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 1e239b36090852d479355dc73f4e0696, type: 3}
   name: Gare
   effect: 
-  color: Grise
+  color: Jaune
   type: "Sp\xE9cial"
   mainIcon: {fileID: 21300000, guid: 90403d7f30120f942be4e8eb85bc3ae5, type: 3}
   additionalIcon: {fileID: 21300000, guid: 90403d7f30120f942be4e8eb85bc3ae5, type: 3}

@@ -49,10 +49,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Transform enemiesUIManager;
     [SerializeField]
-    private CardSO farm;
+    private Transform playerDataUI;
     [SerializeField]
-    private CardSO wheatField;
-    // TextMeshProUGUI playerInfoText;
+    private CardSO[] startPlayerDeck;
+    public TextMeshProUGUI playerInfoText;
     public string[] playerNamesTexts;
     public List<GameObject> playersGameObject; // Liste des GameObjects des joueurs
     public List<Dice> diceObjects; // Liste des dés à lancer
@@ -107,8 +107,10 @@ public class GameManager : MonoBehaviour
                 players[i].Deck = new Piles(); // Initialisation du Deck
                 Debug.Log($"{PlayerData.PlayerNames[i]} a été initialisé.");
                 playersGameObject.Add(GameObject.Find("Player" + (i + 1))); // Trouver les GameObjects des joueurs actifs
-                players[i].Deck.AddCard(new Card(farm));
-                players[i].Deck.AddCard(new Card(wheatField));
+                foreach(CardSO data in startPlayerDeck)
+                {
+                    players[i].Deck.AddCard(new Card(data));
+                }
                 players[i].playerName = PlayerData.PlayerNames[i];
 
                 enemiesUIManager.GetChild(i>0 ? i-1 : i).gameObject.SetActive(true);
@@ -121,9 +123,12 @@ public class GameManager : MonoBehaviour
         if (playersGameObject.Count > 0)
         {
             currentPlayer = playersGameObject[currentPlayerIndex];
+            playerDataUI.GetComponent<EnemyPanelUI>().Init();
+            playerDataUI.gameObject.SetActive(true);
             foreach(Card c in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
                 Debug.Log(c.Name);
             StartTurnForCurrentPlayer();
+
         }
 
         // UI Update
@@ -142,7 +147,7 @@ public class GameManager : MonoBehaviour
         {
             currentPlayer = playersGameObject[currentPlayerIndex];
 
-            imageBG.sprite = currentPlayer.GetComponent<Player>().PlayerBackground;
+            // imageBG.sprite = currentPlayer.GetComponent<Player>().PlayerBackground;
             Debug.Log($"{currentPlayer.name}'s Turn Started");
             currentPhase = TurnPhase.Preparation;
             ChangePlayerColor(Color.green);
