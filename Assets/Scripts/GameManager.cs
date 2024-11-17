@@ -143,8 +143,22 @@ public class GameManager : MonoBehaviour
 
     void ChooseDiceCount()
     {
-        waitingForDiceChoice = true;
-        playerInfoText.text = "Voulez-vous lancer 1 ou 2 dés ?\nAppuyez sur [1] ou [2]";
+        foreach (var card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
+        {
+            if (card.Name == "Gare")
+            {
+                playerInfoText.text = "Choisissez le nombre de dés à lancer (1 ou 2)";
+                waitingForDiceChoice = true;
+                return;
+            }
+            else
+            {
+                playerInfoText.text = "Vous n'avez pas de carte Gare, vous lancerez 1 dé.";
+                waitingForDiceChoice = false;
+                RollDice(1);
+                return;
+            }
+        }
     }
 
     void HandleDiceInput()
