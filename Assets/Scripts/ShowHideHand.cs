@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class ShowHideHand : MonoBehaviour
 {
     [SerializeField]
+    private bool hasColor;
+    [SerializeField]
     private RectOffset hideTarget;
     [SerializeField]
     private RectOffset hideStart;
@@ -23,12 +25,16 @@ public class ShowHideHand : MonoBehaviour
     }
     public void ShowHand()
     {
+        if(hasColor)
+            GetComponent<Image>().DOColor(new Color(0,0,0,83f/255f), duration);
         DOTween.To(()=> showStart, x=> transform.GetComponent<HorizontalLayoutGroup>().padding = x, showTarget, duration);
         interactable = true;
     }
 
     public void HideHand()
     {
+        if(hasColor)
+            GetComponent<Image>().DOColor(Color.black*0, duration);
         if(interactable)
         {
             interactable = false;
