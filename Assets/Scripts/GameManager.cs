@@ -75,6 +75,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Transform diceGroup;
     [SerializeField]
+    private Transform diceButtons;
+    [SerializeField]
     private Sprite[] diceFacesSprite;
 
     IEnumerator PauseGame()
@@ -192,28 +194,34 @@ public class GameManager : MonoBehaviour
 
     void ChooseDiceCount()
     {
-        foreach (var card in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
-        {
-            Debug.Log($"Carte : {card.Name}");
-            if (card.Name == "Gare")
-            {
-                HandleDiceButtons();
-            }
-        }
         waitingForDiceChoice = false;
-
+        UpdateDiceUI(currentPlayer.GetComponent<Player>().Deck.Pile.Keys.Any(card => card.Name == "Gare") ? 2 : 1);
         //Creer un bouton pour lancer Un dé de la meme facon (en event passer le parametre 1 au rolldice())
         currentPhase = TurnPhase.DiceRoll;
         return;
     }
 
-    void HandleDiceButtons()
+    void UpdateDiceUI(int diceCount)
     {
-        //CREER DES BOUTONS ET LES ASSIGNER COMME CA : 1 EN ARGUMENT DE ROLLDICE POUR UN DE ET 2 POUR DEUX
+        for(int i=0; i<2; i++)
+        {
+            diceGroup.GetChild(i).gameObject.SetActive(i<diceCount);
+        }
+        UpdateButtonDiceUI(diceCount);
+    }
+
+    void UpdateButtonDiceUI(int butCount)
+    {
+        for(int i=0; i<2; i++)
+        {
+            diceButtons.GetChild(i).gameObject.SetActive(i<butCount);
+        }
     }
 
     public void RollDice(int diceCount)
     {
+        UpdateDiceUI(diceCount);
+        UpdateButtonDiceUI(0);
         diceResult = 0;
         doubleCheck = 0;
 
