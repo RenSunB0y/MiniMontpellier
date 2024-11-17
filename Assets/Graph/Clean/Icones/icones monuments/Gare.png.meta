@@ -54,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -103,35 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gare_0
+      name: card_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 8
-        width: 22
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a00bc351232232d20800000000000000
-      internalID: 3252480954391638026
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gare_1
-      rect:
-        serializedVersion: 2
-        x: 5
+        x: 0
         y: 0
-        width: 22
-        height: 9
+        width: 512
+        height: 715
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +118,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 66b6174fce1713710800000000000000
-      internalID: 1671242199258458982
+      spriteID: 929d5e1449c750840800000000000000
+      internalID: 5189691121816951081
       vertices: []
       indices: 
       edges: []
@@ -160,8 +138,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Gare_0: 3252480954391638026
-      Gare_1: 1671242199258458982
+      card_0: 5189691121816951081
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

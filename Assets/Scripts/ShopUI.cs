@@ -3,12 +3,11 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class ShopUI : MonoBehaviour, IPointerEvents
 {
     public GameObject SelectedCardZoom;
-    public List<CardSO> cardsType; 
-    public Dictionary <CardSO, int> DrawPile = new Dictionary<CardSO, int>(); // A enlever, recup le drawpile de la classe Pile
     private Vector3 _defaultScale;
 
     private const float SELECTED_CARD_SCALE_COEF = 1.3f;
@@ -22,10 +21,14 @@ public class ShopUI : MonoBehaviour, IPointerEvents
     void Init()
     {
         int id = 0;
-        foreach(CardSO card in cardsType)
+        List<CardSO> cardsSorted = GameManager.Instance.cards;
+        for(int i=0; i<4; i++)
+            cardsSorted.RemoveAt(cardsSorted.Count-1);
+        cardsSorted = cardsSorted.OrderBy(card => card.dice[0]).ThenBy(card=>card.dice.Length).ToList();
+        foreach(CardSO card in cardsSorted)
         {
             var c = Instantiate(card.prefab, transform);
-            c.GetComponent<CardTemplateConfig>().Load(card,true,transform.tag);
+            c.GetComponent<CardTemplateConfig>().Load(card,card.amount,true,transform.tag);
             _defaultScale = c.transform.localScale;
             id++;
         }
@@ -38,7 +41,7 @@ public class ShopUI : MonoBehaviour, IPointerEvents
         SelectedCardZoom.transform.DOScale(_defaultScale * SELECTED_CARD_SCALE_COEF, SELECTED_CARD_DURATION);
         for(int i=0; i<SelectedCardZoom.transform.childCount; i++)
             SelectedCardZoom.transform.GetChild(i).gameObject.SetActive(true);
-        SelectedCardZoom.GetComponent<CardTemplateConfig>().Load(sender.GetComponent<CardTemplateConfig>().card,true,transform.tag);
+        SelectedCardZoom.GetComponent<CardTemplateConfig>().Load(sender.GetComponent<CardTemplateConfig>().cardSO,1,true,transform.tag);
     }
 
     public void MouseLeavesCard(GameObject sender)
@@ -49,6 +52,6 @@ public class ShopUI : MonoBehaviour, IPointerEvents
 
     public void MouseClickCard(GameObject sender)
     {
-        Debug.Log($"Carte achetée : {sender.GetComponent<CardTemplateConfig>().card.name}");
+        Debug.Log($"Carte achetée : {sender.GetComponent<CardTemplateConfig>().cardSO.name}");
     }
 }

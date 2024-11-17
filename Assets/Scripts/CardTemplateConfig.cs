@@ -29,7 +29,8 @@ public class CardTemplateConfig : MonoBehaviour
     public List<Sprite> icons;
     private List<string> templatesChoices = new List<string>{"Bleu","Vert","Rouge","Violette","Jaune","Grise"};
     private Dictionary<string,Color> colorChoice = new Dictionary<string, Color>();
-    public CardSO card;
+    public CardSO cardSO;
+    public int exemplaries;
     public string parentScriptTag;
     public bool isInShop;
     public bool interactable;
@@ -46,54 +47,58 @@ public class CardTemplateConfig : MonoBehaviour
             {"Jaune",templatesColors[4]},
             {"Grise",templatesColors[5]},
         };
-        if(card!=null)
-            Load(card,true,"ShopUI");
+
+        if(cardSO!=null)
+        {
+            parentScriptTag = "Shop";
+            Load(cardSO,-1,true,parentScriptTag);
+        }
     }
-    public void Load(CardSO data, bool inShop, string tag)
+
+    public void Load(CardSO dataSO, int exemp, bool inShop, string tag)
     {
+        cardSO = dataSO;
+        exemplaries = exemp;
         parentScriptTag = tag;
         isInShop = inShop;
-        card = data;
-        art.sprite = data.sprite; 
-        icon.sprite = data.mainIcon;
-        cardTemplate.sprite = templates[templatesChoices.IndexOf(data.color)];
-
-        int t = Random.Range(1,7);
+        art.sprite = cardSO.sprite; 
+        icon.sprite = cardSO.mainIcon;
+        cardTemplate.sprite = templates[templatesChoices.IndexOf(cardSO.color)];
 
         if(inShop)
         {
-            if(data.amount==0) // ou joueur ne peut pas acheter;
+            if(cardSO.amount==0) // ou joueur ne peut pas acheter;
             {
                 cardTemplate.sprite = templates[5];
                 art.color = new Color(0.7f,0.7f,0.7f);
             }
 
-            amount.text = data.amount.ToString();
-            cost.text = data.cost.ToString();
+            amount.text = exemp > 0 ? cardSO.amount.ToString() : "";
+            cost.text = cardSO.cost.ToString();
         }
         else
         {
             for(int i=0; i<amountVisual.childCount; i++)
             {
-                amountVisual.GetChild(i).GetComponent<Image>().color = templatesColors[templatesColors.IndexOf(colorChoice[data.color])];
-                amountVisual.GetChild(i).gameObject.SetActive(i<t && t>=2);
+                amountVisual.GetChild(i).GetComponent<Image>().color = templatesColors[templatesColors.IndexOf(colorChoice[cardSO.color])];
+                amountVisual.GetChild(i).gameObject.SetActive(i<exemp && exemp>=2);
             }
-            amountVisual.GetComponent<Image>().enabled = t>=2;
+            amountVisual.GetComponent<Image>().enabled = exemp>=2;
         }
 
         amount.gameObject.SetActive(inShop);
         cost.transform.parent.gameObject.SetActive(inShop);
-        nameText.text = data.name;
-        effect.text = data.effect;
-        if(card.dice.Length>0)
+        nameText.text = cardSO.name;
+        effect.text = cardSO.effect;
+        if(cardSO.dice.Length>0)
         {
-            dice.text = $"{data.dice[0]}" + (data.dice.Length > 1 ? $"\n{data.dice[1]}" : "");
+            dice.text = $"{cardSO.dice[0]}" + (cardSO.dice.Length > 1 ? $"\n{cardSO.dice[1]}" : "");
             dice.transform.GetChild(0).gameObject.SetActive(false);
         }
         else
         {
             dice.text = "";
-            monumentIcon.sprite = card.mainIcon;
+            monumentIcon.sprite = cardSO.mainIcon;
             dice.transform.GetChild(0).gameObject.SetActive(true);
         }
 
@@ -107,7 +112,7 @@ public class CardTemplateConfig : MonoBehaviour
 
     private bool isInteractable()
     {
-        if(card.amount<=0) // ou joueur n'a plus assez de pièces
+        if(cardSO.amount<=0) // ou joueur n'a plus assez de pièces
             return false;
         return true;
     }

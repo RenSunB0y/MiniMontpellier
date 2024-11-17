@@ -25,36 +25,28 @@ public class Piles
     // M thodes
     public void AddCard(Card wantedCard)
     {
-        if (Pile.ContainsKey(wantedCard))
-        {
-            Pile[wantedCard]++;
-            Debug.Log($"Carte existante augmentée : {wantedCard.Name}, quantité : {Pile[wantedCard]}");
-        }
-        else
-        {
-            Pile.Add(wantedCard, 1);
-            Debug.Log($"Nouvelle carte ajoutée : {wantedCard.Name}, quantité : {Pile[wantedCard]}");
-        }
-
-        UpgradePile();
+        foreach(Card card in Pile.Keys)
+            if(card.SO==wantedCard.SO)
+            {
+                Pile[card]++;
+                Debug.Log($"Carte existante augmentée : {wantedCard.Name}, quantité : {Pile[card]}");
+                return;
+            }
+        Pile.Add(wantedCard, 1);
+        Debug.Log($"Nouvelle carte ajoutée : {wantedCard.Name}, quantité : {Pile[wantedCard]}");
     }
 
 
     public void RemoveCard(Card wantedCard)
     {
-        if (Pile.ContainsKey(wantedCard))
-        {
-            if (Pile[wantedCard] > 0)
+        foreach(Card card in Pile.Keys)
+            if(card.SO==wantedCard.SO)
             {
-                Pile[wantedCard]--;
+                Pile[card]--;
+                if(Pile[card] == 0)
+                    Pile.Remove(card);
+                return;
             }
-            else
-            {
-                Pile.Remove(wantedCard);
-            }
-
-            UpgradePile();
-        }
     }
 
     private void UpgradePile()
