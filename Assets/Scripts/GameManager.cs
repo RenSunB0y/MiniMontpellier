@@ -4,6 +4,7 @@ using TMPro;
 using GameLogic;
 using System.Linq;
 using Unity.VisualScripting;
+using Mono.Cecil;
 
 public enum TurnPhase
 {
@@ -35,8 +36,10 @@ public class GameManager : MonoBehaviour
 
     public Piles DrawPile;
     public List<Player> players; // Liste des joueurs
-    public CardSO Farm; // Référence au ScriptableObject pour Farm
-    public CardSO WheatField; // Référence au ScriptableObject pour Bakery
+    [SerializeField]
+    private CardSO farm;
+    [SerializeField]
+    private CardSO wheatField;
     public TextMeshProUGUI playerInfoText;
     public TextMeshProUGUI[] playerNamesTexts;
     public List<GameObject> player; // Liste des GameObjects des joueurs
@@ -77,8 +80,8 @@ public class GameManager : MonoBehaviour
             // Ajouter des cartes initiales aux joueurs sélectionnés
             for (int i = 0; i < PlayerData.PlayerNames.Count; i++)
             {
-                players[i].Deck.AddCard(Farm.Build());
-                players[i].Deck.AddCard(WheatField.Build());
+                players[i].Deck.AddCard(new Card(farm));
+                players[i].Deck.AddCard(new Card (wheatField));
             }
         }
 
