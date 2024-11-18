@@ -29,8 +29,8 @@ public class MainHandUI : MonoBehaviour, IPointerEvents
         }
 
         int id = 0;
-        //var dec = deck.OrderByDescending(card => card.Key.SO.dice.Length>0 ? card.Key.SO.dice[0] : int.MaxValue).ThenByDescending(card => card.Key.SO.dice.Length);
-        foreach (KeyValuePair<Card,int> card in deck)//instead of dec
+        var dec = deck.OrderByDescending(card => card.Key.SO.dice.Length > 0 ? card.Key.SO.dice[0] : int.MaxValue);//.ThenByDescending(card => card.Key.SO.dice.Length);
+        foreach (KeyValuePair<Card,int> card in dec)//instead of dec
         {
             var c = Instantiate(card.Key.SO.prefab, transform);
             c.GetComponent<CardTemplateConfig>().Load(card.Key.SO,card.Value,false,transform.tag);

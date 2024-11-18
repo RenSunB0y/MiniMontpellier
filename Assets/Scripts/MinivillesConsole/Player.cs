@@ -9,7 +9,6 @@ namespace GameLogic
 {
     public class Player : MonoBehaviour
     {
-        [SerializeField]
         public string playerName;
         public int coins = 3;
         public int coinsPerdus = 0;
@@ -25,7 +24,6 @@ namespace GameLogic
 
         private void Start()
         {
-
         }
 
         public void CheckEffects(Player playerActuel, int diceResult, Card card)

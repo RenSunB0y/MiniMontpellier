@@ -9,7 +9,7 @@ public class Card
     public string Type;
     public int Cost;
     public int Gain; //peut changer
-    public int[] Dice;
+    public int[] Dice = new int[0];
 
     public Card(CardSO card)
     {
