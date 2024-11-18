@@ -51,8 +51,6 @@ public class ShopUI : MonoBehaviour, IPointerEvents
 
     public void MouseClickCard(GameObject sender)
     {
-        Debug.Log($"Carte achetée : {sender.GetComponent<CardTemplateConfig>().cardSO.name}");
-
         GameManager.Instance.currentPlayer.GetComponent<Player>().Deck.AddCard(new Card(sender.GetComponent<CardTemplateConfig>().cardSO), true);
     }
 }

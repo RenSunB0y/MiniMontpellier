@@ -24,6 +24,8 @@ public class EnemyPanelUI : MonoBehaviour
     public void Init(Player player)
     {
         this.player = player;
+        Debug.Log(player);
+        Debug.Log(deck);
         deck = player.GetComponent<Player>().Deck.Pile;
         UpdatePanel();
     }

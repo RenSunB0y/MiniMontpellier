@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
     public string[] playerNamesTexts;
     public List<GameObject> playersGameObject; // Liste des GameObjects des joueurs
     public List<Dice> diceObjects; // Liste des dés à lancer
+    [SerializeField]
     private int currentPlayerIndex = 0; // Index du joueur courant
     public TurnPhase currentPhase = TurnPhase.Preparation; // Phase du tour courant
 
@@ -116,8 +117,10 @@ public class GameManager : MonoBehaviour
             {
                 players[i].Deck = new Piles(); // Initialisation du Deck
                 Debug.Log($"{PlayerData.PlayerNames[i]} a été initialisé.");
-                playersGameObject.Add(GameObject.Find("Player" + (i + 1))); // Trouver les GameObjects des joueurs actifs
-                foreach(CardSO data in startPlayerDeck)
+                playersGameObject.Add(GameObject.Find("Player" + (i + 1))); // Trouver les GameObjects des joueurs actifs 
+
+                Debug.Log(playersGameObject.Count());
+                foreach (CardSO data in startPlayerDeck)
                 {
                     Debug.Log("YOYOYOYOYOYOY");
                     players[i].Deck.AddCard(new Card(data), false);
@@ -127,17 +130,22 @@ public class GameManager : MonoBehaviour
                 enemiesUIManager.GetChild(i>0 ? i-1 : i).gameObject.SetActive(true);
                 enemiesUIManager.GetChild(i>0 ? i-1 : i).GetComponent<EnemyPanelUI>().Init(players[i]);
             }
+            currentPlayer = playersGameObject[currentPlayerIndex];
         }
+
+        Debug.Log("Nombre de joueurs : " + playersGameObject.Count);
 
         // Initialiser le premier joueur et commencer son tour
         if (playersGameObject.Count > 0)
         {
-            currentPlayer = playersGameObject[currentPlayerIndex];
+            Debug.Log("Current Player : " + currentPlayer.name);    
+
             playerDataUI.GetComponent<EnemyPanelUI>().Init(currentPlayer.GetComponent<Player>());
             playerDataUI.gameObject.SetActive(true);
             foreach(Card c in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
                 Debug.Log(c.Name);
-            StartTurnForCurrentPlayer();
+
+            UpdateUI();
 
         }
     }
@@ -152,13 +160,16 @@ public class GameManager : MonoBehaviour
                 playerDataUI.GetComponent<EnemyPanelUI>().Init(players[i]);
             else
             {
-                enemiesUIManager.GetChild(i>=3 ? 2 : i).GetComponent<EnemyPanelUI>().Init(players[i]);
+                int childIndex = (players.Count > 3 && i >= 3) ? 2 : i;
+enemiesUIManager.GetChild(childIndex).GetComponent<EnemyPanelUI>().Init(players[i]);
             }
         }
        GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().UpdateMainHand(currentPlayer.GetComponent<Player>().Deck.Pile);
         imageBG.sprite = currentPlayer.GetComponent<Player>().PlayerBackground;
         Debug.Log($"{currentPlayer.name}'s Turn Started");
         currentPhase = TurnPhase.Preparation;
+
+        StartTurnForCurrentPlayer();
     }
 
     // Démarrer un tour pour le joueur courant
@@ -166,7 +177,6 @@ public class GameManager : MonoBehaviour
     {
         if (players.Count > 0)
         {
-            UpdateUI();
             NextPhase();
         }
         else
