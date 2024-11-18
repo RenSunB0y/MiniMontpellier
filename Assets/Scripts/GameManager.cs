@@ -125,7 +125,6 @@ public class GameManager : MonoBehaviour
         Debug.Log(playersGameObject.Count);
 
         UpdateUI();
-        StartTurnForCurrentPlayer();
 
     }
 
@@ -135,17 +134,25 @@ public class GameManager : MonoBehaviour
        currentPlayer = playersGameObject[currentPlayerIndex];
         for(int i=0; i<players.Count;i++)
         {
-            if(i==currentPlayerIndex)
-                playerDataUI.GetComponent<EnemyPanelUI>().Init(players[i]);
+            if (i == currentPlayerIndex)
+            {
+                Debug.Log(players[i].playerName);
+                playerDataUI.GetComponent<EnemyPanelUI>().Init(players[i]); 
+            }
             else
             {
                 int childIndex = (players.Count > 3 && i >= 3) ? 2 : i;
                 enemiesUIManager.GetChild(childIndex).GetComponent<EnemyPanelUI>().Init(players[i]);
+                ////debug ici pour verifier si c'ets bien initialisé
+                Debug.Log(childIndex);
             }
         }
-       GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().UpdateMainHand(currentPlayer.GetComponent<Player>().Deck.Pile);
+        GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().UpdateMainHand(currentPlayer.GetComponent<Player>().Deck.Pile);
         //imageBG.sprite = currentPlayer.GetComponent<Player>().PlayerBackground;
         Debug.Log($"{currentPlayer.name}'s Turn Started");
+
+
+        StartTurnForCurrentPlayer();
     }
 
     // Démarrer un tour pour le joueur courant

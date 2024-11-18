@@ -26,9 +26,10 @@ public class EnemyPanelUI : MonoBehaviour
         this.player = player;
         Debug.Log(player);
         Debug.Log(deck);
-        deck = player.Deck.Pile;
+        deck = this.player.Deck.Pile;
         UpdatePanel();
     }
+
     public void UpdateSecondaryHand(BaseEventData eventData)
     {
         GameObject.FindGameObjectWithTag("SecondaryHand").GetComponent<MainHandUI>().UpdateMainHand(deck);
