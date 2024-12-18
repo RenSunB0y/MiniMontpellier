@@ -28,6 +28,8 @@ public class PlayerSelectionManager : MonoBehaviour
                 if (PlayerData.PlayerNames.Count < maxPlayers)
                 {
                     PlayerData.PlayerNames.Add(inputField.text); // Ajouter le nom du joueur à la liste
+                    Debug.Log(inputField.text);
+                    Debug.Log(PlayerData.PlayerNames.Count);
                 }
             }
         }

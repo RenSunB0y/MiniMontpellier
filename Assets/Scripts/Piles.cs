@@ -1,3 +1,4 @@
+using GameLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,9 +6,11 @@ using UnityEngine;
 
 public class Piles
 
-{ 
-    public Dictionary<Card, int> Pile= new();
+{
+    public Dictionary<Card, int> Pile = new();
     private Dictionary<Card, int> updatePile = new();
+
+    public Player thisPlayer;
 
     public Piles()
     {
@@ -23,27 +26,63 @@ public class Piles
     }
 
     // M thodes
-    public void AddCard(Card wantedCard)
+    public void AddCard(Card wantedCard, bool isShop, Player thisPlayer)
     {
-        foreach(Card card in Pile.Keys)
-            if(card.SO==wantedCard.SO)
+        Piles targetPile = isShop ? GameManager.Instance.DrawPile : thisPlayer.Deck;
+        if (isShop)
+        {
+
+
+            if (wantedCard.Cost > thisPlayer.coins)
             {
-                Pile[card]++;
-                Debug.Log($"Carte existante augmentée : {wantedCard.Name}, quantité : {Pile[card]}");
+                Debug.Log("Pas assez de pièces pour acheter cette carte");
                 return;
             }
-        Pile.Add(wantedCard, 1);
-        Debug.Log($"Nouvelle carte ajoutée : {wantedCard.Name}, quantité : {Pile[wantedCard]}");
+
+            if (GameManager.Instance.DrawPile.Pile.TryGetValue(wantedCard, out int nbExemplaires))
+            {
+                if (nbExemplaires == 0)
+                {
+                    Debug.Log("Plus de cartes disponibles");
+                    return;
+                }
+            }
+
+            thisPlayer.coins -= wantedCard.Cost;
+        }
+
+        if (thisPlayer.Deck.Pile.ContainsKey(wantedCard))
+        {
+            thisPlayer.Deck.Pile[wantedCard]++;
+            Debug.Log($"Carte existante augmentée : {wantedCard.Name}, quantité : {thisPlayer.Deck.Pile[wantedCard]}");
+            if (isShop)
+            {
+                GameManager.Instance.DrawPile.RemoveCard(wantedCard);
+                GameManager.Instance.EndShopping();
+            }
+        }
+        else
+        {
+            thisPlayer.Deck.Pile.Add(wantedCard, 1);
+            Debug.Log($"Nouvelle carte ajoutée : {wantedCard.Name}, quantité : {thisPlayer.Deck.Pile[wantedCard]}");
+            if (isShop)
+            {
+                GameManager.Instance.DrawPile.RemoveCard(wantedCard);
+                GameManager.Instance.EndShopping();
+            }
+        }
+
+
     }
 
 
     public void RemoveCard(Card wantedCard)
     {
-        foreach(Card card in Pile.Keys)
-            if(card.SO==wantedCard.SO)
+        foreach (Card card in Pile.Keys)
+            if (card.SO == wantedCard.SO)
             {
                 Pile[card]--;
-                if(Pile[card] == 0)
+                if (Pile[card] == 0)
                     Pile.Remove(card);
                 return;
             }

@@ -24,9 +24,12 @@ public class EnemyPanelUI : MonoBehaviour
     public void Init(Player player)
     {
         this.player = player;
-        deck = player.GetComponent<Player>().Deck.Pile;
+        Debug.Log(player);
+        Debug.Log(deck);
+        deck = this.player.Deck.Pile;
         UpdatePanel();
     }
+
     public void UpdateSecondaryHand(BaseEventData eventData)
     {
         GameObject.FindGameObjectWithTag("SecondaryHand").GetComponent<MainHandUI>().UpdateMainHand(deck);
@@ -34,7 +37,8 @@ public class EnemyPanelUI : MonoBehaviour
 
     public void UpdatePanel()
     {
-        playerName.text = player.playerName;
+        player = this.GetComponent<Player>();
+        //playerName.text = player.playerName;
 
         int cardsAmount = 0;
         foreach(Card card in deck.Keys)
@@ -45,9 +49,8 @@ public class EnemyPanelUI : MonoBehaviour
                 monuments.GetChild(monumentsId.IndexOf(card.Name)).GetComponent<Image>().sprite = monumentsIcon[monumentsId.IndexOf(card.Name)];
             }
         }
-
-        coinsCount.text = "x " + player.coins.ToString();
-        cardsCount.text = "x" + cardsAmount;
+        //coinsCount.text = "x " + player.coins.ToString();
+        //cardsCount.text = "x" + cardsAmount;
 
     }
 }

@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+
+
+        Debug.Log("SONNNN");
+        SoundManager.instance.onGameMusicPlay.Invoke();
+        SoundManager.instance.onMainMenuExit.Invoke();
     }
 
     [SerializeField]
@@ -52,9 +57,10 @@ public class GameManager : MonoBehaviour
     private Transform playerDataUI;
     [SerializeField]
     private CardSO[] startPlayerDeck;
-    public string[] playerNamesTexts;
+    public List<string> playerNamesTexts = new();
     public List<GameObject> playersGameObject; // Liste des GameObjects des joueurs
     public List<Dice> diceObjects; // Liste des dés à lancer
+    [SerializeField]
     private int currentPlayerIndex = 0; // Index du joueur courant
     public TurnPhase currentPhase = TurnPhase.Preparation; // Phase du tour courant
 
@@ -89,54 +95,37 @@ public class GameManager : MonoBehaviour
     {
         DrawPile = new Piles(cards); // Initialisation du Draw
 
-        // S'assurer que PlayerData.PlayerNames contient les noms des joueurs
-        if (PlayerData.PlayerNames.Count > 0)
+        players = new List<Player>();
+
+        foreach (string player in PlayerData.PlayerNames)
         {
-            // Mise à jour des noms des joueurs dans l'UI (TextMeshPro)
-            for (int i = 0; i < playerNamesTexts.Length; i++)
-            {
-                if (i < PlayerData.PlayerNames.Count)
-                {
-                    playerNamesTexts[i] = PlayerData.PlayerNames[i]; // Assigner le nom du joueur à chaque TextMeshPro
-                }
-                else
-                {
-                    playerNamesTexts[i] = "Joueur " + (i + 1); // Par défaut, afficher "Joueur X" si non assigné
-                }
-            }
-
-            // Initialisation des GameObjects des joueurs
-            playersGameObject = new List<GameObject>();
-            for (int i = 0; i < PlayerData.PlayerNames.Count; i++)
-            {
-                players[i].Deck = new Piles(); // Initialisation du Deck
-                Debug.Log($"{PlayerData.PlayerNames[i]} a été initialisé.");
-                playersGameObject.Add(GameObject.Find("Player" + (i + 1))); // Trouver les GameObjects des joueurs actifs
-                foreach(CardSO data in startPlayerDeck)
-                {
-                    players[i].Deck.AddCard(new Card(data));
-                }
-                players[i].playerName = PlayerData.PlayerNames[i];
-
-                enemiesUIManager.GetChild(i>0 ? i-1 : i).gameObject.SetActive(true);
-                enemiesUIManager.GetChild(i>0 ? i-1 : i).GetComponent<EnemyPanelUI>().Init(players[i]);
-            }
+            playerNamesTexts.Add(player);
         }
 
-        // Initialiser le premier joueur et commencer son tour
-        if (playersGameObject.Count > 0)
+        for (int i = 0; i < playerNamesTexts.Count; i++)
         {
-            currentPlayer = playersGameObject[currentPlayerIndex];
-            playerDataUI.GetComponent<EnemyPanelUI>().Init(currentPlayer.GetComponent<Player>());
-            playerDataUI.gameObject.SetActive(true);
-            foreach(Card c in currentPlayer.GetComponent<Player>().Deck.Pile.Keys)
-                Debug.Log(c.Name);
-            StartTurnForCurrentPlayer();
-
+            Player player = new Player();
+            player.playerName = playerNamesTexts[i];
+            player.Deck = new Piles();
+            foreach (CardSO card in startPlayerDeck)
+            {
+                player.Deck.AddCard(new Card(card), false, player);
+                Debug.Log(player.Deck.Pile.Count);
+            }
+            players.Add(player);
         }
+        playersGameObject = new List<GameObject>();
+        foreach (Player player in players)
+        {
+            GameObject playerGO = new GameObject(player.playerName);
+            playerGO.AddComponent<Player>().Deck = player.Deck;
+            playerGO.GetComponent<Player>().playerName = player.playerName;
+            playersGameObject.Add(playerGO);
+        }
+        Debug.Log(playersGameObject.Count);
 
-        // UI Update
         UpdateUI();
+
     }
 
     void UpdateUI()
@@ -145,17 +134,25 @@ public class GameManager : MonoBehaviour
        currentPlayer = playersGameObject[currentPlayerIndex];
         for(int i=0; i<players.Count;i++)
         {
-            if(i==currentPlayerIndex)
-                playerDataUI.GetComponent<EnemyPanelUI>().Init(players[i]);
+            if (i == currentPlayerIndex)
+            {
+                Debug.Log(players[i].playerName);
+                playerDataUI.GetComponent<EnemyPanelUI>().Init(players[i]); 
+            }
             else
             {
-                enemiesUIManager.GetChild(i>=3 ? 2 : i).GetComponent<EnemyPanelUI>().Init(players[i]);
+                int childIndex = (players.Count > 3 && i >= 3) ? 2 : i;
+                enemiesUIManager.GetChild(childIndex).GetComponent<EnemyPanelUI>().Init(players[i]);
+                ////debug ici pour verifier si c'ets bien initialisé
+                Debug.Log(childIndex);
             }
         }
-       GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().UpdateMainHand(currentPlayer.GetComponent<Player>().Deck.Pile);
-        imageBG.sprite = currentPlayer.GetComponent<Player>().PlayerBackground;
+        GameObject.FindGameObjectWithTag("MainHand").GetComponent<MainHandUI>().UpdateMainHand(currentPlayer.GetComponent<Player>().Deck.Pile);
+        //imageBG.sprite = currentPlayer.GetComponent<Player>().PlayerBackground;
         Debug.Log($"{currentPlayer.name}'s Turn Started");
-        currentPhase = TurnPhase.Preparation;
+
+
+        StartTurnForCurrentPlayer();
     }
 
     // Démarrer un tour pour le joueur courant
@@ -163,7 +160,6 @@ public class GameManager : MonoBehaviour
     {
         if (players.Count > 0)
         {
-            UpdateUI();
             NextPhase();
         }
         else
@@ -176,6 +172,7 @@ public class GameManager : MonoBehaviour
     void NextPhase()
     {
         Debug.Log($"Phase actuelle : {currentPhase}");
+
         switch (currentPhase)
         {
             case TurnPhase.Preparation:
@@ -307,6 +304,7 @@ public class GameManager : MonoBehaviour
 
     public void EndShopping()
     {
+        SoundManager.instance.onWhoosh.Invoke();
         shopPanel.SetActive(false);
         enemiesUIManager.gameObject.SetActive(true);
         isInShop = false;

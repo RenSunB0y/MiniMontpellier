@@ -11,8 +11,6 @@ public class ChangeScene : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("Game Scene");
-        SoundManager.onGameMusicPlay.Invoke();
-        SoundManager.onMainMenuExit.Invoke();
         
     }
 }

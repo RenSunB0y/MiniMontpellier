@@ -4,6 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using GameLogic;
 
 public class ShopUI : MonoBehaviour, IPointerEvents
 {
@@ -51,6 +52,6 @@ public class ShopUI : MonoBehaviour, IPointerEvents
 
     public void MouseClickCard(GameObject sender)
     {
-        Debug.Log($"Carte achetée : {sender.GetComponent<CardTemplateConfig>().cardSO.name}");
+        GameManager.Instance.currentPlayer.GetComponent<Player>().Deck.AddCard(new Card(sender.GetComponent<CardTemplateConfig>().cardSO), true, GameManager.Instance.currentPlayer.GetComponent<Player>());
     }
 }
